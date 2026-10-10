@@ -26,6 +26,11 @@ One command per pipeline step:
 ```bash
 # 1. Record pages that were already fetched: verify each sha256, store the bytes, add artifacts rows
 uv run python -m promo_rag.ingest import-snapshot <snapshot folder>
+
+# 2. Parse: artifacts → documents (clean text, doc type from the site category, content hash)
+uv run python -m promo_rag.ingest parse
 ```
+
+Both steps are safe to re-run. Parse skips pages that aren't HTTP 200, have no text (image-only), or duplicate another page, and records the reason in `documents.skip_reason`.
 
 A snapshot folder holds `sources.csv` and `raw/<slug>.html`. Raw pages are never committed; [`data/sources.csv`](data/sources.csv) lists each page's URL and sha256 instead.
