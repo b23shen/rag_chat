@@ -14,6 +14,18 @@ bash scripts/install_pgvector.sh     # builds pgvector; sudo asks for your Mac p
 bash scripts/init_db.sh              # role + database + extension; asks for the postgres password
 uv sync                              # Python 3.12 + dependencies
 uv run python scripts/smoke_test.py  # checks Postgres, pgvector, embeddings and structured output
+uv run alembic upgrade head          # creates the tables
 ```
 
 `init_db.sh` generates the app's database password and writes it to `.env`. `.env` is gitignored.
+
+## Ingestion
+
+One command per pipeline step:
+
+```bash
+# 1. Record pages that were already fetched: verify each sha256, store the bytes, add artifacts rows
+uv run python -m promo_rag.ingest import-snapshot <snapshot folder>
+```
+
+A snapshot folder holds `sources.csv` and `raw/<slug>.html`. Raw pages are never committed; [`data/sources.csv`](data/sources.csv) lists each page's URL and sha256 instead.

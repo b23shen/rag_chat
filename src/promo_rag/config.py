@@ -3,7 +3,7 @@
 from functools import lru_cache
 from pathlib import Path
 
-from pydantic import SecretStr
+from pydantic import SecretStr, field_validator
 from pydantic_settings import BaseSettings, SettingsConfigDict
 
 REPO_ROOT = Path(__file__).resolve().parents[2]
@@ -28,8 +28,13 @@ class Settings(BaseSettings):
     pg_password: SecretStr
     pg_db: str = "rag"
 
-    # Raw page bytes (local folder in dev)
+    # Raw page bytes (local folder in dev). A relative path is relative to the repo root.
     blob_dir: Path = REPO_ROOT / "data" / "blobs"
+
+    @field_validator("blob_dir")
+    @classmethod
+    def _resolve_blob_dir(cls, v: Path) -> Path:
+        return v if v.is_absolute() else REPO_ROOT / v
 
     @property
     def pg_conninfo(self) -> str:
