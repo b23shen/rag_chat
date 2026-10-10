@@ -1,1 +1,23 @@
+# Secrets
 .env
+
+# Python
+.venv/
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+.ruff_cache/
+
+# Raw pages are never committed (copyright). data/sources.csv lists url + sha256 instead.
+data/blobs/
+data/raw/
+
+# Downloaded model weights
+models/
+.cache/
+
+# OS and editors
+.DS_Store
+.idea/
+.vscode/

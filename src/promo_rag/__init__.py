@@ -1,0 +1,1 @@
+"""Retail promotions RAG assistant."""
