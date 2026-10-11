@@ -23,7 +23,7 @@ def _embed_dims() -> int:
 
 class IndexConfig(BaseModel):
     # Bump when the chunking code changes in a way that changes its output.
-    chunker: str = "sentence-pack-v1"
+    chunker: str = "sentence-pack-v2"  # v2: posting date and section in headers
     chunk_tokens: int = 512
     overlap_tokens: int = 100
     # Gemini tokens are about 1.1 Chinese characters each on these pages (measured with

@@ -103,13 +103,14 @@ def _header_facts(session: Session, doc: Document) -> tuple[HeaderFacts, Promoti
         .join(PromotionSource, PromotionSource.promotion_id == Promotion.id)
         .where(PromotionSource.document_id == doc.id)
     ).first()
+    page = {"title": doc.title, "posted": doc.published_date, "section": doc.category}
     if promotion is None:
-        return HeaderFacts(title=doc.title), None
+        return HeaderFacts(**page), None
     # stores is empty for "all stores", one name for a store notice, or the stores a
     # campaign is limited to; all three read right in the header.
     return (
         HeaderFacts(
-            title=doc.title,
+            **page,
             start=promotion.start_date,
             end=promotion.end_date,
             stores=tuple(promotion.stores),

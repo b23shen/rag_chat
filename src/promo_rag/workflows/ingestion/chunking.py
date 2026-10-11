@@ -5,8 +5,13 @@
   FAQ pages     one chunk per question (each "Q: …" / "A: …" block); the question goes in the header
   store list    pack whole rows
 
-Every chunk starts with a header line, e.g. "十分賺-… | 2026-10-07 ~ 2026-11-03", so a chunk
-cut from the middle of a page still says which promotion it belongs to.
+Every chunk starts with a header line, so a chunk cut from the middle of a page still says
+what it belongs to. After the title comes whatever we know, in this order:
+  campaign period    十分賺-… | 2026-10-07 ~ 2026-11-03
+  or posting date    【得獎公告】… | 公告 2026-10-08      (no campaign period on the page)
+  stores             … | 台中大墩店, 台南和緯店              (only if limited to some stores)
+  site section       會員權益線上申辦 | 會員須知            (only if nothing else follows the title)
+  FAQ question       門市相關-常見問題 | 寵物入店規定
 """
 
 import math
@@ -36,6 +41,8 @@ class HeaderFacts:
     end: date | None = None
     stores: tuple[str, ...] = ()
     single_day: bool = False  # store openings: one date, not an open-ended period
+    posted: date | None = None  # the page's publish date
+    section: str | None = None  # the site's category, e.g. 會員須知
 
 
 @dataclass(frozen=True)
@@ -55,12 +62,22 @@ def header_line(facts: HeaderFacts, extra: str | None = None) -> str:
         parts.append(f"{facts.start}")
     elif facts.start or facts.end:
         parts.append(f"{facts.start or ''} ~ {facts.end or ''}".strip())
+    elif facts.posted:
+        # 公告 = "posted on": never to be read as the campaign period.
+        parts.append(f"公告 {facts.posted}")
     stores = [s for s in facts.stores if s not in facts.title]  # don't repeat the title
     if stores:
         parts.append(", ".join(stores))
+    if len(parts) == 1 and facts.section and not _mentions(facts.title, facts.section):
+        parts.append(facts.section)
     if extra:
         parts.append(extra)
     return " | ".join(parts)
+
+
+def _mentions(title: str, section: str) -> bool:
+    """常見問題-門市相關 is already in the title 門市相關-常見問題."""
+    return all(part in title for part in section.split("-"))
 
 
 def split_sentences(text: str) -> list[Unit]:

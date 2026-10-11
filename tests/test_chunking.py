@@ -46,6 +46,21 @@ def test_header_line():
     assert header_line(HeaderFacts("會員須知")) == "會員須知"
 
 
+def test_header_without_a_campaign_period_uses_posting_date_or_section():
+    announcement = HeaderFacts(
+        "【得獎公告】捐點數抽好禮", posted=date(2026, 10, 8), section="得獎公告"
+    )
+    assert header_line(announcement) == "【得獎公告】捐點數抽好禮 | 公告 2026-10-08"
+    campaign = HeaderFacts("十分賺", date(2026, 10, 7), date(2026, 11, 3), posted=date(2026, 10, 7))
+    assert header_line(campaign) == "十分賺 | 2026-10-07 ~ 2026-11-03"  # the period wins
+    policy = HeaderFacts("會員權益線上申辦", section="會員須知")
+    assert header_line(policy) == "會員權益線上申辦 | 會員須知"
+    faq = HeaderFacts("門市相關-常見問題", section="常見問題-門市相關")
+    assert (
+        header_line(faq, "停車資訊") == "門市相關-常見問題 | 停車資訊"
+    )  # section already in title
+
+
 def test_faq_gets_one_chunk_per_question_with_the_question_in_the_header():
     text = "Q: 寵物入店規定\nA: 請將寵物放進寵物袋\n\nQ: 停車資訊\nA: 請致電門市"
     drafts = chunk_document(text, HeaderFacts("門市相關-常見問題"), CFG)
