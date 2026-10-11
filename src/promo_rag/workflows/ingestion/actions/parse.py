@@ -21,9 +21,9 @@ from sqlalchemy import delete, select
 from sqlalchemy.orm import Session
 
 from promo_rag.db.models import Artifact, Chunk, Document, Promotion, PromotionSource
-from promo_rag.ingest import poya
-from promo_rag.ingest.html_text import content_hash, detect_language
 from promo_rag.storage.blob import BlobStore
+from promo_rag.workflows.ingestion.html_text import content_hash, detect_language
+from promo_rag.workflows.ingestion.sources import poya
 
 # Less body text than this means the page's content is in images (catalogs, banners).
 MIN_TEXT_CHARS = 20

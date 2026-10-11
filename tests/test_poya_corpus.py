@@ -10,8 +10,8 @@ from pathlib import Path
 
 import pytest
 
-from promo_rag.ingest.parse import MIN_TEXT_CHARS
-from promo_rag.ingest.poya import parse_page
+from promo_rag.workflows.ingestion.actions.parse import MIN_TEXT_CHARS
+from promo_rag.workflows.ingestion.sources.poya import parse_page
 
 CORPUS = Path(os.environ.get("POYA_CORPUS", "~/Downloads/rag_poya_corpus")).expanduser()
 pytestmark = pytest.mark.skipif(not (CORPUS / "sources.csv").exists(), reason="no local snapshot")

@@ -1,8 +1,8 @@
 import csv
 import hashlib
 
-from promo_rag.ingest.snapshot import load_snapshot
 from promo_rag.storage.blob import LocalBlobStore, blob_key
+from promo_rag.workflows.ingestion.actions.import_snapshot import load_snapshot
 
 
 def _write_snapshot(folder, pages: dict[str, bytes], recorded_sha: dict[str, str] | None = None):

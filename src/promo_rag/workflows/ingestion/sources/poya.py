@@ -18,7 +18,12 @@ from datetime import date
 
 from bs4 import BeautifulSoup, Tag
 
-from promo_rag.ingest.html_text import block_lines, image_urls, normalize_line, strip_non_content
+from promo_rag.workflows.ingestion.html_text import (
+    block_lines,
+    image_urls,
+    normalize_line,
+    strip_non_content,
+)
 
 TITLE_SUFFIX = "-寶雅 POYA"
 

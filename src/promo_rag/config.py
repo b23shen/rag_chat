@@ -20,6 +20,13 @@ class Settings(BaseSettings):
     judge_model: str | None = None
     embed_model: str = "gemini-embedding-2"
     embed_dims: int = 1536
+    # Requests per minute for batch jobs (ingestion, eval). The free tier's limits are low.
+    gemini_rpm: int = 10
+
+    # Langfuse tracing (off if the keys are empty)
+    langfuse_public_key: str | None = None
+    langfuse_secret_key: SecretStr | None = None
+    langfuse_host: str = "https://cloud.langfuse.com"
 
     # Postgres
     pg_host: str = "localhost"

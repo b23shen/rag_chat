@@ -7,8 +7,8 @@ from datetime import date
 
 from bs4 import BeautifulSoup
 
-from promo_rag.ingest.html_text import block_lines, normalize_line, strip_non_content
-from promo_rag.ingest.poya import doc_type_for, parse_page
+from promo_rag.workflows.ingestion.html_text import block_lines, normalize_line, strip_non_content
+from promo_rag.workflows.ingestion.sources.poya import doc_type_for, parse_page
 
 URL = "https://www.poya.com.tw/news-detail/999/"
 

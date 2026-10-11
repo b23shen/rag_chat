@@ -1,7 +1,8 @@
 """Ingestion tables. Postgres holds all metadata; the blob store holds only raw bytes.
 
 artifacts 1──< documents >──< promotions      (via promotion_sources)
-                   │
+                   │  │
+                   │  └──< extractions                (one row per extraction attempt)
                    └──< chunks >── corpus_versions
 """
 
@@ -116,6 +117,31 @@ class Promotion(Base):
     extraction_model: Mapped[str]
     extracted_at: Mapped[datetime]
     raw: Mapped[dict] = mapped_column(JSONB)  # the full Pydantic output
+    created_at: Mapped[datetime] = created_at()
+
+
+class Extraction(Base):
+    """One fact-extraction run for one document: how it was done and how it went.
+
+    Failures are recorded here and never become promotions rows.
+    """
+
+    __tablename__ = "extractions"
+    __table_args__ = (UniqueConstraint("document_id", "schema_name", "prompt_version"),)
+
+    id: Mapped[uuid.UUID] = uuid_pk()
+    document_id: Mapped[uuid.UUID] = mapped_column(ForeignKey("documents.id"))
+    schema_name: Mapped[str]  # PromotionFacts | StoreNoticeFacts
+    method: Mapped[str]  # rules | llm
+    model: Mapped[str | None]  # NULL for rules
+    prompt_version: Mapped[str]  # hash of prompt + schema (llm) or the rules version
+    status: Mapped[str]  # ok | needs_review | failed
+    output: Mapped[dict | None] = mapped_column(JSONB)  # the last output, valid or not
+    errors: Mapped[list] = mapped_column(JSONB, server_default=text("'[]'::jsonb"))
+    attempts: Mapped[int]
+    tokens_in: Mapped[int | None]
+    tokens_out: Mapped[int | None]
+    latency_ms: Mapped[int | None]
     created_at: Mapped[datetime] = created_at()
 
 
