@@ -13,6 +13,7 @@ from pathlib import Path
 from promo_rag.agents.tracing import flush_traces
 from promo_rag.config import REPO_ROOT
 from promo_rag.workflows.ingestion import deps
+from promo_rag.workflows.ingestion.actions.activate import activate_version
 from promo_rag.workflows.ingestion.actions.chunk import chunk_documents
 from promo_rag.workflows.ingestion.actions.embed import embed_chunks
 from promo_rag.workflows.ingestion.actions.extract import extract_documents
@@ -137,6 +138,30 @@ def cmd_embed(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_activate(args: argparse.Namespace) -> int:
+    with deps.session() as session:
+        r = activate_version(session, uuid.UUID(args.version) if args.version else None)
+
+    print(f"Corpus version {r.version_id} (fingerprint {r.fingerprint}, {r.n_chunks} chunks)")
+    if r.problems:
+        print("Not activated:")
+        for problem in r.problems:
+            print(f"  - {problem}")
+        return 1
+    if r.already_active:
+        print("Already active.")
+    else:
+        print("Checks passed. Now active." + (f" Retired {r.retired}." if r.retired else ""))
+    print(
+        "Indexes valid:",
+        ", ".join(f"{k} {'yes' if v else 'NO'}" for k, v in r.indexes_valid.items()),
+    )
+    for query, plan in r.plans.items():
+        print(f"  {query:36s} {plan}")
+    hnsw_usable = "ix_chunks_embedding_hnsw" in r.plans.get("vector index usable (HNSW)", "")
+    return 0 if all(r.indexes_valid.values()) and hnsw_usable else 1
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(prog="ingest")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -173,6 +198,10 @@ def main() -> int:
     p.add_argument("--version", help="corpus version id (default: the newest one being built)")
     p.add_argument("--batch-size", type=int, default=50, help="texts per API call (default 50)")
     p.set_defaults(func=cmd_embed)
+
+    p = sub.add_parser("activate", help="step 6: check a version and make it the one search reads")
+    p.add_argument("--version", help="corpus version id (default: the newest one)")
+    p.set_defaults(func=cmd_activate)
 
     args = parser.parse_args()
     return args.func(args)

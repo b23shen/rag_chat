@@ -163,6 +163,13 @@ class CorpusVersion(Base):
     __tablename__ = "corpus_versions"
     __table_args__ = (
         Index("uq_corpus_versions_fingerprint_inputs", "fingerprint", "inputs_hash", unique=True),
+        # At most one active version: search reads it.
+        Index(
+            "uq_corpus_versions_one_active",
+            "status",
+            unique=True,
+            postgresql_where=text("status = 'active'"),
+        ),
     )
 
     id: Mapped[uuid.UUID] = uuid_pk()

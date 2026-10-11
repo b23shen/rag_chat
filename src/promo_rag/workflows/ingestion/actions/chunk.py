@@ -44,14 +44,14 @@ def chunk_documents(session: Session, cfg: IndexConfig, rebuild: bool = False) -
         .where(Document.is_latest, Document.status == "active")
         .order_by(Document.source_url)
     ).all()
-    facts = {doc.id: _header_facts(session, doc) for doc in docs}
+    facts = {doc.id: header_facts(session, doc) for doc in docs}
     report = ChunkReport(fingerprint=cfg.fingerprint())
 
-    inputs_hash = _inputs_hash(docs, facts)
+    current_inputs = inputs_hash(docs, facts)
     version = session.scalars(
         select(CorpusVersion).where(
             CorpusVersion.fingerprint == report.fingerprint,
-            CorpusVersion.inputs_hash == inputs_hash,
+            CorpusVersion.inputs_hash == current_inputs,
         )
     ).one_or_none()
     if version and not rebuild:
@@ -62,7 +62,7 @@ def chunk_documents(session: Session, cfg: IndexConfig, rebuild: bool = False) -
         version = CorpusVersion(
             fingerprint=report.fingerprint,
             config=cfg.model_dump(),
-            inputs_hash=inputs_hash,
+            inputs_hash=current_inputs,
             status="building",
         )
         session.add(version)
@@ -100,7 +100,7 @@ def chunk_documents(session: Session, cfg: IndexConfig, rebuild: bool = False) -
     return report
 
 
-def _header_facts(session: Session, doc: Document) -> tuple[HeaderFacts, Promotion | None]:
+def header_facts(session: Session, doc: Document) -> tuple[HeaderFacts, Promotion | None]:
     promotion = session.scalars(
         select(Promotion)
         .join(PromotionSource, PromotionSource.promotion_id == Promotion.id)
@@ -123,7 +123,7 @@ def _header_facts(session: Session, doc: Document) -> tuple[HeaderFacts, Promoti
     )
 
 
-def _inputs_hash(docs: list[Document], facts: dict) -> str:
+def inputs_hash(docs: list[Document], facts: dict) -> str:
     lines = sorted(f"{doc.content_hash}|{facts[doc.id][0]!r}" for doc in docs)
     return hashlib.sha256("\n".join(lines).encode("utf-8")).hexdigest()
 

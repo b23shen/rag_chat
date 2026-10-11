@@ -55,6 +55,9 @@ uv run ingest chunk
 
 # 5. Embed: fill chunk embeddings (gemini-embedding-2, 1536 dims), cached by the exact input text
 uv run ingest embed
+
+# 6. Activate: check the version (every chunk embedded, nothing stale) and make it the one search reads
+uv run ingest activate
 ```
 
 Every step is safe to re-run. Parse skips pages that aren't HTTP 200, have no text (image-only), or duplicate another page, and records the reason in `documents.skip_reason`. Extract checks every output in code (dates must be quoted from the page, start ≤ end, numbers must appear on the page), retries once with the errors, and logs each run in `extractions`. Only outputs that pass become `promotions` rows.
