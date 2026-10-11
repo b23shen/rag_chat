@@ -12,6 +12,7 @@ from pathlib import Path
 from promo_rag.agents.tracing import flush_traces
 from promo_rag.config import REPO_ROOT
 from promo_rag.workflows.ingestion import deps
+from promo_rag.workflows.ingestion.actions.chunk import chunk_documents
 from promo_rag.workflows.ingestion.actions.extract import extract_documents
 from promo_rag.workflows.ingestion.actions.import_snapshot import (
     load_snapshot,
@@ -19,6 +20,7 @@ from promo_rag.workflows.ingestion.actions.import_snapshot import (
     write_manifest,
 )
 from promo_rag.workflows.ingestion.actions.parse import parse_documents
+from promo_rag.workflows.ingestion.index_config import IndexConfig
 
 
 def cmd_import_snapshot(args: argparse.Namespace) -> int:
@@ -81,6 +83,35 @@ def cmd_extract(args: argparse.Namespace) -> int:
     return 0
 
 
+def cmd_chunk(args: argparse.Namespace) -> int:
+    overrides = {
+        k: v
+        for k, v in {
+            "chunk_tokens": args.chunk_tokens,
+            "overlap_tokens": args.overlap_tokens,
+            "segmenter": args.segmenter,
+            "header": False if args.no_header else None,
+        }.items()
+        if v is not None
+    }
+    cfg = IndexConfig(**overrides)
+    with deps.session() as session:
+        r = chunk_documents(session, cfg, rebuild=args.rebuild)
+
+    print(f"Corpus version {r.corpus_version_id} (fingerprint {r.fingerprint})")
+    if r.already_built:
+        print(f"Already built with these settings and inputs: {r.n_chunks} chunks. Nothing to do.")
+        return 0
+    counts = sorted(r.token_counts)
+    print(
+        f"{r.n_documents} documents → {r.n_chunks} chunks; {r.multi_chunk_docs} documents "
+        f"have more than one.\nEstimated tokens per chunk: min {counts[0]}, median "
+        f"{counts[len(counts) // 2]}, max {counts[-1]}."
+    )
+    print("Chunks by doc_type:", dict(sorted(r.by_doc_type.items())))
+    return 0
+
+
 def main() -> int:
     parser = argparse.ArgumentParser(prog="ingest")
     sub = parser.add_subparsers(dest="command", required=True)
@@ -102,6 +133,16 @@ def main() -> int:
     p.add_argument("--limit", type=int, help="only the first N pages (for trying it out)")
     p.add_argument("--only", help="only pages whose URL contains this text, e.g. /news-detail/361/")
     p.set_defaults(func=cmd_extract)
+
+    p = sub.add_parser("chunk", help="step 4: documents → chunks of a corpus version")
+    p.add_argument("--chunk-tokens", type=int, help="tokens per chunk (default 512)")
+    p.add_argument(
+        "--overlap-tokens", type=int, help="tokens repeated between chunks (default 100)"
+    )
+    p.add_argument("--segmenter", choices=["none", "jieba", "bigram"], help="default jieba")
+    p.add_argument("--no-header", action="store_true", help="no 'title | dates | stores' line")
+    p.add_argument("--rebuild", action="store_true", help="rebuild even if this version exists")
+    p.set_defaults(func=cmd_chunk)
 
     args = parser.parse_args()
     return args.func(args)

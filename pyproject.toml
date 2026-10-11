@@ -39,3 +39,7 @@ dev = [
 
 [tool.ruff]
 line-length = 100
+
+[tool.pytest.ini_options]
+# jieba is old code; Python 3.12 warns about its regex strings when it is first compiled.
+filterwarnings = ["ignore::SyntaxWarning"]

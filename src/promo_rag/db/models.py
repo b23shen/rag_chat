@@ -160,11 +160,16 @@ class CorpusVersion(Base):
     """One index build: these pages, indexed with these settings."""
 
     __tablename__ = "corpus_versions"
+    __table_args__ = (
+        Index("uq_corpus_versions_fingerprint_inputs", "fingerprint", "inputs_hash", unique=True),
+    )
 
     id: Mapped[uuid.UUID] = uuid_pk()
     fingerprint: Mapped[str] = mapped_column(String(16), index=True)  # hash of `config`
     config: Mapped[dict] = mapped_column(JSONB)  # chunk size, overlap, embed model, dims, ...
-    artifact_set_hash: Mapped[str | None] = mapped_column(String(64))
+    # Hash of everything the chunks were built from: each document's content_hash plus the
+    # facts in its header line. Same fingerprint + same inputs_hash = same chunks.
+    inputs_hash: Mapped[str | None] = mapped_column(String(64))
     n_documents: Mapped[int] = mapped_column(server_default="0")
     n_chunks: Mapped[int] = mapped_column(server_default="0")
     status: Mapped[str] = mapped_column(server_default="building")  # building | active | retired
