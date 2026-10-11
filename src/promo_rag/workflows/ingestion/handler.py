@@ -7,12 +7,14 @@ uv run ingest extract
 
 import argparse
 import sys
+import uuid
 from pathlib import Path
 
 from promo_rag.agents.tracing import flush_traces
 from promo_rag.config import REPO_ROOT
 from promo_rag.workflows.ingestion import deps
 from promo_rag.workflows.ingestion.actions.chunk import chunk_documents
+from promo_rag.workflows.ingestion.actions.embed import embed_chunks
 from promo_rag.workflows.ingestion.actions.extract import extract_documents
 from promo_rag.workflows.ingestion.actions.import_snapshot import (
     load_snapshot,
@@ -109,6 +111,29 @@ def cmd_chunk(args: argparse.Namespace) -> int:
         f"{counts[len(counts) // 2]}, max {counts[-1]}."
     )
     print("Chunks by doc_type:", dict(sorted(r.by_doc_type.items())))
+    if r.drafts_dropped:
+        print(f"Dropped {r.drafts_dropped} older draft version(s) that were never embedded.")
+    return 0
+
+
+def cmd_embed(args: argparse.Namespace) -> int:
+    with deps.session() as session:
+        r = embed_chunks(
+            session,
+            version_id=uuid.UUID(args.version) if args.version else None,
+            batch_size=args.batch_size,
+        )
+    print(
+        f"Corpus version {r.corpus_version_id}: {r.embedded} chunks embedded with {r.model} ({r.dims} dims)"
+    )
+    if r.embedded:
+        print(
+            f"{r.from_cache} from the cache, {r.from_api} from the API in {r.api_calls} call(s), "
+            f"{r.seconds:.1f} s; ≈{r.estimated_tokens:,} tokens ≈ ${r.estimated_cost_usd:.4f} at paid prices"
+        )
+        print(f"Vector lengths (norms): min {min(r.norms):.4f}, max {max(r.norms):.4f}")
+    else:
+        print("Nothing to do: every chunk in this version already has an embedding.")
     return 0
 
 
@@ -143,6 +168,11 @@ def main() -> int:
     p.add_argument("--no-header", action="store_true", help="no 'title | dates | stores' line")
     p.add_argument("--rebuild", action="store_true", help="rebuild even if this version exists")
     p.set_defaults(func=cmd_chunk)
+
+    p = sub.add_parser("embed", help="step 5: fill chunk embeddings (cached by input text)")
+    p.add_argument("--version", help="corpus version id (default: the newest one being built)")
+    p.add_argument("--batch-size", type=int, default=50, help="texts per API call (default 50)")
+    p.set_defaults(func=cmd_embed)
 
     args = parser.parse_args()
     return args.func(args)

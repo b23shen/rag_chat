@@ -4,6 +4,7 @@ artifacts 1──< documents >──< promotions      (via promotion_sources)
                    │  │
                    │  └──< extractions                (one row per extraction attempt)
                    └──< chunks >── corpus_versions
+embedding_cache: vectors keyed by (model, dims, sha256 of the input text)
 """
 
 import uuid
@@ -210,4 +211,16 @@ class Chunk(Base):
     language: Mapped[str]
     start_date: Mapped[date | None]
     end_date: Mapped[date | None]
+    created_at: Mapped[datetime] = created_at()
+
+
+class EmbeddingCacheEntry(Base):
+    """An embedding, keyed by the exact text that was sent (task prefix included)."""
+
+    __tablename__ = "embedding_cache"
+
+    model: Mapped[str] = mapped_column(primary_key=True)
+    dims: Mapped[int] = mapped_column(primary_key=True)
+    input_hash: Mapped[str] = mapped_column(String(64), primary_key=True)
+    embedding: Mapped[list[float]] = mapped_column(Vector())  # no fixed size
     created_at: Mapped[datetime] = created_at()

@@ -12,7 +12,6 @@ For each active document whose doc_type has an extractor (facts.EXTRACTORS):
 A failed extraction never blocks search: chunks are built from the document text either way.
 """
 
-import time
 import uuid
 from collections import Counter
 from collections.abc import Callable
@@ -30,7 +29,7 @@ from promo_rag.agents.config import get_agent_config
 from promo_rag.agents.invoke import prompt_version
 from promo_rag.config import get_settings
 from promo_rag.db.models import Document, Extraction, Promotion, PromotionSource
-from promo_rag.llm import cost_usd
+from promo_rag.llm import Pacer, cost_usd
 from promo_rag.workflows.ingestion.facts import (
     EXTRACTORS,
     RULES_VERSION,
@@ -70,20 +69,6 @@ class ExtractReport:
     tokens_out: int = 0
     cost_usd: float = 0.0
     problems: list[tuple[str, str, list]] = field(default_factory=list)  # (url, status, errors)
-
-
-class Pacer:
-    """Spaces out LLM calls to stay under the free tier's requests-per-minute limit."""
-
-    def __init__(self, rpm: int):
-        self.interval = 60.0 / rpm
-        self.last = 0.0
-
-    def wait(self) -> None:
-        delay = self.last + self.interval - time.monotonic()
-        if delay > 0:
-            time.sleep(delay)
-        self.last = time.monotonic()
 
 
 def extract_documents(

@@ -34,6 +34,10 @@ class IndexConfig(BaseModel):
     word_list: str = Field(default_factory=word_list_version)
     embed_model: str = Field(default_factory=_embed_model)
     embed_dims: int = Field(default_factory=_embed_dims)
+    # gemini-embedding-2 takes the task as a text prefix. The query format is an eval
+    # experiment ("task: search result" vs "task: question answering").
+    embed_doc_format: str = "title: {title} | text: {text}"
+    embed_query_format: str = "task: search result | query: {query}"
 
     def fingerprint(self) -> str:
         blob = json.dumps(self.model_dump(), sort_keys=True)

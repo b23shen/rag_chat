@@ -17,11 +17,15 @@ import hashlib
 import logging
 import re
 import unicodedata
+import warnings
 from functools import lru_cache
 from pathlib import Path
 from typing import Literal
 
-import jieba
+with warnings.catch_warnings():
+    # jieba is old code; Python 3.12 warns about its regex strings when it is first compiled.
+    warnings.simplefilter("ignore", SyntaxWarning)
+    import jieba
 
 Segmenter = Literal["none", "jieba", "bigram"]
 

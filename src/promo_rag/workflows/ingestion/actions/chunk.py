@@ -6,14 +6,15 @@ A corpus version is "these inputs, indexed with these settings":
 
 Chunking is deterministic, so if a version with the same fingerprint and inputs_hash
 already exists there is nothing to do. Change a setting, a page or a fact, and a new
-version is built next to the old one (old versions stay for A/B comparison).
+version is built next to the old one. Versions that have embeddings stay (for A/B
+comparison); drafts that were never embedded are replaced, since rebuilding them is free.
 """
 
 import hashlib
 from collections import Counter
 from dataclasses import dataclass, field
 
-from sqlalchemy import delete, select
+from sqlalchemy import delete, exists, select
 from sqlalchemy.orm import Session
 
 from promo_rag.db.models import Chunk, CorpusVersion, Document, Promotion, PromotionSource
@@ -34,6 +35,7 @@ class ChunkReport:
     by_doc_type: Counter = field(default_factory=Counter)
     multi_chunk_docs: int = 0
     token_counts: list[int] = field(default_factory=list)
+    drafts_dropped: int = 0
 
 
 def chunk_documents(session: Session, cfg: IndexConfig, rebuild: bool = False) -> ChunkReport:
@@ -65,6 +67,7 @@ def chunk_documents(session: Session, cfg: IndexConfig, rebuild: bool = False) -
         )
         session.add(version)
         session.flush()
+        report.drafts_dropped = _drop_unembedded_drafts(session, keep=version.id)
     else:
         session.execute(delete(Chunk).where(Chunk.corpus_version_id == version.id))
 
@@ -123,3 +126,19 @@ def _header_facts(session: Session, doc: Document) -> tuple[HeaderFacts, Promoti
 def _inputs_hash(docs: list[Document], facts: dict) -> str:
     lines = sorted(f"{doc.content_hash}|{facts[doc.id][0]!r}" for doc in docs)
     return hashlib.sha256("\n".join(lines).encode("utf-8")).hexdigest()
+
+
+def _drop_unembedded_drafts(session: Session, keep) -> int:
+    """Delete `building` versions with no embedded chunks: drafts replaced by this build."""
+    has_embedding = exists().where(
+        Chunk.corpus_version_id == CorpusVersion.id, Chunk.embedding.is_not(None)
+    )
+    drafts = session.scalars(
+        select(CorpusVersion.id).where(
+            CorpusVersion.status == "building", CorpusVersion.id != keep, ~has_embedding
+        )
+    ).all()
+    for draft in drafts:
+        session.execute(delete(Chunk).where(Chunk.corpus_version_id == draft))
+        session.execute(delete(CorpusVersion).where(CorpusVersion.id == draft))
+    return len(drafts)

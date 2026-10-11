@@ -1,5 +1,7 @@
 """Gemini client setup, shared by ingestion, the agent and eval."""
 
+import time
+
 from google import genai
 from google.genai import types
 
@@ -37,3 +39,17 @@ def gemini_client(timeout_s: float = 30) -> genai.Client:
 def cost_usd(model: str, tokens_in: int, tokens_out: int) -> float:
     price_in, price_out = PRICES.get(model, (0.0, 0.0))
     return (tokens_in * price_in + tokens_out * price_out) / 1_000_000
+
+
+class Pacer:
+    """Spaces out calls to stay under a requests-per-minute limit (the free tier's is low)."""
+
+    def __init__(self, rpm: int):
+        self.interval = 60.0 / rpm
+        self.last = 0.0
+
+    def wait(self) -> None:
+        delay = self.last + self.interval - time.monotonic()
+        if delay > 0:
+            time.sleep(delay)
+        self.last = time.monotonic()
