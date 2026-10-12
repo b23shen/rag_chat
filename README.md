@@ -67,6 +67,15 @@ curl localhost:8000/runs/<run_id>/content        # each action's report, once fi
 
 Runs are rows in `platform.workflow_runs`; a worker claims the oldest queued one with `SELECT … FOR UPDATE SKIP LOCKED`, so several workers never take the same run and a restart loses nothing. Each action's status, timing, output and error is recorded in `platform.action_runs`.
 
+**Updating a page vs adding one.** A page is identified by its `source_url`, and a corpus version's `n_documents` counts pages (the active, latest document per URL), not rows:
+
+| You upload | Result | `n_documents` |
+|---|---|---|
+| New content for a URL already in the corpus | A new document version; the old one is archived and its promotion removed | unchanged |
+| A new URL whose text matches an existing page | Recorded, but skipped as `duplicate of <url>` | unchanged |
+| A new URL with new content | A new page: document, promotion (if any) and chunks | +1 |
+| Bytes already stored for that URL | Same artifact (`"new": false`), its `last_seen_at` moves forward. If they're an older version (A → B → A), that text becomes current again | unchanged |
+
 ## Running one step at a time
 
 The same actions, as CLI commands (handy while developing):
