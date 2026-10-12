@@ -32,6 +32,7 @@ dependencies = [
 ingest = "promo_rag.workflows.ingestion.handler:main"
 serve = "promo_rag.platform.api:serve"
 worker = "promo_rag.platform.worker:main"
+search = "promo_rag.search.cli:main"
 
 [build-system]
 requires = ["uv_build>=0.13.0,<0.14.0"]
