@@ -28,7 +28,7 @@ questions:
   - id: rule-02
     category: rule
     lang: zh
-    question: 用折價券買的東西可以退嗎?
+    question: 在門市用折價券買的東西可以退嗎?
     relevant:
       /law_regulation/5: {grade: 2, quote: "折價券購買之商品,恕無法辦理退貨"}
       /faq/8: {grade: 2, quote: "折價券購買之商品,恕無法辦理退貨"}
@@ -100,6 +100,7 @@ questions:
     relevant:
       /voucher/: {grade: 2, quote: "特殊門市(如百貨門市)及離島門市"}
       /voucher-detail/3: {grade: 2, quote: ["高島屋天母店", "澎湖北辰店"]}
+      /news-detail/311/: {grade: 1, quote: "特殊門市(如:百貨門市)及離島門市"}
     answer: No. E-vouchers don't work at special stores such as department-store counters, or at offshore-island stores.
 
   - id: rule-11
@@ -175,8 +176,9 @@ questions:
     relevant:
       /news-detail/361/: {grade: 2, quote: "2026/11/04~2026/12/01"}
       /events-detail/43/: {grade: 1, quote: "精選商品消費滿額即贈10%回饋金"}
+      /events-detail/44/: {grade: 1, quote: "精選商品消費滿額即贈10%回饋金"}
     answer: 2026/11/04 到 2026/12/01，在全台實體門市使用。
-    notes: Only the news page gives the voucher dates; the events page is the same campaign.
+    notes: Only the news page gives the voucher dates; the events pages are the same campaign (44 is the store-limited version).
 
   - id: date-04
     category: date
@@ -293,6 +295,7 @@ questions:
     relevant:
       /voucher-detail/3: {grade: 2, quote: ["高島屋天母店", "澎湖北辰店"]}
       /voucher/: {grade: 1, quote: "不適用門市完整資訊"}
+      /news-detail/311/: {grade: 1, quote: "特殊門市(如:百貨門市)及離島門市"}
     answer: 百貨和特殊門市及離島門市，例如高島屋天母、南港高鐵、台北北車、環球林口、金門伯玉、澎湖北辰等 22 家。
 
   - id: list-08
