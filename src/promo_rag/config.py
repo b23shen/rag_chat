@@ -23,6 +23,12 @@ class Settings(BaseSettings):
     # Requests per minute for batch jobs (ingestion, eval). The free tier's limits are low.
     gemini_rpm: int = 10
 
+    # Cohere Rerank (the rerank search mode). A free trial key allows 10 calls a minute and
+    # 1,000 a month. Pin an exact model, as with Gemini, so eval results stay comparable.
+    cohere_api_key: SecretStr | None = None
+    rerank_model: str = "rerank-v4.0-pro"
+    rerank_rpm: int = 10
+
     # Langfuse tracing (off if the keys are empty)
     langfuse_public_key: str | None = None
     langfuse_secret_key: SecretStr | None = None

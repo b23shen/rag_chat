@@ -1,10 +1,11 @@
-"""Search a corpus version's chunks: vector, keyword, or hybrid (both, merged by rank).
+"""Search a corpus version's chunks: vector, keyword, hybrid, or rerank.
 
   vector   cosine distance between the question's embedding and each chunk's (pgvector)
   keyword  Postgres full-text search on the segmented text (chunks.tsv), any word may match
   hybrid   both lists merged with reciprocal rank fusion (RRF): each chunk scores
            sum(1 / (rrf_k + rank)) over the lists it appears in. Ranks, not scores, so the
            two very different score scales never need to be compared.
+  rerank   hybrid's top results, put in a new order by a reranker model (search/rerank.py)
 
 The question is embedded and segmented with the settings the version was built with (its
 config), so a question and the chunks it is compared with are always processed the same way.
@@ -19,12 +20,13 @@ from sqlalchemy import text
 from sqlalchemy.orm import Session
 
 from promo_rag.search.embed import DbEmbeddingCache, embed_inputs, gemini_embed, query_input
+from promo_rag.search.rerank import RerankCall, cohere_rerank
 from promo_rag.search.segment import segment, word_list_version
 
-Mode = Literal["vector", "keyword", "hybrid"]
+Mode = Literal["vector", "keyword", "hybrid", "rerank"]
 EmbedQuery = Callable[[str], list[float]]
 
-# Each list's top N goes into the fusion.
+# Each list's top N goes into the fusion, and the fused top N into the reranker.
 CANDIDATES = 20
 # The usual RRF constant; a larger value flattens the gap between rank 1 and rank 2.
 RRF_K = 60
@@ -52,9 +54,11 @@ class Hit:
     source_url: str
     title: str
     text: str
-    score: float  # vector: cosine similarity; keyword: ts_rank; hybrid: RRF score
-    vector_rank: int | None = None  # hybrid only: the chunk's rank in each list
+    # vector: cosine similarity; keyword: ts_rank; hybrid: RRF score; rerank: relevance 0-1
+    score: float
+    vector_rank: int | None = None  # hybrid and rerank: the chunk's rank in each list
     keyword_rank: int | None = None
+    hybrid_rank: int | None = None  # rerank only: the chunk's rank before reranking
 
 
 def search(
@@ -65,6 +69,7 @@ def search(
     k: int = 5,
     version_id: uuid.UUID | None = None,
     embed_query: EmbedQuery | None = None,
+    rerank: RerankCall | None = None,
 ) -> list[Hit]:
     """The top k chunks for a question. Reads the active version unless one is given.
 
@@ -72,12 +77,13 @@ def search(
     commit to keep it.
     """
     version = load_version(session, version_id)
-    n = k if mode != "hybrid" else max(k, CANDIDATES)
+    fused = mode in ("hybrid", "rerank")
+    n = max(k, CANDIDATES) if fused else k
     vector_ids, keyword_ids = [], []
-    if mode in ("vector", "hybrid"):
+    if mode != "keyword":
         embed = embed_query or cached_query_embedder(session, version)
         vector_ids = _vector(session, version, embed(query), n)
-    if mode in ("keyword", "hybrid"):
+    if mode != "vector":
         keyword_ids = _keyword(session, version, query, n)
 
     if mode == "vector":
@@ -85,10 +91,15 @@ def search(
     elif mode == "keyword":
         ranked = keyword_ids
     else:
-        ranked = rrf([[i for i, _ in vector_ids], [i for i, _ in keyword_ids]], RRF_K)
+        ranked = rrf([[i for i, _ in vector_ids], [i for i, _ in keyword_ids]], RRF_K)[:n]
+    rows = _chunk_rows(session, [chunk_id for chunk_id, _ in ranked])
+    hybrid_rank = {chunk_id: r for r, (chunk_id, _) in enumerate(ranked, 1)}
+    if mode == "rerank":
+        scores = (rerank or cohere_rerank())(query, [rows[c].text for c, _ in ranked])
+        rescored = [(c, s) for (c, _), s in zip(ranked, scores, strict=True)]
+        ranked = sorted(rescored, key=lambda cs: (-cs[1], hybrid_rank[cs[0]]))
     ranked = ranked[:k]
 
-    rows = _chunk_rows(session, [chunk_id for chunk_id, _ in ranked])
     v_rank = {chunk_id: r for r, (chunk_id, _) in enumerate(vector_ids, 1)}
     kw_rank = {chunk_id: r for r, (chunk_id, _) in enumerate(keyword_ids, 1)}
     return [
@@ -99,8 +110,9 @@ def search(
             title=rows[chunk_id].title,
             text=rows[chunk_id].text,
             score=score,
-            vector_rank=v_rank.get(chunk_id) if mode == "hybrid" else None,
-            keyword_rank=kw_rank.get(chunk_id) if mode == "hybrid" else None,
+            vector_rank=v_rank.get(chunk_id) if fused else None,
+            keyword_rank=kw_rank.get(chunk_id) if fused else None,
+            hybrid_rank=hybrid_rank[chunk_id] if mode == "rerank" else None,
         )
         for r, (chunk_id, score) in enumerate(ranked, 1)
     ]
@@ -146,6 +158,16 @@ def load_version(session: Session, version_id: uuid.UUID | None = None) -> Versi
             "split differently from its chunks. Rebuild it (ingest chunk)."
         )
     return version
+
+
+def find_version(session: Session, prefix: str) -> uuid.UUID:
+    """A corpus version by its id or the first characters of it (e.g. 02fc002a)."""
+    ids = session.scalars(
+        text("SELECT id FROM corpus_versions WHERE id::text LIKE :p"), {"p": prefix + "%"}
+    ).all()
+    if len(ids) != 1:
+        raise SearchError(f"{len(ids)} corpus versions start with {prefix!r}")
+    return ids[0]
 
 
 def cached_query_embedder(session: Session, version: Version) -> EmbedQuery:

@@ -21,7 +21,11 @@ src/promo_rag/
     models.py          model roles (chat / helper / judge) from .env; retries set here only
     tools/ middleware/ shared tools and middleware, referenced by name
     tracing.py         Langfuse (off without keys)
-  search/              shared by ingestion and search: word splitting (jieba), embeddings + cache
+  search/              word splitting (jieba), embeddings + cache, and search itself
+    retrieve.py        search(query, mode=vector | keyword | hybrid | rerank)
+    rerank.py          Cohere Rerank client
+    cli.py             `uv run search "…"`
+  evals/               the golden question set's loader (the questions are in evals/golden.yaml)
   workflows/
     ingestion/         runbook.yaml, actions/, agents.py, prompts/, sources/, handler.py (CLI)
   db/  storage/        tables (schemas platform and rag) and the blob store
@@ -40,7 +44,7 @@ uv run python scripts/smoke_test.py  # checks Postgres, pgvector, embeddings and
 uv run alembic upgrade head          # creates the tables
 ```
 
-`init_db.sh` generates the app's database password and writes it to `.env`. `.env` is gitignored.
+`init_db.sh` generates the app's database password and writes it to `.env`. `.env` is gitignored. The `rerank` search mode also needs a Cohere key (`COHERE_API_KEY`; a free trial key works).
 
 ## Ingestion as a workflow
 
@@ -93,3 +97,49 @@ uv run ingest activate     # check the version (every chunk embedded, nothing st
 Every step is safe to re-run. Parse skips pages that aren't HTTP 200, have no text (image-only), or duplicate another page, and records the reason in `documents.skip_reason`. Extract checks every output in code (dates must be quoted from the page, start ≤ end, numbers must appear on the page), retries once with the errors, and logs each run in `extractions`. Only outputs that pass become `promotions` rows.
 
 A snapshot folder holds `sources.csv` and `raw/<slug>.html`. Raw pages are never committed; [`data/sources.csv`](data/sources.csv) lists each page's URL and sha256 instead.
+
+## Search
+
+Search reads the active corpus version's chunks and returns the top chunks for a question, in one of four modes. Each mode adds a step to the one before it:
+
+```
+question
+   ├─ vector search ──┐   top 20 each: cheap, finds many candidates
+   └─ keyword search ─┤
+                      ▼
+                RRF (hybrid)      → top 20 candidates
+                      ▼
+                reranker          → reads question + chunk together, re-orders
+                      ▼
+                top 5             → the LLM that writes the answer
+```
+
+| Mode | How it ranks | Score |
+|---|---|---|
+| `vector` | Closeness of the question's embedding to each chunk's (pgvector, cosine) | cosine similarity, higher is closer |
+| `keyword` | Postgres full-text search on the jieba-split text; any question word may match. Words found in more than 20% of chunks (的, 活動, 2026 …) are ignored, because Postgres ranking doesn't weigh rare words higher | `ts_rank`; compare only within one search |
+| `hybrid` | Both lists' top 20, merged by reciprocal rank fusion: each chunk scores `1 / (60 + rank)` per list it appears in | at most 2/61 ≈ 0.0328 (first in both) |
+| `rerank` | Hybrid's top 20, re-ordered by Cohere Rerank, which reads the question and each chunk together | relevance from 0 to 1 |
+
+```bash
+uv run search "週五用街口支付有什麼優惠?"                 # hybrid
+uv run search "Can I bring my dog?" --mode rerank -k 3
+uv run search "退貨" --mode keyword --version 02fc002a    # another corpus version, by id prefix
+```
+
+Each line of output is one chunk (a page can appear more than once): rank, score, page, title, and the start of the chunk's text. Hybrid and rerank also show each chunk's rank in the vector and keyword lists, and rerank its rank before reranking.
+
+The question is split into words and embedded with the settings its corpus version was built with, so a question and the chunks it is compared with are always processed the same way.
+
+
+## Search eval
+
+[`evals/golden.yaml`](evals/golden.yaml) holds 50 questions (rules, dates, lists, counts, unanswerable, multi-turn; about a third in English). Each one names the pages that answer it and a short quote from each page. A search result chunk counts as relevant if it comes from one of those pages and contains the quote, so the labels work on every corpus version, whatever its chunk ids or boundaries.
+
+```bash
+uv run eval-search                          # all modes, the active corpus version (rerank takes ~5 min on a trial key)
+uv run eval-search --modes vector hybrid    # some modes
+uv run eval-search --version 02fc002a       # another corpus version
+```
+
+It searches every answerable question in each mode and reports Hit@5 and Hit@20 (a chunk that answers the question is in the top 5 / 20), MRR@10 (1 / the rank of the first one), nDCG@5 (how close the top 5 is to the best possible order) and search latency. Results are saved to `evals/results/` as Markdown tables and JSON (every question's results and the settings used).

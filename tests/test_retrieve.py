@@ -89,3 +89,36 @@ def test_hybrid_reports_each_lists_rank(session):
     hits = search(session, "寵物", mode="hybrid", k=5, embed_query=lambda _: json.loads(vector))
     assert hits[0].chunk_id == chunk_id
     assert hits[0].vector_rank == 1 and hits[0].keyword_rank == 1
+
+
+def test_rerank_reorders_hybrids_top_results(session):
+    pets_chunk_id, vector = session.execute(
+        text(
+            "SELECT c.id, c.embedding::text FROM chunks c JOIN corpus_versions v "
+            "ON v.id = c.corpus_version_id JOIN documents d ON d.id = c.document_id "
+            "WHERE v.status = 'active' AND d.source_url LIKE '%/faq/8' AND c.text LIKE '%寵物%'"
+        )
+    ).one()
+    sent = []
+
+    def backwards(query, documents):  # a fake reranker that prefers hybrid's last result
+        sent.append(documents)
+        return [i / len(documents) for i in range(len(documents))]
+
+    hits = search(
+        session,
+        "寵物",
+        mode="rerank",
+        k=3,
+        embed_query=lambda _: json.loads(vector),
+        rerank=backwards,
+    )
+    n = len(sent[0])
+    assert n == 20  # hybrid's top 20 go to the reranker, with their full text
+    assert [h.hybrid_rank for h in hits] == [n, n - 1, n - 2]
+    assert hits[0].score == pytest.approx((n - 1) / n)
+    hybrid_first = search(
+        session, "寵物", mode="hybrid", k=1, embed_query=lambda _: json.loads(vector)
+    )
+    assert hybrid_first[0].chunk_id == pets_chunk_id
+    assert sent[0][0] == hybrid_first[0].text  # the reranker reads each chunk's full text
