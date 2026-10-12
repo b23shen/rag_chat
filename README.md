@@ -22,7 +22,7 @@ src/promo_rag/
     tools/ middleware/ shared tools and middleware, referenced by name
     tracing.py         Langfuse (off without keys)
   search/              word splitting (jieba), embeddings + cache, and search itself
-    retrieve.py        search(query, mode=vector | keyword | hybrid | rerank)
+    retrieve.py        search(query, mode=rerank (default) | vector | keyword | hybrid)
     rerank.py          Cohere Rerank client
     cli.py             `uv run search "…"`
   evals/               the golden question set's loader (the questions are in evals/golden.yaml)
@@ -100,37 +100,40 @@ A snapshot folder holds `sources.csv` and `raw/<slug>.html`. Raw pages are never
 
 ## Search
 
-Search reads the active corpus version's chunks and returns the top chunks for a question, in one of four modes. Each mode adds a step to the one before it:
+Search reads the active corpus version's chunks and returns the top chunks for a question. The default mode, `rerank`, is a funnel: a cheap search finds candidates, then a slower, more accurate model puts them in order.
 
 ```
 question
-   ├─ vector search ──┐   top 20 each: cheap, finds many candidates
-   └─ keyword search ─┤
-                      ▼
-                RRF (hybrid)      → top 20 candidates
-                      ▼
-                reranker          → reads question + chunk together, re-orders
-                      ▼
-                top 5             → the LLM that writes the answer
+   │
+vector search       → top 20 candidates: cheap, finds the right chunk almost always
+   ▼
+reranker            → reads the question and each chunk together, re-orders them
+   ▼
+top 5               → the LLM that writes the answer
 ```
+
+If the reranker fails (no key, a trial key's limit of 10 calls a minute, an outage), search keeps vector's order and says so (`Hit.reranked = False`), so it never stops working.
 
 | Mode | How it ranks | Score |
 |---|---|---|
+| `rerank` (default) | Vector's top 20, re-ordered by Cohere Rerank (`rerank-v4.0-pro`) | relevance from 0 to 1 |
 | `vector` | Closeness of the question's embedding to each chunk's (pgvector, cosine) | cosine similarity, higher is closer |
-| `keyword` | Postgres full-text search on the jieba-split text; any question word may match. Words found in more than 20% of chunks (的, 活動, 2026 …) are ignored, because Postgres ranking doesn't weigh rare words higher | `ts_rank`; compare only within one search |
-| `hybrid` | Both lists' top 20, merged by reciprocal rank fusion: each chunk scores `1 / (60 + rank)` per list it appears in | at most 2/61 ≈ 0.0328 (first in both) |
-| `rerank` | Hybrid's top 20, re-ordered by Cohere Rerank, which reads the question and each chunk together | relevance from 0 to 1 |
+| `keyword` | Postgres full-text search on the split text; any question word may match. Words found in more than 20% of chunks (的, 活動, 2026 …) are ignored, because Postgres ranking doesn't weigh rare words higher | `ts_rank`; compare only within one search |
+| `hybrid` | Vector's and keyword's top 20, merged by reciprocal rank fusion: each chunk scores `weight / (60 + rank)` per list it appears in | at most 2/61 ≈ 0.0328 (first in both) |
+
+**Why not hybrid?** On the golden set, keyword search made results worse: hybrid's MRR was 0.70–0.85 against vector's 0.93, whatever the segmenter (jieba or bigram), word filter (10%–off) or vector weight (1–5). Keyword helped 1 question and hurt 6 to 13. So keyword and hybrid stay as modes for experiments (e.g. a learned sparse model such as BGE-M3), not for answers. The set has few exact-match questions (phone numbers, serial numbers), where keyword search usually helps.
+
+**Why rerank, when it ranks no better than vector here?** Its scores mean the same thing across questions, so a low top score can flag "nothing relevant": a cutoff of 0.68 caught 3 of the 6 unanswerable questions without losing an answerable one. Vector's scores caught 1 of 6.
 
 ```bash
-uv run search "週五用街口支付有什麼優惠?"                 # hybrid
-uv run search "Can I bring my dog?" --mode rerank -k 3
-uv run search "退貨" --mode keyword --version 02fc002a    # another corpus version, by id prefix
+uv run search "週五用街口支付有什麼優惠?"                 # rerank
+uv run search "Can I bring my dog?" --mode vector -k 3
+uv run search "退貨" --mode keyword --version 3090b223    # another corpus version, by id prefix
 ```
 
-Each line of output is one chunk (a page can appear more than once): rank, score, page, title, and the start of the chunk's text. Hybrid and rerank also show each chunk's rank in the vector and keyword lists, and rerank its rank before reranking.
+Each line of output is one chunk (a page can appear more than once): rank, score, page, title, and the start of the chunk's text. Rerank also shows each chunk's rank before reranking, and hybrid its rank in the vector and keyword lists.
 
 The question is split into words and embedded with the settings its corpus version was built with, so a question and the chunks it is compared with are always processed the same way.
-
 
 ## Search eval
 
@@ -138,8 +141,10 @@ The question is split into words and embedded with the settings its corpus versi
 
 ```bash
 uv run eval-search                          # all modes, the active corpus version (rerank takes ~5 min on a trial key)
-uv run eval-search --modes vector hybrid    # some modes
-uv run eval-search --version 02fc002a       # another corpus version
+uv run eval-search --modes vector hybrid    # some modes (the first is the baseline)
+uv run eval-search --version 5da896fe 3090b223 --max-word-share 0.1 0.2 1.0   # compare variants
 ```
 
-It searches every answerable question in each mode and reports Hit@5 and Hit@20 (a chunk that answers the question is in the top 5 / 20), MRR@10 (1 / the rank of the first one), nDCG@5 (how close the top 5 is to the best possible order) and search latency. Results are saved to `evals/results/` as Markdown tables and JSON (every question's results and the settings used).
+Flags that take several values make one variant per combination (mode × corpus version × setting). For each variant it reports Hit@5 and Hit@20 (a chunk that answers the question is in the top 5 / 20), MRR@10 (1 / the rank of the first one), nDCG@5 (how close the top 5 is to the best possible order) and search latency.
+
+Every variant is compared with the first one question by question, with a 95% range for the difference: draw the 44 questions at random, with repeats, 2,000 times, and keep the middle 95% of the results. A range that includes 0 means the two can't be told apart on this many questions; with 44 questions, one question moves Hit@5 by 0.023. The unanswerable questions are searched too, to find the top-score cutoff (vector and rerank only) that best flags "nothing relevant". Results are saved to `evals/results/` as Markdown tables and JSON (every question's results and each variant's settings).

@@ -1,9 +1,8 @@
 """Try a search from the terminal.
 
-uv run search "週五用街口支付有什麼優惠?"
+uv run search "週五用街口支付有什麼優惠?"                 # rerank (needs COHERE_API_KEY in .env)
 uv run search "Can I bring my dog?" --mode vector -k 3
-uv run search "退貨" --mode keyword --version 02fc002a      # another corpus version, by id prefix
-uv run search "可以帶狗嗎?" --mode rerank                     # needs COHERE_API_KEY in .env
+uv run search "退貨" --mode keyword --version 3090b223    # another corpus version, by id prefix
 """
 
 import argparse
@@ -21,7 +20,7 @@ def main() -> int:
     parser = argparse.ArgumentParser(prog="search")
     parser.add_argument("query")
     parser.add_argument(
-        "--mode", choices=["vector", "keyword", "hybrid", "rerank"], default="hybrid"
+        "--mode", choices=["vector", "keyword", "hybrid", "rerank"], default="rerank"
     )
     parser.add_argument("-k", type=int, default=5)
     parser.add_argument("--version", help="corpus version id or its first characters")
@@ -39,17 +38,19 @@ def main() -> int:
         session.commit()  # keep the question's embedding in the cache
 
     for h in hits:
-        ranks = ""
-        if args.mode in ("hybrid", "rerank"):
-            ranks = f"vector #{h.vector_rank or '-'}, keyword #{h.keyword_rank or '-'}"
-            if args.mode == "rerank":
-                ranks = f"hybrid #{h.hybrid_rank}: {ranks}"
-            ranks = f"  ({ranks})"
+        ranks = []
+        if h.candidate_rank:
+            ranks.append(f"before #{h.candidate_rank}")
+        if h.vector_rank or h.keyword_rank:
+            ranks.append(f"vector #{h.vector_rank or '-'}, keyword #{h.keyword_rank or '-'}")
+        ranks = f"  ({'; '.join(ranks)})" if ranks else ""
         body = h.text.split("\n", 1)[-1].replace("\n", " ")
         print(f"{h.rank}. {h.score:.4f}  {h.source_url.removeprefix(SITE)}  {h.title}{ranks}")
         print(f"   {body[:90]}")
     if not hits:
         print("No results.")
+    elif args.mode == "rerank" and not hits[0].reranked:
+        print("(The reranker failed; these are in vector order with vector scores.)")
     print(f"{args.mode}, {ms:.0f} ms")
     return 0
 

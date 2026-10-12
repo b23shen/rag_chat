@@ -50,7 +50,10 @@ def cohere_rerank(
         if not documents:
             return []
         body = {"model": model, "query": query, "documents": documents}
-        response = _post(client, body, pacer)
+        try:
+            response = _post(client, body, pacer)
+        except httpx.HTTPError as e:  # timeouts, connection errors
+            raise RerankError(f"Cohere rerank: {type(e).__name__}: {e}") from e
         return scores_in_input_order(response.json(), len(documents))
 
     return call

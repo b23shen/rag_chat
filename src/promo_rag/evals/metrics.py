@@ -5,6 +5,8 @@
 """
 
 import math
+import random
+import statistics
 from collections.abc import Sequence
 
 
@@ -37,6 +39,34 @@ def percentile(values: Sequence[float], p: float) -> float:
         return 0.0
     ordered = sorted(values)
     return ordered[max(0, math.ceil(p / 100 * len(ordered)) - 1)]
+
+
+def paired_range(
+    diffs: Sequence[float], n: int = 2000, seed: int = 0
+) -> tuple[float, float, float]:
+    """The mean of per-question differences, and its 95% range (bootstrap).
+
+    Draw len(diffs) questions at random, with repeats, n times; the middle 95% of those
+    means is the range. A range that includes 0 means the two variants can't be told apart
+    on this many questions.
+    """
+    if not diffs:
+        return 0.0, 0.0, 0.0
+    rng = random.Random(seed)
+    means = sorted(statistics.mean(rng.choices(diffs, k=len(diffs))) for _ in range(n))
+    return statistics.mean(diffs), means[int(0.025 * n)], means[int(0.975 * n) - 1]
+
+
+def best_cutoff(answerable: Sequence[float], unanswerable: Sequence[float]) -> dict:
+    """The top-score cutoff that sorts the most questions right: a question whose best
+    result scores at least the cutoff is treated as answerable. Ties keep more answerable."""
+    best = None
+    for cutoff in sorted(set(answerable) | set(unanswerable)):
+        kept = sum(s >= cutoff for s in answerable)
+        caught = sum(s < cutoff for s in unanswerable)
+        if best is None or (kept + caught, kept) > (best["kept"] + best["caught"], best["kept"]):
+            best = {"cutoff": cutoff, "kept": kept, "caught": caught}
+    return {**best, "n_answerable": len(answerable), "n_unanswerable": len(unanswerable)}
 
 
 def _dcg(grades: Sequence[int], k: int) -> float:
