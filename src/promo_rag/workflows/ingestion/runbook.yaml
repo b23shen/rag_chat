@@ -1,0 +1,28 @@
+# The ingestion workflow: a dataset of fetched pages in, an active corpus version out.
+# Synced into platform.workflows when the API or a worker starts.
+name: ingestion
+version: 1
+description: >-
+  Turn a dataset of fetched pages into a searchable corpus version: parse the pages,
+  extract promotion facts, chunk, embed, and activate the new version.
+
+input:
+  dataset: required   # POST /datasets, then POST /datasets/{id}/artifacts (or `ingest import-snapshot`)
+
+params:               # defaults; POST /workflows/ingestion/start can override any of them
+  chunk_tokens: 512
+  overlap_tokens: 100
+  segmenter: jieba    # none | jieba | bigram
+  header: true
+
+actions:
+  - name: parse
+    description: The dataset's pages → documents (clean text, doc type, content hash). Skips 404s, image-only pages and duplicates.
+  - name: extract
+    description: Promotion and store-notice pages → checked facts in promotions (rules first, then the fact_extractor agent).
+  - name: chunk
+    description: All active documents → chunks of a corpus version. Nothing to do if one with the same settings and inputs exists.
+  - name: embed
+    description: Fill that version's chunk embeddings (cached by input text).
+  - name: activate
+    description: Check the version and make it the one search reads.

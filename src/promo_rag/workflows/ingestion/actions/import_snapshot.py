@@ -6,18 +6,20 @@ same `artifacts` rows, so every later step works the same for both.
 
 Every fetch is recorded, including 404s: in a re-crawl, a 404 is how we learn a page
 was removed. Parsing (step 2) decides which artifacts become searchable documents.
+The `import-snapshot` command also puts the pages in a new dataset: the input of an
+ingestion workflow run.
 """
 
 import csv
 import hashlib
+import uuid
 from dataclasses import dataclass, field
 from datetime import datetime
 from pathlib import Path
 
-from sqlalchemy.dialects.postgresql import insert
 from sqlalchemy.orm import Session
 
-from promo_rag.db.models import Artifact
+from promo_rag.platform.datasets import add_artifact
 from promo_rag.storage.blob import BlobStore
 
 # Columns from the crawler's list pages worth keeping for parsing.
@@ -55,36 +57,29 @@ def load_snapshot(folder: Path) -> SnapshotLoad:
     return result
 
 
-def record_artifacts(session: Session, store: BlobStore, pages: list[SnapshotPage]) -> int:
-    """Store the bytes and add one artifacts row per page. Returns how many rows were new.
+def record_artifacts(
+    session: Session, store: BlobStore, pages: list[SnapshotPage]
+) -> tuple[list[uuid.UUID], int]:
+    """Store the bytes and record one artifact per page. Returns (artifact ids, how many new).
 
-    Safe to re-run: an existing (source_url, sha256) is left alone. Blobs are written
-    before the commit; if the commit fails, the orphan blobs are harmless and get reused.
+    Safe to re-run: an existing (source_url, sha256) is the same artifact. The caller commits.
     """
-    added = 0
+    ids, added = [], 0
     for page in pages:
         row = page.row
-        key = store.put(page.data, ".html")
-        stmt = (
-            insert(Artifact)
-            .values(
-                sha256=row["sha256"],
-                source_url=row["url"],
-                final_url=row["final_url"] or None,
-                fetched_at=datetime.fromisoformat(row["fetched_at"]),
-                http_status=int(row["http_status"]),
-                mime_type="text/html",
-                byte_size=len(page.data),
-                blob_key=key,
-                fetch_meta={k: row[k] for k in FETCH_META_FIELDS if row.get(k)},
-            )
-            .on_conflict_do_nothing(index_elements=["source_url", "sha256"])
-            .returning(Artifact.id)
+        artifact_id, created = add_artifact(
+            session,
+            store,
+            page.data,
+            source_url=row["url"],
+            final_url=row["final_url"] or None,
+            fetched_at=datetime.fromisoformat(row["fetched_at"]),
+            http_status=int(row["http_status"]),
+            fetch_meta={k: row[k] for k in FETCH_META_FIELDS if row.get(k)},
         )
-        if session.execute(stmt).scalar_one_or_none() is not None:
-            added += 1
-    session.commit()
-    return added
+        ids.append(artifact_id)
+        added += created
+    return ids, added
 
 
 def write_manifest(pages: list[SnapshotPage], path: Path) -> None:

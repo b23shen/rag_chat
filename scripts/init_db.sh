@@ -39,8 +39,10 @@ SELECT '  tables already here: ' || coalesce(string_agg(schemaname || '.' || tab
   FROM pg_tables WHERE schemaname NOT IN ('pg_catalog', 'information_schema');
 SELECT '  extensions already here: ' || string_agg(extname || ' ' || extversion, ', ') FROM pg_extension;
 CREATE EXTENSION IF NOT EXISTS vector;
--- If the database belongs to another role, the app role still needs to create tables.
+-- If the database belongs to another role, the app role still needs to create tables,
+-- and (since migration 0006) its own schemas.
 GRANT USAGE, CREATE ON SCHEMA public TO :"role";
+GRANT CREATE ON DATABASE :"db" TO :"role";
 SELECT '  pgvector ' || extversion || ' is enabled in ' || current_database()
   FROM pg_extension WHERE extname = 'vector';
 SQL

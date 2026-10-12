@@ -2,7 +2,7 @@
 
 A corpus version is "these inputs, indexed with these settings":
   fingerprint   hash of IndexConfig (chunk size, overlap, header, segmenter, word list, embed model)
-  inputs_hash   hash of every document's content_hash plus the facts in its header line
+  inputs_hash   hash of every document's id, content_hash and the facts in its header line
 
 Chunking is deterministic, so if a version with the same fingerprint and inputs_hash
 already exists there is nothing to do. Change a setting, a page or a fact, and a new
@@ -124,7 +124,10 @@ def header_facts(session: Session, doc: Document) -> tuple[HeaderFacts, Promotio
 
 
 def inputs_hash(docs: list[Document], facts: dict) -> str:
-    lines = sorted(f"{doc.content_hash}|{facts[doc.id][0]!r}" for doc in docs)
+    """Which document rows, with which text and header facts. The document id matters too:
+    chunks point at document rows, so a page that went A → B → A has new rows (v3, not v1)
+    and needs its own version, even though its text is A again."""
+    lines = sorted(f"{doc.id}|{doc.content_hash}|{facts[doc.id][0]!r}" for doc in docs)
     return hashlib.sha256("\n".join(lines).encode("utf-8")).hexdigest()
 
 

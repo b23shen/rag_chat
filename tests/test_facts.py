@@ -43,7 +43,7 @@ def _sample(schema):
 
 @pytest.mark.parametrize("doc_type", sorted(EXTRACTORS))
 def test_every_extractor_fills_real_promotion_columns_including_dates(doc_type):
-    """The nova-api bug: a schema/column name mismatch left every date NULL, silently."""
+    """A schema/column name mismatch can leave every date NULL, silently; this catches it."""
     extractor = EXTRACTORS[doc_type]
     row = extractor.to_promotion(_sample(extractor.schema), "title")
     assert set(row) <= set(Promotion.__table__.columns.keys())

@@ -13,6 +13,7 @@ For the latest fetch of each URL:
 Skipped pages still get a row with the reason, so "why isn't X searchable?" has an answer.
 """
 
+import uuid
 from collections import Counter
 from dataclasses import dataclass, field
 from datetime import date
@@ -23,6 +24,7 @@ from sqlalchemy.orm import Session
 from promo_rag.db.models import Artifact, Chunk, Document, Promotion, PromotionSource
 from promo_rag.storage.blob import BlobStore
 from promo_rag.workflows.ingestion.html_text import content_hash, detect_language
+from promo_rag.workflows.ingestion.promotions import unlink_promotions
 from promo_rag.workflows.ingestion.sources import poya
 
 # Less body text than this means the page's content is in images (catalogs, banners).
@@ -34,12 +36,19 @@ class ParseReport:
     added: int = 0
     new_versions: int = 0
     unchanged: int = 0
+    promotions_removed: int = 0  # facts that belonged to a page version now archived
     by_status: Counter = field(default_factory=Counter)
     by_doc_type: Counter = field(default_factory=Counter)
     skipped: list[tuple[str, str]] = field(default_factory=list)  # (url, reason)
 
 
-def parse_documents(session: Session, store: BlobStore, rebuild: bool = False) -> ParseReport:
+def parse_documents(
+    session: Session,
+    store: BlobStore,
+    rebuild: bool = False,
+    artifact_ids: list[uuid.UUID] | None = None,
+) -> ParseReport:
+    """Parse every URL's newest fetch, or only the URLs in `artifact_ids` (a dataset)."""
     if rebuild:
         _delete_documents(session)
 
@@ -53,7 +62,7 @@ def parse_documents(session: Session, store: BlobStore, rebuild: bool = False) -
         ).all()
     )
 
-    for artifact in _latest_artifacts(session):
+    for artifact in _latest_artifacts(session, artifact_ids):
         url = artifact.source_url
         page = poya.parse_page(store.get(artifact.blob_key), url)
         meta = artifact.fetch_meta or {}
@@ -79,6 +88,8 @@ def parse_documents(session: Session, store: BlobStore, rebuild: bool = False) -
             # The partial unique index allows one latest row per URL, so retire this one first.
             current.is_latest = False
             current.status = "archived"
+            # Its facts described the old page; the new version gets extracted afresh.
+            report.promotions_removed += unlink_promotions(session, current.id)
             session.flush()
             report.new_versions += 1
         else:
@@ -106,16 +117,21 @@ def parse_documents(session: Session, store: BlobStore, rebuild: bool = False) -
     return report
 
 
-def _latest_artifacts(session: Session) -> list[Artifact]:
+def _latest_artifacts(session: Session, artifact_ids: list[uuid.UUID] | None) -> list[Artifact]:
     """The newest fetch of each URL, shortest URL first.
 
+    With `artifact_ids`, only the URLs those artifacts belong to, still at their newest
+    fetch (an old fetch in a dataset must not overwrite a newer page).
     Shortest-first makes duplicate handling deterministic: /member/ is kept and
     /member-detail/5/ is marked as its duplicate.
     """
+    query = select(Artifact)
+    if artifact_ids is not None:
+        urls = select(Artifact.source_url).where(Artifact.id.in_(artifact_ids))
+        query = query.where(Artifact.source_url.in_(urls))
     latest = (
-        select(Artifact)
-        .distinct(Artifact.source_url)
-        .order_by(Artifact.source_url, Artifact.fetched_at.desc())
+        query.distinct(Artifact.source_url)
+        .order_by(Artifact.source_url, Artifact.last_seen_at.desc())
         .subquery()
     )
     rows = session.scalars(select(Artifact).join(latest, Artifact.id == latest.c.id)).all()

@@ -85,3 +85,16 @@ def test_fingerprint_changes_with_any_setting():
     )
     assert CFG.fingerprint() != CFG.model_copy(update={"segmenter": "bigram"}).fingerprint()
     assert CFG.fingerprint() != CFG.model_copy(update={"chunk_tokens": 256}).fingerprint()
+
+
+def test_a_corpus_version_is_tied_to_document_rows_not_just_their_text():
+    """A page that went A → B → A has a new document row; its version must be rebuilt."""
+    import uuid
+
+    from promo_rag.db.models import Document
+    from promo_rag.workflows.ingestion.actions.chunk import inputs_hash
+
+    facts = HeaderFacts("十分賺")
+    v1 = Document(id=uuid.uuid4(), content_hash="a" * 64)
+    v3 = Document(id=uuid.uuid4(), content_hash="a" * 64)  # same text, new row
+    assert inputs_hash([v1], {v1.id: (facts, None)}) != inputs_hash([v3], {v3.id: (facts, None)})

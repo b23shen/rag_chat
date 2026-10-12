@@ -12,6 +12,7 @@ from pathlib import Path
 
 from promo_rag.agents.tracing import flush_traces
 from promo_rag.config import REPO_ROOT
+from promo_rag.platform.datasets import create_dataset, link_artifacts
 from promo_rag.workflows.ingestion import deps
 from promo_rag.workflows.ingestion.actions.activate import activate_version
 from promo_rag.workflows.ingestion.actions.chunk import chunk_documents
@@ -33,7 +34,11 @@ def cmd_import_snapshot(args: argparse.Namespace) -> int:
         print(f"  rejected  {reason}")
 
     with deps.session() as session:
-        added = record_artifacts(session, deps.blob_store(), loaded.pages)
+        dataset = create_dataset(session, args.name or f"snapshot {folder.name}", str(folder))
+        ids, added = record_artifacts(session, deps.blob_store(), loaded.pages)
+        link_artifacts(session, dataset.id, ids)
+        session.commit()
+        dataset_id = dataset.id
     write_manifest(loaded.pages, REPO_ROOT / "data" / "sources.csv")
 
     print(
@@ -41,6 +46,7 @@ def cmd_import_snapshot(args: argparse.Namespace) -> int:
         f"{added} new artifacts, {len(loaded.pages) - added} already recorded. "
         f"Wrote data/sources.csv."
     )
+    print(f"Dataset {dataset_id}: start ingestion with POST /workflows/ingestion/start")
     return 1 if loaded.rejected else 0
 
 
@@ -168,6 +174,7 @@ def main() -> int:
 
     p = sub.add_parser("import-snapshot", help="step 1: record pages that were already fetched")
     p.add_argument("folder", help="folder with sources.csv and raw/<slug>.html")
+    p.add_argument("--name", help="dataset name (default: 'snapshot <folder name>')")
     p.set_defaults(func=cmd_import_snapshot)
 
     p = sub.add_parser("parse", help="step 2: artifacts → documents (clean text, doc type, hash)")

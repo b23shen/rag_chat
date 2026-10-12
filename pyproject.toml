@@ -10,6 +10,7 @@ requires-python = ">=3.12"
 dependencies = [
     "alembic>=1.20.0",
     "beautifulsoup4>=4.15.0",
+    "fastapi>=0.143.0",
     "google-genai>=2.29.0",
     "httpx>=0.28.1",
     "jieba>=0.42.1",
@@ -21,11 +22,16 @@ dependencies = [
     "psycopg[binary,pool]>=3.3.6",
     "pydantic>=2.14.0",
     "pydantic-settings>=2.15.0",
+    "python-multipart>=0.0.32",
+    "pyyaml>=6.0.3",
     "sqlalchemy>=2",
+    "uvicorn>=0.54.0",
 ]
 
 [project.scripts]
 ingest = "promo_rag.workflows.ingestion.handler:main"
+serve = "promo_rag.platform.api:serve"
+worker = "promo_rag.platform.worker:main"
 
 [build-system]
 requires = ["uv_build>=0.13.0,<0.14.0"]

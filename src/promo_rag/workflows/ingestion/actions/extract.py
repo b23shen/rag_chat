@@ -37,6 +37,7 @@ from promo_rag.workflows.ingestion.facts import (
     check_facts,
     dedup_key,
 )
+from promo_rag.workflows.ingestion.promotions import unlink_promotions
 
 AGENT = "fact_extractor"
 MAX_ATTEMPTS = 2  # the first answer + one retry with the check errors
@@ -278,15 +279,6 @@ def _upsert_promotion(
 
 
 def _unlink_document(session: Session, doc: Document) -> None:
-    """Before re-extracting: drop this page's old runs and links, and promotions left with no page."""
-    old = session.scalars(
-        select(PromotionSource.promotion_id).where(PromotionSource.document_id == doc.id)
-    ).all()
-    session.execute(delete(PromotionSource).where(PromotionSource.document_id == doc.id))
+    """Before re-extracting: drop this page's old runs and its promotion links."""
+    unlink_promotions(session, doc.id)
     session.execute(delete(Extraction).where(Extraction.document_id == doc.id))
-    for promotion_id in old:
-        still_linked = session.scalars(
-            select(PromotionSource).where(PromotionSource.promotion_id == promotion_id)
-        ).first()
-        if still_linked is None:
-            session.execute(delete(Promotion).where(Promotion.id == promotion_id))
