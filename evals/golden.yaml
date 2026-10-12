@@ -1,0 +1,503 @@
+# Golden question set for search and answer evals.
+#
+# relevant: page path (under https://www.poya.com.tw) → {grade, quote}.
+#   grade: 2 = answers the question, 1 = helps.
+#   quote: short exact text from the page (or a list of them). A search result chunk is
+#   relevant if it comes from the page and contains a quote; spaces and full/half-width
+#   characters are ignored. Pages and quotes, not chunk ids: chunk ids change with every
+#   corpus version, but a quote is found in whichever chunk holds it.
+#   Empty for unanswerable questions.
+# answer: a short reference answer. Not used by the search eval; saved for answer evals later.
+# Questions use everyday words, not the page's own wording, so keyword search gets no free help.
+
+as_of: 2026-10-10   # snapshot date: "now" and "this month" mean this date / October 2026
+
+questions:
+
+  # ------------------------------------------------------------------ rule (16)
+
+  - id: rule-01
+    category: rule
+    lang: zh
+    question: 在門市買的東西不想要了，幾天內可以拿去退?
+    relevant:
+      /law_regulation/5: {grade: 2, quote: "請於七日內(消費後隔日起為第一天)"}
+      /faq/8: {grade: 2, quote: "請於七日內(消費後隔日起為第一天)"}
+    answer: 7 天內(消費隔天算第 1 天)，帶發票或載具畫面、交易明細和完整未拆封的商品到門市辦理。
+
+  - id: rule-02
+    category: rule
+    lang: zh
+    question: 用折價券買的東西可以退嗎?
+    relevant:
+      /law_regulation/5: {grade: 2, quote: "折價券購買之商品,恕無法辦理退貨"}
+      /faq/8: {grade: 2, quote: "折價券購買之商品,恕無法辦理退貨"}
+    answer: 不能退貨，只能換貨。
+
+  - id: rule-03
+    category: rule
+    lang: en
+    question: Can I bring my dog into a POYA store?
+    relevant:
+      /faq/8: {grade: 2, quote: "請將寵物放進自備的寵物袋"}
+    answer: Yes, if the pet is in your own pet bag or pet stroller.
+
+  - id: rule-04
+    category: rule
+    lang: zh
+    question: 寶雅的點數放多久會不見?
+    relevant:
+      /faq/7: {grade: 2, quote: "隔年12/31失效歸零"}
+      /news-detail/321/: {grade: 1, quote: "寶雅點數效期至交易日/歸戶日隔年12/31到期"}
+    answer: 當年累積的點數在隔年 12/31 失效，例如 2026 年的點數到 2027/12/31。
+
+  - id: rule-05
+    category: rule
+    lang: en
+    question: How many POYA points do I need to take 1 NT dollar off my bill?
+    relevant:
+      /faq/7: {grade: 2, quote: "300點可折抵1元"}
+    answer: 300 points = NT$1. Points can cover up to 30% of a bill in stores and 15% online.
+
+  - id: rule-06
+    category: rule
+    lang: zh
+    question: 網路上買的東西尺寸不合，可以換一個嗎?
+    relevant:
+      /faq/6: {grade: 2, quote: "寶雅線上買並無提供換貨服務"}
+      /law_regulation/5: {grade: 2, quote: "線上購物僅提供退貨服務"}
+    answer: 不行，寶雅線上買不提供換貨，只能退貨。
+
+  - id: rule-07
+    category: rule
+    lang: en
+    question: Can I pay with a Diners Club card at POYA?
+    relevant:
+      /faq/8: {grade: 2, quote: "無配合大來卡"}
+    answer: No. POYA stores do not accept Diners Club (大來卡).
+    notes: The page says 大來卡; the English name never appears.
+
+  - id: rule-08
+    category: rule
+    lang: zh
+    question: POYA Pay 一次最少要加值多少? 最多可以放多少錢?
+    relevant:
+      /law_regulation/4: {grade: 2, quote: "每次最低儲值金額為新台幣$100"}
+    answer: 每次最少 $100，儲值上限 $30,000。
+
+  - id: rule-09
+    category: rule
+    lang: zh
+    question: 我想把 POYA Pay 裡面的錢拿回來，要付手續費嗎?
+    relevant:
+      /law_regulation/4: {grade: 2, quote: "將酌收退還儲值金額之3%手續費"}
+    answer: 要。只能全部退，收退款金額 3% 手續費，加現金匯款 $30 和發票寄送 $28。帶身分證件到任一門市辦理。
+
+  - id: rule-10
+    category: rule
+    lang: en
+    question: Can I use a POYA e-voucher at the POYA counter inside a department store?
+    relevant:
+      /voucher/: {grade: 2, quote: "特殊門市(如百貨門市)及離島門市"}
+      /voucher-detail/3: {grade: 2, quote: ["高島屋天母店", "澎湖北辰店"]}
+    answer: No. E-vouchers don't work at special stores such as department-store counters, or at offshore-island stores.
+
+  - id: rule-11
+    category: rule
+    lang: zh
+    question: 寶雅的提貨券會過期嗎?
+    relevant:
+      /gift_card/: {grade: 2, quote: "本券無使用期限"}
+    answer: 不會，提貨券沒有使用期限。
+
+  - id: rule-12
+    category: rule
+    lang: zh
+    question: 街口星期五那張券最多可以便宜多少錢?
+    relevant:
+      /news-detail/356/: {grade: 2, quote: "最高折抵 $100"}
+    answer: 單筆滿 $800 打 88 折，最多折 $100。
+
+  - id: rule-13
+    category: rule
+    lang: en
+    question: How much do I need to spend to get the LINE Pay cashback on Wednesdays?
+    relevant:
+      /news-detail/357/: {grade: 2, quote: "單筆交易實際支付滿新台幣650元"}
+    answer: At least NT$650 in one payment (after LINE POINTS and coupons), in POYA's own stores. You get 3% back in LINE POINTS.
+
+  - id: rule-14
+    category: rule
+    lang: zh
+    question: 刷悠遊卡送的 40 元券，一個人最多可以拿幾張?
+    relevant:
+      /news-detail/292/: {grade: 2, quote: "每帳戶限領25份"}
+    answer: 每個帳戶最多 25 份(週五到週日，單筆滿 $299 送 1 份，限量 10,000 份)。
+
+  - id: rule-15
+    category: rule
+    lang: en
+    question: Can I use the free hot pot meat coupon for takeout?
+    relevant:
+      /news-detail/337/: {grade: 2, quote: "本券僅限內用"}
+    answer: No, the 築間 coupon is for dine-in only, not takeout or delivery.
+
+  - id: rule-16
+    category: rule
+    lang: zh
+    question: 要怎樣才能變成金卡會員?
+    relevant:
+      /member/: {grade: 2, quote: "年度消費累積$10,000元"}
+    answer: 一年內累積消費滿 $10,000，次月 15 號升等金卡。
+
+  # ------------------------------------------------------------------ date (8)
+
+  - id: date-01
+    category: date
+    lang: zh
+    question: LINE Pay 星期三的回饋活動到哪一天結束?
+    relevant:
+      /news-detail/357/: {grade: 2, quote: "2026/12/30(三)"}
+    answer: 2026/12/30。
+
+  - id: date-02
+    category: date
+    lang: en
+    question: When does the American Express extra points offer at POYA end?
+    relevant:
+      /news-detail/315/: {grade: 2, quote: "即日起至2026/10/15"}
+    answer: October 15, 2026.
+
+  - id: date-03
+    category: date
+    lang: zh
+    question: 十分賺送的抵用券什麼時候可以用?
+    relevant:
+      /news-detail/361/: {grade: 2, quote: "2026/11/04~2026/12/01"}
+      /events-detail/43/: {grade: 1, quote: "精選商品消費滿額即贈10%回饋金"}
+    answer: 2026/11/04 到 2026/12/01，在全台實體門市使用。
+    notes: Only the news page gives the voucher dates; the events page is the same campaign.
+
+  - id: date-04
+    category: date
+    lang: zh
+    question: 新店中正店哪天開幕?
+    relevant:
+      /news-detail/188__67/: {grade: 2, quote: "10/17(六) 10:00"}
+    answer: 2026/10/17(六) 10:00。
+
+  - id: date-05
+    category: date
+    lang: en
+    question: Until when can I collect stamps in the online 褲褲兔 stamp campaign?
+    relevant:
+      /news-detail/335/: {grade: 2, quote: "印花集點時間為2026/09/02-2026/11/03"}
+    answer: Stamps until November 3, 2026. Gifts must be redeemed by December 1, 2026.
+
+  - id: date-06
+    category: date
+    lang: zh
+    question: 永康崑山店裝修期間關到什麼時候?
+    relevant:
+      /news-detail/188__39/: {grade: 2, quote: "封館日期:2026/07/09(四)~08/12(三)"}
+      /news-detail/188__56/: {grade: 2, quote: "08/15(六) 10:00"}
+    answer: 封館 2026/07/09 到 08/12，08/15 重新開幕。
+
+  - id: date-07
+    category: date
+    lang: en
+    question: I exchanged POYA points for Asia Miles. By when do I have to enter the code?
+    relevant:
+      /news-detail/340/: {grade: 2, quote: "本次序號兌換期限到2026/12/31(四)止"}
+    answer: By December 31, 2026, on the Asia Miles code page.
+
+  - id: date-08
+    category: date
+    lang: zh
+    question: 台新 Richart 卡要在什麼時候前辦，才拿得到首刷禮?
+    relevant:
+      /news-detail/311/: {grade: 2, quote: "2027/1/7"}
+    answer: 2026/8/1 到 12/31 透過寶雅專屬連結申辦，2027/1/7 前核卡。
+
+  # ------------------------------------------------------------------ list (8)
+
+  - id: list-01
+    category: list
+    lang: en
+    question: Which new stores open in October?
+    relevant:
+      /news-detail/188__67/: {grade: 2, quote: "10/17(六)"}
+      /news-detail/188__68/: {grade: 2, quote: "10/17(六)"}
+      /news-detail/188__69/: {grade: 2, quote: "10/24(六)"}
+    answer: 新店中正店 and 鳳山和成店 (October 17), 台中興安店 (October 24).
+
+  - id: list-02
+    category: list
+    lang: zh
+    question: 寶雅點數可以拿來換哪些跟開車有關的東西?
+    relevant:
+      /news-detail/351/: {grade: 2, quote: "兌換30 Vi幣"}
+      /news-detail/352/: {grade: 2, quote: "兌換300固得點數"}
+      /news-detail/343/: {grade: 2, quote: "兌換50元特爾電力充電金"}
+    answer: ViVi PARK 停車點數、固得租車點數、特爾電力電動車充電金。
+
+  - id: list-03
+    category: list
+    lang: zh
+    question: 信用卡綁 POYA 支付有哪些優惠?
+    relevant:
+      /news-detail/345/: {grade: 2, quote: "每週二、五消費或儲值單筆滿$799贈10,000點"}
+      /news-detail/346/: {grade: 2, quote: "天天儲值單筆滿$800贈5%小樹點"}
+      /news-detail/311/: {grade: 1, quote: "完成 POYA Pay 綁定並累積消費滿 1,000 元"}
+    answer: 台新信用卡週二、五單筆滿 $799 送 10,000 點；國泰世華信用卡儲值滿 $800 送 5% 小樹點。(台新 Richart 新卡綁 POYA Pay 消費滿額有首刷禮。)
+
+  - id: list-04
+    category: list
+    lang: en
+    question: Which offers are only for gold card members?
+    relevant:
+      /news-detail/337/: {grade: 2, quote: "【金卡會員身分】"}
+      /news-detail/163/: {grade: 2, quote: "即符合當月領券資格"}
+      /news-detail/224/: {grade: 1, quote: "金卡會員每月可於LINE領取"}
+    answer: The 築間 hot pot meat coupon (October 2026) and the monthly POYA GIFT coupon. Gold members also get a bigger monthly LINE points coupon.
+
+  - id: list-05
+    category: list
+    lang: zh
+    question: 這個月禮拜五去寶雅結帳有什麼優惠?
+    relevant:
+      /news-detail/356/: {grade: 2, quote: "限每週五當日"}
+      /news-detail/345/: {grade: 2, quote: "每週二、五消費或儲值"}
+      /news-detail/292/: {grade: 1, quote: "活動期間每週五~週日"}
+    answer: 週五用街口支付滿 $800 打 88 折；台新信用卡綁 POYA 支付週二、五滿 $799 送 10,000 點；週五到週日嗶悠遊卡滿 $299 送 $40 券。
+    notes: The 悠遊卡 page has no end date, so it is graded 1.
+
+  - id: list-06
+    category: list
+    lang: en
+    question: Which new POYA stores opened in Kaohsiung in 2026?
+    relevant:
+      /news-detail/188__19/: {grade: 2, quote: "高雄市鳳山區光遠路"}
+      /news-detail/188__22/: {grade: 2, quote: "高雄市鼓山區九如四路"}
+      /news-detail/188__31/: {grade: 2, quote: "高雄市路竹區"}
+      /news-detail/188__55/: {grade: 2, quote: "高雄市茄萣區"}
+      /news-detail/188__57/: {grade: 2, quote: "高雄市鼓山區大順一路"}
+      /news-detail/188__68/: {grade: 2, quote: "高雄市鳳山區和成路"}
+    answer: 鳳山光遠店 (May 9), 高雄九如店 (May 16), 路竹大社店 (May 23), 高雄茄萣店 (Aug 15), 鼓山大順店 (Aug 22), and 鳳山和成店 opens October 17.
+    notes: Some titles don't say 高雄; only the address does. Reopenings (改裝開幕) are not new stores.
+
+  - id: list-07
+    category: list
+    lang: zh
+    question: 哪些分店不能用即享券?
+    relevant:
+      /voucher-detail/3: {grade: 2, quote: ["高島屋天母店", "澎湖北辰店"]}
+      /voucher/: {grade: 1, quote: "不適用門市完整資訊"}
+    answer: 百貨和特殊門市及離島門市，例如高島屋天母、南港高鐵、台北北車、環球林口、金門伯玉、澎湖北辰等 22 家。
+
+  - id: list-08
+    category: list
+    lang: zh
+    question: 這期 DM 買什麼東西滿額會送小贈品?
+    relevant:
+      /events-detail/45/: {grade: 2, quote: "POYA PURE+活力B脆皮軟糖乙包"}
+      /events-detail/46/: {grade: 2, quote: "優生99.9%抗菌酒精濕巾"}
+      /events-detail/47/: {grade: 2, quote: "限量16,000包"}
+      /events-detail/48/: {grade: 2, quote: "限量10,000瓶"}
+    answer: 身體保養滿 $888 送軟糖；美白口腔滿 $399 送酒精濕巾；衣物/居家清潔滿 $299 送去汙濕巾；衛生棉滿 $299 送私密沐浴露。
+    notes: On the site, pages 47 and 48 have each other's brand lists.
+
+  # ------------------------------------------------------------------ count (6)
+
+  - id: count-01
+    category: count
+    lang: zh
+    question: 寶雅點數可以拿去換幾種別家的點數或服務?
+    relevant:
+      /news-detail/331/: {grade: 2, quote: "兌換7天VIP序號"}
+      /news-detail/340/: {grade: 2, quote: "兌換100 里數"}
+      /news-detail/343/: {grade: 2, quote: "兌換50元特爾電力充電金"}
+      /news-detail/347/: {grade: 2, quote: "兌換 5000 全Fa點"}
+      /news-detail/348/: {grade: 2, quote: "兌換25 Ocoin"}
+      /news-detail/349/: {grade: 2, quote: "兌換10點樂天點數"}
+      /news-detail/350/: {grade: 2, quote: "兌換20 SUPER POINT"}
+      /news-detail/351/: {grade: 2, quote: "兌換30 Vi幣"}
+      /news-detail/352/: {grade: 2, quote: "兌換300固得點數"}
+      /news-detail/353/: {grade: 2, quote: "兌換30分鐘借電券"}
+      /news-detail/354/: {grade: 2, quote: "兌換10代幣"}
+    answer: 11 種：LINE TV、亞洲萬里通、特爾電力、全家、Ocoin、樂天、SUPER POINT、ViVi PARK、固得租車、旅電、LINE WEBTOON。
+    notes: Donations (捐點) and 台新Point → POYA points (the other direction) are not counted.
+
+  - id: count-02
+    category: count
+    lang: en
+    question: How many new stores opened in August?
+    relevant:
+      /news-detail/188__52/: {grade: 2, quote: "08/08(六)"}
+      /news-detail/188__53/: {grade: 2, quote: "08/08(六)"}
+      /news-detail/188__54/: {grade: 2, quote: "08/08(六)"}
+      /news-detail/188__55/: {grade: 2, quote: "08/15(六)"}
+      /news-detail/188__57/: {grade: 2, quote: "08/22(六)"}
+      /news-detail/188__58/: {grade: 2, quote: "08/22(六)"}
+    answer: 6 new stores. (3 more stores reopened after renovation.)
+
+  - id: count-03
+    category: count
+    lang: zh
+    question: 六月有幾家店整修完重新開幕?
+    relevant:
+      /news-detail/188__35/: {grade: 2, quote: "06/06(六)"}
+      /news-detail/188__36/: {grade: 2, quote: "06/06(六)"}
+      /news-detail/188__37/: {grade: 2, quote: "06/06(六)"}
+      /news-detail/188__42/: {grade: 2, quote: "06/13(六)"}
+      /news-detail/188__43/: {grade: 2, quote: "06/20(六)"}
+    answer: 5 家：士林芝山、台南北門、彰化秀水(6/6)，左營華夏(6/13)，汐止中興(6/20)。
+
+  - id: count-04
+    category: count
+    lang: zh
+    question: 現在有幾個信用卡的優惠活動?
+    relevant:
+      /news-detail/311/: {grade: 2, quote: "申辦台新 Richart 卡正卡"}
+      /news-detail/315/: {grade: 2, quote: "刷美國運通卡"}
+      /news-detail/345/: {grade: 2, quote: "綁定台新銀行信用卡"}
+      /news-detail/346/: {grade: 2, quote: "綁定國泰世華信用卡"}
+    answer: 4 個：台新 Richart 首刷禮、美國運通額外積分、台新綁 POYA 支付送點、國泰世華儲值送小樹點。
+    notes: LINE Pay accepts credit cards, but it's a LINE Pay offer, so it isn't counted.
+
+  - id: count-05
+    category: count
+    lang: en
+    question: How many stores started a clearance sale before renovation in May 2026?
+    relevant:
+      /news-detail/188__25/: {grade: 2, quote: "出清日期:2026/05/07(四)"}
+      /news-detail/188__26/: {grade: 2, quote: "出清日期:2026/05/07(四)"}
+      /news-detail/188__27/: {grade: 2, quote: "出清日期:2026/05/07(四)"}
+      /news-detail/188__28/: {grade: 2, quote: "出清日期:2026/05/07(四)"}
+    answer: "4, all from May 7: 永康中正, 嘉義朴子, 台南金華, 台中東勢."
+
+  - id: count-06
+    category: count
+    lang: zh
+    question: 現在可以把點數捐給幾個基金會?
+    relevant:
+      /news-detail/341/: {grade: 2, quote: "財團法人台灣癌症基金會"}
+      /news-detail/342/: {grade: 2, quote: "伊甸基金會(衛部救字"}
+      /news-detail/364/: {grade: 1, quote: "活動已結束"}
+      /news-detail/365/: {grade: 1, quote: "活動已結束"}
+    answer: 2 個：台灣癌症基金會和伊甸基金會，到 2026/12/31。
+    notes: 364 and 365 are winner notices for the earlier round, which ended 2026/09/30.
+
+  # ------------------------------------------------------------------ unanswerable (6)
+
+  - id: none-01
+    category: unanswerable
+    lang: en
+    question: Does POYA sell iPhones?
+    relevant: {}
+    answer: null
+
+  - id: none-02
+    category: unanswerable
+    lang: en
+    question: Is there a Black Friday sale at POYA this year?
+    relevant: {}
+    answer: null
+
+  - id: none-03
+    category: unanswerable
+    lang: zh
+    question: 寶雅週年慶是什麼時候?
+    relevant: {}
+    answer: null
+
+  - id: none-04
+    category: unanswerable
+    lang: zh
+    question: 用 Apple Pay 付款有回饋嗎?
+    relevant: {}
+    answer: null
+    notes: Apple Pay is accepted, but no page offers a reward for it. Other payment offers make this easy to get wrong.
+
+  - id: none-05
+    category: unanswerable
+    lang: en
+    question: What is the phone number of the POYA store in Hualien?
+    relevant: {}
+    answer: null
+
+  - id: none-06
+    category: unanswerable
+    lang: zh
+    question: 寶雅門市在徵兼職嗎? 時薪多少?
+    relevant: {}
+    answer: null
+
+  # ------------------------------------------------------------------ multi_turn (6)
+
+  - id: multi-01
+    category: multi_turn
+    lang: zh
+    history:
+      - {role: user, content: "週五用街口支付有什麼優惠?"}
+      - {role: assistant, content: "每週五在門市用街口支付，單筆滿 $800 打 88 折，最多折 $100。"}
+    question: 那要先領券嗎?
+    relevant:
+      /news-detail/356/: {grade: 2, quote: "於街口支付 App 活動頁領取"}
+    answer: 要，先在街口 App 活動頁領「週五 美妍日 88折券」，每月 1 號開放領當月的券。
+
+  - id: multi-02
+    category: multi_turn
+    lang: en
+    history:
+      - {role: user, content: "What's the LINE Pay offer at POYA?"}
+      - {role: assistant, content: "Every Wednesday in POYA stores, pay at least NT$650 with LINE Pay and get 3% back in LINE POINTS."}
+    question: Does it work at the Taipei Main Station store?
+    relevant:
+      /news-detail/357/: {grade: 2, quote: "寶雅台北北車店"}
+    answer: No. 台北北車店 is one of the stores excluded from this offer.
+
+  - id: multi-03
+    category: multi_turn
+    lang: zh
+    history:
+      - {role: user, content: "我在門市買的吹風機可以退嗎?"}
+      - {role: assistant, content: "可以在 7 天內帶發票、交易明細和完整未拆封的商品到門市辦理。"}
+    question: 可是我買快一年了，現在壞掉了呢?
+    relevant:
+      /law_regulation/5: {grade: 2, quote: "商品非人為因素而產生故障"}
+      /faq/8: {grade: 2, quote: "商品非人為因素而產生故障"}
+    answer: 電器買一年內，不是人為造成的故障，帶保固貼紙(書)或發票和完整商品到門市可以退貨。超過一年就不能退。
+
+  - id: multi-04
+    category: multi_turn
+    lang: zh
+    history:
+      - {role: user, content: "寶雅點數可以換全家的點數嗎?"}
+      - {role: assistant, content: "可以，6000 寶雅點數換 5000 全家點數，在 POYA APP 的跨界點數交換。"}
+    question: 每個人最多可以換幾次?
+    relevant:
+      /news-detail/347/: {grade: 2, quote: "每位會員限兌換3次"}
+    answer: 每位會員最多 3 次，換完為止。
+
+  - id: multi-05
+    category: multi_turn
+    lang: en
+    history:
+      - {role: user, content: "When does the new store in Fengshan open?"}
+      - {role: assistant, content: "鳳山和成店 opens on October 17 at 10:00."}
+    question: What's its address?
+    relevant:
+      /news-detail/188__68/: {grade: 2, quote: "高雄市鳳山區和成路535號"}
+    answer: 高雄市鳳山區和成路535號 (phone 07-7962244).
+
+  - id: multi-06
+    category: multi_turn
+    lang: zh
+    history:
+      - {role: user, content: "台新信用卡綁 POYA 支付有什麼優惠?"}
+      - {role: assistant, content: "每週二、五消費或儲值單筆滿 $799 送 10,000 點，每人限領一次。"}
+    question: 哪些門市不能用?
+    relevant:
+      /news-detail/345/: {grade: 2, quote: "寶雅中壢崇光店"}
+    answer: 中壢崇光、桃園大江、高雄大遠百、遠百成功、新竹大遠百、高島屋天母、台北北車、義享天地、台南三井。
