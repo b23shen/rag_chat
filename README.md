@@ -2,7 +2,7 @@
 
 A chat assistant that answers questions about a retailer's promotions, offers and products, in Chinese and English, from the retailer's public web pages. An LLM agent routes each question to SQL tools (count and list promotions by date, store or payment method) or to hybrid search (pgvector + full-text, rank fusion, reranking) for rules and fine print. Every answer cites its sources, and every design choice is measured on a golden question set.
 
-*Work in progress.* Done: **M1, ingestion as a workflow** ([handoff](docs/handoffs/M1_ingestion.md)). Next: M2, search and eval.
+*Work in progress.* Done: **M1, ingestion as a workflow** ([handoff](docs/handoffs/M1_ingestion.md)) and **M2, search and eval** ([handoff](docs/handoffs/M2_search_eval.md)). Next: M3, the agent.
 
 ## Layout
 
