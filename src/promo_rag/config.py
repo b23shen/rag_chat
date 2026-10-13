@@ -1,5 +1,6 @@
 """App settings, read from environment variables and the repo's .env file."""
 
+from datetime import date
 from functools import lru_cache
 from pathlib import Path
 
@@ -41,8 +42,17 @@ class Settings(BaseSettings):
     pg_password: SecretStr
     pg_db: str = "rag"
 
+    # Pin "today" (YYYY-MM-DD) for evals, so "now" and "this month" mean the same days on
+    # every run. Empty: the real date in Taiwan.
+    today: date | None = None
+
     # Raw page bytes (local folder in dev). A relative path is relative to the repo root.
     blob_dir: Path = REPO_ROOT / "data" / "blobs"
+
+    @field_validator("today", mode="before")
+    @classmethod
+    def _empty_today_is_unset(cls, v):
+        return v or None
 
     @field_validator("blob_dir")
     @classmethod

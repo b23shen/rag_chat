@@ -20,9 +20,8 @@ from sqlalchemy.orm import Session
 from promo_rag.db.models import Chunk, CorpusVersion, Document, Promotion, PromotionSource
 from promo_rag.search.segment import segment
 from promo_rag.workflows.ingestion.chunking import HeaderFacts, chunk_document
+from promo_rag.workflows.ingestion.facts import SINGLE_DAY_TYPES
 from promo_rag.workflows.ingestion.index_config import IndexConfig
-
-SINGLE_DAY_TYPES = {"store_opening", "store_reopening"}
 
 
 @dataclass

@@ -91,6 +91,9 @@ class StoreNoticeFacts(BaseModel):
     phone: str | None = None
 
 
+# Store events that happen on one day: start_date is the day, end_date is NULL (not open-ended).
+SINGLE_DAY_TYPES = frozenset({"store_opening", "store_reopening"})
+
 # ---------------------------------------------------------------- cities
 
 # Taiwan's 22 cities and counties, written with 台 (the site mixes 台 and 臺).
