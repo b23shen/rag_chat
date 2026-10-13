@@ -19,7 +19,7 @@ from datetime import date
 from typing import Literal
 
 from pydantic import BaseModel, Field
-from sqlalchemy import ColumnElement, String, case, cast, func, or_, select
+from sqlalchemy import ColumnElement, String, and_, case, cast, func, or_, select
 from sqlalchemy.orm import Session
 
 from promo_rag.db.models import Document, Promotion, PromotionSource
@@ -72,7 +72,8 @@ class PromotionFilters(BaseModel):
     city: Literal[CITIES] | None = Field(
         default=None,
         description="A city or county, as its full Chinese name (Kaohsiung = 高雄市, "
-        "Taichung = 台中市). Only store events have a city.",
+        "Taichung = 台中市). Matches what applies there: its store events, and offers for "
+        "all stores. For store events only, add promo_types.",
     )
     payment_method: str | None = Field(
         default=None,
@@ -185,7 +186,10 @@ def _conditions(f: PromotionFilters) -> list[ColumnElement[bool]]:
             func.array_to_string(Promotion.stores, "|").icontains(name, autoescape=True)
         )
     if f.city:
-        conditions.append(Promotion.cities.contains([f.city]))
+        # Store events have a city. Offers for all stores have none (and no store list), and
+        # apply in every city. An offer limited to named stores has no city, and is left out.
+        everywhere = and_(Promotion.cities == [], Promotion.stores == [])
+        conditions.append(or_(Promotion.cities.contains([f.city]), everywhere))
     if f.payment_method:
         method = f.payment_method.strip()
         conditions.append(

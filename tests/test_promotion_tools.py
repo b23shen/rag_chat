@@ -107,6 +107,18 @@ def test_a_store_opening_runs_on_its_day_only(session):
     assert count_promotions(session, a_week_later)["count"] == 0
 
 
+def test_a_city_also_gets_the_offers_for_all_stores(session):
+    """ "现在台北市有什么活动吗" found nothing: offers for all stores have no city."""
+    today = {"active_from": date(2026, 10, 12), "active_to": date(2026, 10, 12)}
+    running = list_promotions(session, ListPromotionsArgs(limit=50, **today))
+    assert running["total"] == running["shown"]
+    # Rows leave out empty fields: named stores but no city = can't tell where it applies.
+    named_stores_only = [p for p in running["promotions"] if "stores" in p and "cities" not in p]
+    taipei = count_promotions(session, PromotionFilters(city="台北市", **today))["count"]
+    assert named_stores_only and taipei > 0
+    assert taipei == running["total"] - len(named_stores_only)
+
+
 def test_store_names_match_in_part_and_with_either_tai(session):
     assert _stores(session, store="臺中興安", promo_types=["store_opening"]) == ["台中興安店"]
 
