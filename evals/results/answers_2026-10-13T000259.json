@@ -1,0 +1,3805 @@
+{
+ "settings": {
+  "run_at": "2026-10-12 23:59",
+  "chat_model": "gemini-3.1-flash-lite",
+  "chat_fallback_model": "gemini-3.5-flash-lite",
+  "judge_model": "gemini-3.6-flash",
+  "rerank_model": "rerank-v4.0-pro",
+  "today": "2026-10-10",
+  "questions": 102,
+  "rejudged_from": "answers_2026-10-12T234105.json"
+ },
+ "summary": {
+  "questions": 102,
+  "score": 0.9411764705882353,
+  "answerable": {
+   "n": 82,
+   "correct": 73,
+   "partial": 8,
+   "wrong": 1,
+   "error": 0,
+   "score": 0.9390243902439024,
+   "declined": 1,
+   "cited": 0.975609756097561,
+   "cites_golden_page": 0.975609756097561,
+   "tools_found_golden_page": 0.975609756097561
+  },
+  "unanswerable": {
+   "n": 20,
+   "declined_correctly": 19,
+   "score": 0.95
+  },
+  "grounded_citations": 0.9897959183673469,
+  "language_ok": 1.0,
+  "tool_calls_mean": 1.2352941176470589,
+  "tool_calls_max": 3,
+  "latency_ms_p50": 2538,
+  "latency_ms_p95": 4335,
+  "tokens_in": 883150,
+  "tokens_out": 27722,
+  "cost_usd": 0.3888,
+  "warnings": {
+   "tool error": 1
+  }
+ },
+ "by_category": {
+  "rule": {
+   "n": 26,
+   "correct": 25,
+   "partial": 1,
+   "wrong": 0,
+   "error": 0,
+   "score": 0.9807692307692307
+  },
+  "exact": {
+   "n": 15,
+   "correct": 14,
+   "partial": 0,
+   "wrong": 1,
+   "error": 0,
+   "score": 0.9333333333333333
+  },
+  "date": {
+   "n": 12,
+   "correct": 11,
+   "partial": 1,
+   "wrong": 0,
+   "error": 0,
+   "score": 0.9583333333333334
+  },
+  "list": {
+   "n": 11,
+   "correct": 7,
+   "partial": 4,
+   "wrong": 0,
+   "error": 0,
+   "score": 0.8181818181818182
+  },
+  "count": {
+   "n": 8,
+   "correct": 6,
+   "partial": 2,
+   "wrong": 0,
+   "error": 0,
+   "score": 0.875
+  },
+  "unanswerable": {
+   "n": 20,
+   "correct": 19,
+   "partial": 0,
+   "wrong": 1,
+   "error": 0,
+   "score": 0.95
+  },
+  "multi_turn": {
+   "n": 10,
+   "correct": 10,
+   "partial": 0,
+   "wrong": 0,
+   "error": 0,
+   "score": 1.0
+  }
+ },
+ "results": [
+  {
+   "id": "rule-01",
+   "category": "rule",
+   "lang": "zh",
+   "question": "在門市買的東西不想要了，幾天內可以拿去退?",
+   "reference": "7 天內(消費隔天算第 1 天)，帶發票或載具畫面、交易明細和完整未拆封的商品到門市辦理。",
+   "answer": "若您是在寶雅實體門市購買的商品，請於 **7 日內**（消費後隔日起為第一天）攜帶以下物品至門市辦理退換貨 [1, 2]：\n\n1.  **發票**（使用載具者請出示載具畫面）\n2.  **交易明細**\n3.  **完整未拆封之商品**\n4.  若為刷卡付款，需攜帶**信用卡簽單**及**實體信用卡**\n5.  若交易時有獲得實體印花貼紙，需一併攜帶\n\n**注意事項：**\n*   **無法退換貨之情形**：\n    *   貼身衣物及個人衛生用品（基於衛生考量）。\n    *   易腐敗、保存期限較短之商品（如生鮮、米、冷藏/冷凍食品等）、菸酒。\n    *   已拆封之商品。\n    *   客製化商品（如電腦調色漆、裁切商品等，除非有出廠瑕疵）。\n    *   使用提貨券、折價券購買之商品（僅能換貨，無法退貨）。\n*   若商品因人為損壞或操作不當導致故障，恕無法辦理退換貨。\n*   電器產品若非人為因素故障，購買一年內可憑保固貼紙（書）或發票辦理退貨；超過一年則無提供退貨服務。\n\n建議您前往門市前，先確認商品符合上述完整未拆封之條件。\n\nSources:\n[1] 門市相關-常見問題 — https://www.poya.com.tw/faq/8\n[2] 退貨換貨相關規範 — https://www.poya.com.tw/law_regulation/5",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer accurately provides the 7-day timeframe starting from the day after purchase and all required items for the return.",
+   "tool_calls": [
+    "search_promotion_text(query='門市退貨規定 幾天內可以退貨')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/faq/6",
+    "https://www.poya.com.tw/faq/8",
+    "https://www.poya.com.tw/law_regulation/5",
+    "https://www.poya.com.tw/voucher"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/faq/8",
+    "https://www.poya.com.tw/law_regulation/5"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8458,
+   "tokens_out": 435,
+   "latency_ms": 2759,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 874,
+   "judge_tokens_out": 187,
+   "warnings": []
+  },
+  {
+   "id": "rule-02",
+   "category": "rule",
+   "lang": "zh",
+   "question": "在門市用折價券買的東西可以退嗎?",
+   "reference": "不能退貨，只能換貨。",
+   "answer": "根據寶雅的門市退換貨規範，使用折價券購買的商品，**恕無法辦理退貨，僅能以換貨處理** [2]。\n\n若您有退換貨需求，請留意以下事項：\n*   **換貨方式**：門市會開立等值換貨單據，需於單據開立當日使用完畢，逾期失效且恕不找零。換貨後的商品將無法再次辦理退貨 [2]。\n*   **辦理期限**：請於消費後 7 日內（消費隔日起算為第一天）攜帶發票（或載具畫面）、交易明細及完整未拆封之商品至原門市辦理 [2]。\n*   **其他限制**：若為貼身衣物、個人衛生用品、易腐敗商品（如生鮮、冷藏冷凍食品）、菸酒或已拆封商品，恕無法辦理退換貨 [2]。\n\n建議您前往門市辦理前，先確認商品是否符合換貨條件，並攜帶相關單據與完整商品。\n\nSources:\n[2] 門市相關-常見問題 — https://www.poya.com.tw/faq/8",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly states that items bought with a coupon cannot be returned for a refund and can only be exchanged.",
+   "tool_calls": [
+    "search_promotion_text(query='門市退貨 折價券')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/faq/8",
+    "https://www.poya.com.tw/gift_card",
+    "https://www.poya.com.tw/news-detail/361",
+    "https://www.poya.com.tw/voucher"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/faq/8"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8356,
+   "tokens_out": 295,
+   "latency_ms": 2517,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 706,
+   "judge_tokens_out": 193,
+   "warnings": []
+  },
+  {
+   "id": "rule-03",
+   "category": "rule",
+   "lang": "en",
+   "question": "Can I bring my dog into a POYA store?",
+   "reference": "Yes, if the pet is in your own pet bag or pet stroller.",
+   "answer": "Yes, you can bring your dog into a POYA store, provided that you place your pet inside a pet carrier or a pet stroller that you have brought with you [1].\n\nSources:\n[1] 門市相關-常見問題 — https://www.poya.com.tw/faq/8",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer accurately states that dogs are allowed if kept inside a self-provided pet carrier or pet stroller.",
+   "tool_calls": [
+    "search_promotion_text(query='寶雅可以帶寵物嗎？')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/faq/6",
+    "https://www.poya.com.tw/faq/8",
+    "https://www.poya.com.tw/law_regulation/5"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/faq/8"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 7713,
+   "tokens_out": 90,
+   "latency_ms": 1876,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 505,
+   "judge_tokens_out": 168,
+   "warnings": []
+  },
+  {
+   "id": "rule-04",
+   "category": "rule",
+   "lang": "zh",
+   "question": "寶雅的點數放多久會不見?",
+   "reference": "當年累積的點數在隔年 12/31 失效，例如 2026 年的點數到 2027/12/31。",
+   "answer": "寶雅的紅利點數有效期限為：當年度累積的點數，統一於**隔年的 12 月 31 日**失效歸零 [1]。\n\n例如：2026 年 1 月 1 日至 2026 年 12 月 31 日期間消費所累積的點數，會保留至 2027 年 12 月 31 日午夜 12 點後失效 [1]。\n\n您可以透過以下方式查詢目前的點數及即將到期的點數：\n*   登入 **POYA 寶雅 APP**。\n*   點選「會員專區」。\n*   點選「會員點數中心」即可查看 [2]。\n\nSources:\n[1] 會員專區-常見問題 — https://www.poya.com.tw/faq/7\n[2] 【點數交換】台新Point兌換POYA寶雅點數! — https://www.poya.com.tw/news-detail/321/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly explains that points expire on December 31st of the following year after they are earned.",
+   "tool_calls": [
+    "search_promotion_text(query='寶雅點數有效期限')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/faq/7",
+    "https://www.poya.com.tw/news-detail/321",
+    "https://www.poya.com.tw/news-detail/348",
+    "https://www.poya.com.tw/news-detail/354"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/faq/7",
+    "https://www.poya.com.tw/news-detail/321"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8219,
+   "tokens_out": 254,
+   "latency_ms": 2137,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 696,
+   "judge_tokens_out": 198,
+   "warnings": []
+  },
+  {
+   "id": "rule-05",
+   "category": "rule",
+   "lang": "en",
+   "question": "How many POYA points do I need to take 1 NT dollar off my bill?",
+   "reference": "300 points = NT$1. Points can cover up to 30% of a bill in stores and 15% online.",
+   "answer": "You need 300 POYA points to take 1 NT dollar off your bill [1].\n\nPlease note that there are limits on how much you can offset per transaction:\n*   **Physical stores:** Up to 30% of the total transaction amount [1].\n*   **POYA Online (寶雅線上買):** Up to 15% of the total transaction amount [1].\n\nSources:\n[1] 會員專區-常見問題 — https://www.poya.com.tw/faq/7",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly states that 300 points equal 1 NT dollar and includes the 30% store and 15% online redemption limits.",
+   "tool_calls": [
+    "search_promotion_text(query='寶雅點數折抵金額 幾點折1元')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/events-detail/50",
+    "https://www.poya.com.tw/faq/7",
+    "https://www.poya.com.tw/news-detail/321",
+    "https://www.poya.com.tw/news-detail/348",
+    "https://www.poya.com.tw/news-detail/350"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/faq/7"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 7970,
+   "tokens_out": 145,
+   "latency_ms": 2073,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 577,
+   "judge_tokens_out": 193,
+   "warnings": []
+  },
+  {
+   "id": "rule-06",
+   "category": "rule",
+   "lang": "zh",
+   "question": "網路上買的東西尺寸不合，可以換一個嗎?",
+   "reference": "不行，寶雅線上買不提供換貨，只能退貨。",
+   "answer": "您好，根據寶雅線上買的退換貨規範，線上購物並無提供「換貨」服務，若您收到的商品尺寸不合，僅能辦理「退貨」處理 [1][5]。\n\n以下為相關注意事項：\n* **退貨期限**：收到商品後，隔日起算 10 天內為猶豫期（含例假日）[1]。\n* **退貨條件**：商品必須回復至您收到時的原始狀態，包含包裝外箱、主商品、內外包裝、贈品及活動贈品等，且需保持全新未拆封狀態 [1][4][5]。\n* **申請方式**：請於線上申請退貨（路徑：我的帳戶 > 訂單查詢 > 申請退貨）[4][5]。\n* **例外情形**：若商品屬於個人衛生用品（如內衣褲、襪子等）且已拆封，或已超過猶豫期、商品有缺件/毀損等情形，可能會影響您的退貨權限 [1][4]。\n\n建議您在申請退貨後，若仍需要合適尺寸的商品，可直接重新下單購買。\n\nSources:\n[1] 寶雅線上買-常見問題 — https://www.poya.com.tw/faq/6\n[4] 寶雅線上買-常見問題 — https://www.poya.com.tw/faq/6\n[5] 退貨換貨相關規範 — https://www.poya.com.tw/law_regulation/5",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer accurately states that POYA online does not offer exchange services and only permits returns.",
+   "tool_calls": [
+    "search_promotion_text(query='網購商品退換貨政策 尺寸不合可以換貨嗎')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/faq/6",
+    "https://www.poya.com.tw/faq/8",
+    "https://www.poya.com.tw/law_regulation/5"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/faq/6",
+    "https://www.poya.com.tw/law_regulation/5"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8238,
+   "tokens_out": 376,
+   "latency_ms": 2787,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 786,
+   "judge_tokens_out": 152,
+   "warnings": []
+  },
+  {
+   "id": "rule-07",
+   "category": "rule",
+   "lang": "en",
+   "question": "Can I pay with a Diners Club card at POYA?",
+   "reference": "No. POYA stores do not accept Diners Club (大來卡).",
+   "answer": "No, you cannot pay with a Diners Club card at POYA. According to POYA's official FAQ, they do not support Diners Club cards [1].\n\nSources:\n[1] 門市相關-常見問題 — https://www.poya.com.tw/faq/8",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly states that Diners Club cards are not accepted at POYA stores.",
+   "tool_calls": [
+    "search_promotion_text(query='寶雅可以使用大來卡 (Diners Club) 付款嗎？')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/faq/6",
+    "https://www.poya.com.tw/faq/8",
+    "https://www.poya.com.tw/law_regulation/4",
+    "https://www.poya.com.tw/news-detail/346"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/faq/8"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 7892,
+   "tokens_out": 96,
+   "latency_ms": 1866,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 507,
+   "judge_tokens_out": 109,
+   "warnings": []
+  },
+  {
+   "id": "rule-08",
+   "category": "rule",
+   "lang": "zh",
+   "question": "POYA Pay 一次最少要加值多少? 最多可以放多少錢?",
+   "reference": "每次最少 $100，儲值上限 $30,000。",
+   "answer": "POYA Pay（POYA支付）的儲值金額限制如下：\n\n*   **最低儲值金額**：每次最低為新台幣 100 元。\n*   **儲值上限**：儲值金額上限為新台幣 30,000 元。\n\n請注意，禮券無法用於儲值。\n\nSources:\n[1] 儲值支付使用原則 — https://www.poya.com.tw/law_regulation/4",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly states both the minimum top-up amount ($100) and the maximum limit ($30,000).",
+   "tool_calls": [
+    "search_promotion_text(query='POYA Pay 加值金額限制 最少 最多')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/faq/7",
+    "https://www.poya.com.tw/law_regulation/4",
+    "https://www.poya.com.tw/news-detail/346",
+    "https://www.poya.com.tw/warranty"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/law_regulation/4"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 7985,
+   "tokens_out": 132,
+   "latency_ms": 5531,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 556,
+   "judge_tokens_out": 139,
+   "warnings": []
+  },
+  {
+   "id": "rule-09",
+   "category": "rule",
+   "lang": "zh",
+   "question": "我想把 POYA Pay 裡面的錢拿回來，要付手續費嗎?",
+   "reference": "要。只能全部退，收退款金額 3% 手續費，加現金匯款 $30 和發票寄送 $28。帶身分證件到任一門市辦理。",
+   "answer": "若您欲申請退還 POYA 支付（儲值金）餘額，根據寶雅的儲值支付使用原則，企業經營者得酌收相關費用。\n\n辦理退款時，將會收取以下費用：\n*   **退還儲值金額之 3% 手續費**\n*   **現金匯款手續費 $30**\n*   **發票寄送費 $28**\n\n**辦理方式與注意事項：**\n1.  **全額退還：** 儲值金餘額將全數退還，恕不接受部分餘額退還。\n2.  **辦理地點：** 請至任一寶雅門市填寫退款文件。\n3.  **攜帶證件：** 請準備身份證明文件；若原儲值方式為信用卡，請務必攜帶該張原信用卡前往辦理。\n4.  **退款方式：** 若原儲值金係以現金儲值，將以現金支付退還；若原儲值金係以信用卡線上儲值，將以全數刷退方式退還（均不包含原卡片點數）。\n\n建議您前往門市前，可先準備好相關證件，並向門市人員確認辦理流程。\n\nSources:\n[1] 儲值支付使用原則 — https://www.poya.com.tw/law_regulation/4",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer accurately states all key fees, conditions, and procedures for refunding POYA Pay stored value as specified in the reference.",
+   "tool_calls": [
+    "search_promotion_text(query='POYA Pay 餘額退款 手續費')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/faq/6",
+    "https://www.poya.com.tw/law_regulation/4",
+    "https://www.poya.com.tw/news-detail/345",
+    "https://www.poya.com.tw/news-detail/346"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/law_regulation/4"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8404,
+   "tokens_out": 340,
+   "latency_ms": 2630,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 791,
+   "judge_tokens_out": 226,
+   "warnings": []
+  },
+  {
+   "id": "rule-10",
+   "category": "rule",
+   "lang": "en",
+   "question": "Can I use a POYA e-voucher at the POYA counter inside a department store?",
+   "reference": "No. E-vouchers don't work at special stores such as department-store counters, or at offshore-island stores.",
+   "answer": "Generally, POYA e-vouchers (即享券) cannot be used at POYA stores located inside department stores [1, 2].\n\nThese e-vouchers are not applicable to special stores that do not issue invoices under POYA International Co., Ltd., which includes department store locations and offshore island stores [1, 2]. You can check the complete list of excluded stores on the Edenred website provided by POYA [1, 2].\n\nSources:\n[1] 【寶雅x台新】新申辦台新Richart卡首刷達檻最高拿$1,000即享券 — https://www.poya.com.tw/news-detail/311/\n[2] 一次抵用型 — https://www.poya.com.tw/voucher/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly states that POYA e-vouchers cannot be used at store counters inside department stores.",
+   "tool_calls": [
+    "search_promotion_text(query='寶雅電子禮券可以在百貨公司內的寶雅門市使用嗎？')"
+   ],
+   "tool_urls": [
+    "https://www.edenred.com.tw/index.php/store/poya",
+    "https://www.poya.com.tw/faq/6",
+    "https://www.poya.com.tw/gift_card",
+    "https://www.poya.com.tw/news-detail/311",
+    "https://www.poya.com.tw/voucher",
+    "https://www.poyabuy.com.tw"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/311",
+    "https://www.poya.com.tw/voucher"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8376,
+   "tokens_out": 207,
+   "latency_ms": 2175,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 634,
+   "judge_tokens_out": 202,
+   "warnings": []
+  },
+  {
+   "id": "rule-11",
+   "category": "rule",
+   "lang": "zh",
+   "question": "寶雅的提貨券會過期嗎?",
+   "reference": "不會，提貨券沒有使用期限。",
+   "answer": "寶雅的「提貨券」本身**沒有使用期限** [1]。\n\n不過，請留意寶雅發行的其他類型票券規定不同：\n*   **折價券/抵用券**：通常設有使用效期，逾期即失效 [2, 4]。\n*   **即享券**：需在票券上顯示的有效期限內使用，逾期無效 [3, 5]。\n\n建議您確認手中持有的票券類型，若為「提貨券」，則無過期問題 [1]。\n\nSources:\n[1] 提貨券說明 — https://www.poya.com.tw/gift_card/\n[2] 寶雅線上買-常見問題 — https://www.poya.com.tw/faq/6\n[3] 一次抵用型 | 即享券專區 — https://www.poya.com.tw/voucher/\n[4] 十分賺-精選商品滿額贈現金抵用券 — https://www.poya.com.tw/news-detail/361/\n[5] 一次抵用型 | 即享券專區 — https://www.poya.com.tw/voucher/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly states that POYA's提貨券 has no expiration date.",
+   "tool_calls": [
+    "search_promotion_text(query='寶雅提貨券會過期嗎')"
+   ],
+   "tool_urls": [
+    "https://www.edenred.com.tw/index.php/store/poya",
+    "https://www.poya.com.tw/faq/6",
+    "https://www.poya.com.tw/gift_card",
+    "https://www.poya.com.tw/news-detail/361",
+    "https://www.poya.com.tw/voucher",
+    "https://www.poyabuy.com.tw"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/gift_card",
+    "https://www.poya.com.tw/faq/6",
+    "https://www.poya.com.tw/voucher",
+    "https://www.poya.com.tw/news-detail/361"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8102,
+   "tokens_out": 296,
+   "latency_ms": 2331,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 704,
+   "judge_tokens_out": 107,
+   "warnings": []
+  },
+  {
+   "id": "rule-12",
+   "category": "rule",
+   "lang": "zh",
+   "question": "街口星期五那張券最多可以便宜多少錢?",
+   "reference": "單筆滿 $800 打 88 折，最多折 $100。",
+   "answer": "使用街口支付的「週五 美妍日 88折券」，單筆消費滿 $800 可享 88 折優惠，最高可折抵 **$100** [1]。\n\n**活動注意事項：**\n*   **適用時間：** 活動期間（至 2026/12/31）的每週五。\n*   **領券方式：** 需於街口支付 App 活動頁領取。\n*   **限制：** 每人每券限使用一次，每週限量 80 名，先折先贏。\n\nSources:\n[1] 【寶雅 X 街口支付】 週五用街口!領券現享88折 — https://www.poya.com.tw/news-detail/356/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly states that the maximum discount is $100 for orders over $800.",
+   "tool_calls": [
+    "resolve_dates(unit='month')",
+    "list_promotions(payment_method='街口', active_to='2026-10-31', active_from='2026-10-01')",
+    "get_promotion(id='57a71d87-2b5a-4e40-8b84-d9306c562ad0')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/news-detail/356"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/356"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 13497,
+   "tokens_out": 299,
+   "latency_ms": 3104,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 626,
+   "judge_tokens_out": 154,
+   "warnings": []
+  },
+  {
+   "id": "rule-13",
+   "category": "rule",
+   "lang": "en",
+   "question": "How much do I need to spend to get the LINE Pay cashback on Wednesdays?",
+   "reference": "At least NT$650 in one payment (after LINE POINTS and coupons), in POYA's own stores. You get 3% back in LINE POINTS.",
+   "answer": "To get the LINE Pay cashback on Wednesdays at POYA stores, you need to spend a minimum of **$650** in a single transaction [1].\n\nThis offer provides 3% LINE POINTS back and is valid until December 30, 2026 [1].\n\nSources:\n[1] 【寶雅門市】每週三用LINE Pay,單筆滿額享LINE POINTS 3%回饋! — https://www.poya.com.tw/news-detail/357/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly identifies the minimum spending amount of $650 in a single transaction for the Wednesday LINE Pay 3% cashback offer.",
+   "tool_calls": [
+    "resolve_dates(unit='month')",
+    "list_promotions(active_from='2026-10-01', active_to='2026-10-31', payment_method='LINE Pay')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/news-detail/357"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/357"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 9579,
+   "tokens_out": 183,
+   "latency_ms": 2167,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 578,
+   "judge_tokens_out": 156,
+   "warnings": []
+  },
+  {
+   "id": "rule-14",
+   "category": "rule",
+   "lang": "zh",
+   "question": "刷悠遊卡送的 40 元券，一個人最多可以拿幾張?",
+   "reference": "每個帳戶最多 25 份(週五到週日，單筆滿 $299 送 1 份，限量 10,000 份)。",
+   "answer": "根據寶雅的活動公告，於活動期間（每週五至週日）持記名悠遊卡於寶雅實體門市消費滿 299 元，每帳戶最多可領取 **25 份** 40 元悠遊付現金回饋券。\n\n請注意以下重點：\n*   **單筆不累贈**：單筆消費滿 299 元即贈 1 份，無法單筆消費累積領取多份。\n*   **限量**：總回饋券限量 10,000 份，額滿活動即提前結束。\n*   **資格**：需為悠遊付會員，且使用本人名下之記名悠遊卡（含悠遊聯名卡、Debit 卡）消費。\n*   **排除門市**：部分門市（如寶雅南港高鐵、寶雅台北北車等）不適用此活動，建議消費前先確認該門市是否在排除名單內。\n\n詳細活動辦法與排除門市清單，請參考寶雅官網公告：[【寶雅限定】週五~週日 嗶悠遊卡送$40悠遊付現金券](https://www.poya.com.tw/news-detail/292/)\n\nSources:\n[1] 【寶雅限定】週五~週日 嗶悠遊卡送$40悠遊付現金券 — https://www.poya.com.tw/news-detail/292/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly states that each account can receive a maximum of 25 vouchers.",
+   "tool_calls": [
+    "search_promotion_text(query='刷悠遊卡送的 40 元券 一個人最多可以拿幾張')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/news-detail/292"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/292"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8360,
+   "tokens_out": 372,
+   "latency_ms": 2568,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 811,
+   "judge_tokens_out": 154,
+   "warnings": []
+  },
+  {
+   "id": "rule-15",
+   "category": "rule",
+   "lang": "en",
+   "question": "Can I use the free hot pot meat coupon for takeout?",
+   "reference": "No, the 築間 coupon is for dine-in only, not takeout or delivery.",
+   "answer": "No, you cannot use the free hot pot meat coupon for takeout.\n\nAccording to the terms of the \"POYA × 築間幸福鍋物\" meat coupon promotion, the coupon is **valid for dine-in only** and is not applicable to takeout or delivery services [1, 2].\n\nSources:\n[1] 【金卡限定】寶雅×築間幸福鍋物「0元」肉品兌換券! — https://www.poya.com.tw/news-detail/337/\n[2] 【金卡限定】寶雅×築間幸福鍋物「0元」肉品兌換券! — https://www.poya.com.tw/news-detail/337/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly states that the coupon is for dine-in only and cannot be used for takeout.",
+   "tool_calls": [
+    "search_promotion_text(query='免費火鍋肉片兌換券 外帶可以使用嗎')"
+   ],
+   "tool_urls": [
+    "https://www.edenred.com.tw/index.php/faq",
+    "https://www.poya.com.tw/news-detail/337",
+    "https://www.poya.com.tw/voucher",
+    "https://www.poya.com.tw/voucher-detail/3"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/337"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 7879,
+   "tokens_out": 188,
+   "latency_ms": 2716,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 604,
+   "judge_tokens_out": 147,
+   "warnings": []
+  },
+  {
+   "id": "rule-16",
+   "category": "rule",
+   "lang": "zh",
+   "question": "要怎樣才能變成金卡會員?",
+   "reference": "一年內累積消費滿 $10,000，次月 15 號升等金卡。",
+   "answer": "若要成為寶雅的金卡會員，您需要先成為寶雅的數位會員（下載 POYA 寶雅 APP 並註冊即可免費加入）。\n\n當您的**年度消費累積達到新台幣 10,000 元**，系統將於達標的次月 15 號為您升等為金卡會員，升等後的金卡資格效期至 2028 年 1 月 14 日，並可享有更多金卡專屬禮遇 [1]。\n\nSources:\n[1] 會員權益線上申辦 — https://www.poya.com.tw/member/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly states that accumulating 10,000 TWD in annual spending upgrades the member to Gold status on the 15th of the following month.",
+   "tool_calls": [
+    "search_promotion_text(query='如何成為寶雅金卡會員')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/faq/7",
+    "https://www.poya.com.tw/member",
+    "https://www.poya.com.tw/news-detail/163",
+    "https://www.poya.com.tw/news-detail/224"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/member"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 7898,
+   "tokens_out": 164,
+   "latency_ms": 2445,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 587,
+   "judge_tokens_out": 251,
+   "warnings": []
+  },
+  {
+   "id": "rule-17",
+   "category": "rule",
+   "lang": "zh",
+   "question": "線上買付款沒成功，我用掉的折價券會還給我嗎?",
+   "reference": "會。取消訂單或付款失敗後，該筆用掉的折價券和點數 2 小時內返還。",
+   "answer": "若您在寶雅線上買（POYA Buy）遇到訂單付款失敗的情況，折價券是可以返還的，處理方式如下：\n\n1.  **自動返還**：若因系統機制導致付款失敗，訂單會在 30 分鐘至 1 小時後自動轉為「訂單不成立」狀態，屆時該筆訂單使用的折價券及點數將於 2 小時內返還至您的帳戶。\n2.  **手動取消**：您也可以自行前往「會員專區」→「訂單查詢」，找到該筆訂單並點選「取消訂單」。取消後，該筆使用的折價券及點數同樣會在 2 小時內返還。\n\n**特別提醒**：此規則僅適用於「付款失敗」或「取消訂單」的情況。若訂單已付款完成，後續才辦理退貨或取消部分商品，依據規定，已使用的折價券將失效且不會歸還。\n\n來源：\n[1] 寶雅線上買-常見問題 — https://www.poya.com.tw/faq/6",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly states that used coupons and points will be returned within 2 hours after payment failure or order cancellation.",
+   "tool_calls": [
+    "search_promotion_text(query='線上購物 付款失敗 折價券 退還')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/faq/6",
+    "https://www.poya.com.tw/news-detail/361",
+    "https://www.poya.com.tw/voucher"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/faq/6"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 7833,
+   "tokens_out": 276,
+   "latency_ms": 3776,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 710,
+   "judge_tokens_out": 227,
+   "warnings": []
+  },
+  {
+   "id": "rule-18",
+   "category": "rule",
+   "lang": "en",
+   "question": "I chose store pickup for an online order but never picked it up. Do I get back the points I used?",
+   "reference": "No. The order is refunded after it goes back to the warehouse, but coupons and points used on it are not returned.",
+   "answer": "According to POYA's online shopping FAQ, if an order is not picked up by the deadline, it will be returned to the warehouse. Once the return is processed, the system will initiate a refund for the order, but any coupons or bonus points used for that order cannot be returned [1].\n\nSources:\n[1] 寶雅線上買-常見問題 — https://www.poya.com.tw/faq/6",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer accurately states that points and coupons used on an uncollected store pickup order are not returned.",
+   "tool_calls": [
+    "search_promotion_text(query='網購門市取貨 未取貨 點數退還')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/faq/6",
+    "https://www.poya.com.tw/faq/7",
+    "https://www.poya.com.tw/gift_card",
+    "https://www.poya.com.tw/news-detail/335"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/faq/6"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 7754,
+   "tokens_out": 122,
+   "latency_ms": 2650,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 553,
+   "judge_tokens_out": 212,
+   "warnings": []
+  },
+  {
+   "id": "rule-19",
+   "category": "rule",
+   "lang": "zh",
+   "question": "網購退貨以後，錢大概多久會退回來?",
+   "reference": "商店確認退貨完成後，7 到 10 個工作天內退到指定帳戶。",
+   "answer": "根據寶雅線上買的退款規定，待商店回收包裹並執行「退貨完成」後，退款作業時間如下：\n\n*   **退款時間：** 商店確認退貨完成後，約 **7 至 10 個工作天內**會將款項退至您的指定帳戶或原信用卡帳戶。\n*   **退款方式：**\n    *   **信用卡一次付清：** 款項將刷退至您當初付款的信用卡帳戶中。\n    *   **信用卡分期付款：** 若刷卡金額與退款金額相符，將刷退至原信用卡帳戶；若金額不符，則會改以匯款方式退款（需於退貨完成後，至會員專區的訂單查詢中填寫退款帳戶資料）。\n    *   **ATM 付款 / 超商付款取貨：** 需於申請退貨時填寫正確的退款帳號資料，款項將匯入該指定帳號。\n\n您可以隨時至「會員專區 > 訂單查詢」中確認退貨進度與退款資訊。若顯示退款完成但未收到款項，建議您刷摺確認是否有「九易宇軒股份有限公司」之款項匯入。\n\nSources:\n[1] 寶雅線上買-常見問題 — https://www.poya.com.tw/faq/6",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly states that the refund will be processed within 7 to 10 working days after the store confirms the return is completed.",
+   "tool_calls": [
+    "search_promotion_text(query='網購退貨 退款時間')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/faq/6"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/faq/6"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8284,
+   "tokens_out": 333,
+   "latency_ms": 5106,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 758,
+   "judge_tokens_out": 168,
+   "warnings": []
+  },
+  {
+   "id": "rule-20",
+   "category": "rule",
+   "lang": "zh",
+   "question": "在寶雅線上買下單，寄到家裡要幾天?",
+   "reference": "宅配在完成付款後約 2 到 5 個工作天到貨，偏遠地區或節慶檔期再多 1 到 3 天。",
+   "answer": "在寶雅線上買選擇「宅配」寄送至家裡，完成付款後約需 **2-5 個工作日**到貨 [1]。\n\n若遇偏遠地區或節慶檔期，配送時間可能會再多加 1-3 日 [1]。\n\n資料來源：\n[1] 寶雅線上買-常見問題 — https://www.poya.com.tw/faq/6",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer accurately states the delivery timeframe of 2-5 business days after payment and the additional 1-3 days for remote areas or festive periods.",
+   "tool_calls": [
+    "search_promotion_text(query='寶雅線上買 寄到家裡要幾天')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/faq/6",
+    "https://www.poya.com.tw/law_regulation/5",
+    "https://www.poya.com.tw/news-detail/335"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/faq/6"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 7954,
+   "tokens_out": 119,
+   "latency_ms": 2410,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 554,
+   "judge_tokens_out": 179,
+   "warnings": []
+  },
+  {
+   "id": "rule-21",
+   "category": "rule",
+   "lang": "en",
+   "question": "Can I stack two coupons on one online order?",
+   "reference": "No. Each online checkout can use only one coupon.",
+   "answer": "It depends on the type of coupon you are using:\n\n*   **General Discount Coupons (折價券):** You can only use **one** discount coupon per online order [1].\n*   **\"即享券\" (Vouchers):** You **can** use multiple \"即享券\" in a single online order, up to a maximum of 10 vouchers per order (subject to system display) [2, 3].\n\nPlease note that discount coupons cannot be used to offset shipping fees [1], and \"即享券\" can only be used on orders that meet the free shipping threshold [2, 3].\n\nSources:\n[1] 寶雅線上買-常見問題 — https://www.poya.com.tw/faq/6\n[2] 【寶雅x台新】新申辦台新Richart卡首刷達檻最高拿$1,000即享券 — https://www.poya.com.tw/news-detail/311/\n[3] 一次抵用型 — https://www.poya.com.tw/voucher/",
+   "verdict": "partial",
+   "declined": false,
+   "reason": "The answer states 'It depends' and mentions voucher stacking instead of providing a direct 'No', though it correctly notes that only one discount coupon can be used per order.",
+   "tool_calls": [
+    "search_promotion_text(query='線上購物可以使用多張優惠券嗎？')"
+   ],
+   "tool_urls": [
+    "https://www.edenred.com.tw/index.php/store/poya",
+    "https://www.poya.com.tw/faq/6",
+    "https://www.poya.com.tw/news-detail/311",
+    "https://www.poya.com.tw/news-detail/361",
+    "https://www.poya.com.tw/voucher",
+    "https://www.poyabuy.com.tw"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/faq/6",
+    "https://www.poya.com.tw/news-detail/311",
+    "https://www.poya.com.tw/voucher"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8273,
+   "tokens_out": 266,
+   "latency_ms": 2858,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 675,
+   "judge_tokens_out": 470,
+   "warnings": []
+  },
+  {
+   "id": "rule-22",
+   "category": "rule",
+   "lang": "zh",
+   "question": "如果在店裡被騷擾，最晚多久以內可以申訴?",
+   "reference": "一般在知道事件後 2 年內(事件發生起不超過 5 年)；權勢性騷擾是 3 年內(不超過 7 年)；未成年時發生的，成年後 3 年內。",
+   "answer": "根據寶雅的《性騷擾防治辦法》，若適用《性騷擾防治法》，申訴期限規定如下：\n\n1.  **一般性騷擾事件**：於知悉事件發生後 **2 年內** 提出申訴。但自性騷擾事件發生之日起超過 **5 年** 者，不得提出。\n2.  **權勢性騷擾事件**：於知悉事件發生後 **3 年內** 提出申訴。但自性騷擾事件發生之日起超過 **7 年** 者，不得提出。\n3.  **未成年被害人**：若性騷擾事件發生時被害人未成年，得於成年後 **3 年內** 提出申訴。若上述規定有較長之期限，則從其規定。\n\n若您在店內遭遇相關事件，建議您參考寶雅官網的完整說明，並依據實際情況向相關單位（如事件發生地之警察機關或相關主管單位）提出申訴。\n\nSources:\n[1] 性騷擾防治辦法 — https://www.poya.com.tw/law_regulation/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer accurately provides all the complaint time limit conditions as stated in the reference.",
+   "tool_calls": [
+    "search_promotion_text(query='在店裡被騷擾 申訴期限')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/law_regulation"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/law_regulation"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8512,
+   "tokens_out": 274,
+   "latency_ms": 3218,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 728,
+   "judge_tokens_out": 221,
+   "warnings": []
+  },
+  {
+   "id": "rule-23",
+   "category": "rule",
+   "lang": "en",
+   "question": "Can I ask POYA to delete my personal data?",
+   "reference": "Yes. Ask through the customer service mailbox, the hotline 0800-033-168, or at any store.",
+   "answer": "Yes, you can request that POYA delete your personal data.\n\nAccording to POYA's Personal Data Protection Policy, you have the right to request the deletion of your personal data. You can initiate this request through the following channels:\n\n*   **Online:** Contact POYA via their customer service email.\n*   **Phone:** Call the customer service hotline at 0800-033-168 (or 02-8772-4981 for mobile phones).\n*   **In-person:** Visit any POYA store to make the request.\n\nSources:\n[1] 個人資料保護原則 — https://www.poya.com.tw/law_regulation/3",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly identifies all three methods to request personal data deletion as listed in the reference.",
+   "tool_calls": [
+    "search_promotion_text(query='如何刪除個人資料')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/faq/7",
+    "https://www.poya.com.tw/law_regulation/3"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/law_regulation/3"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 7814,
+   "tokens_out": 175,
+   "latency_ms": 2295,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 608,
+   "judge_tokens_out": 140,
+   "warnings": []
+  },
+  {
+   "id": "rule-24",
+   "category": "rule",
+   "lang": "en",
+   "question": "How long can I use the LINE WEBTOON coins I get with POYA points?",
+   "reference": "14 days from the day the code is redeemed; then they expire.",
+   "answer": "The LINE WEBTOON coins you receive from redeeming POYA points are valid for **14 days** from the date they are credited to your account [1, 2]. After 14 days, any unused coins will automatically expire and be removed [1, 2].\n\nYou can check the specific expiration date for your coins within the LINE WEBTOON App under \"My Coins\" (我的代幣) [1, 2].\n\nSources:\n[1] 【會員專屬】POYA寶雅點數秒變LINE WEBTOON代幣! — https://www.poya.com.tw/news-detail/354/\n[2] 【會員專屬】POYA寶雅點數秒變LINE WEBTOON代幣! — https://www.poya.com.tw/news-detail/354/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly states that the coins are valid for 14 days from the date they are redeemed/credited before expiring.",
+   "tool_calls": [
+    "search_promotion_text(query='POYA點數兌換 LINE WEBTOON 代幣 使用期限')"
+   ],
+   "tool_urls": [
+    "https://webtoons.onelink.me/Jzmu/l4gy3sz0",
+    "https://webtoons.onelink.me/Jzmu/lztkf7y7",
+    "https://www.poya.com.tw/faq/7",
+    "https://www.poya.com.tw/news-detail/354"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/354"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8017,
+   "tokens_out": 213,
+   "latency_ms": 2746,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 629,
+   "judge_tokens_out": 125,
+   "warnings": []
+  },
+  {
+   "id": "rule-25",
+   "category": "rule",
+   "lang": "zh",
+   "question": "褲褲兔集點的同一款贈品，我最多可以換幾個?",
+   "reference": "每位會員每款贈品最多 10 個。",
+   "answer": "根據「POYA寶雅線上買」的「兔力全開 軟萌應援」褲褲兔印花集點活動規定，每位會員針對單一印花贈品，最高兌換數量以 **10 個**為限 [1]。\n\n請注意，所有贈品皆為限量，數量有限換完為止 [1, 3]。\n\nSources:\n[1] 【兔力全開 軟萌應援】線上買獨家褲褲兔印花集點活動 — https://www.poya.com.tw/news-detail/335/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly states that each member can redeem a maximum of 10 of the same item.",
+   "tool_calls": [
+    "search_promotion_text(query='褲褲兔集點 同一款贈品 最多可以換幾個')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/faq/7",
+    "https://www.poya.com.tw/news-detail/335"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/335"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8251,
+   "tokens_out": 161,
+   "latency_ms": 2310,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 574,
+   "judge_tokens_out": 181,
+   "warnings": []
+  },
+  {
+   "id": "rule-26",
+   "category": "rule",
+   "lang": "zh",
+   "question": "存在 POYA Pay 裡的錢有銀行擔保嗎?",
+   "reference": "有，由凱基銀行提供足額履約保證(保證期間 2025/12/12 到 2026/12/12)。",
+   "answer": "是的，您存在 POYA Pay（POYA 支付）裡的儲值金有銀行擔保。\n\nPOYA Pay 的儲值金額已依法由凱基商業銀行提供足額履約保證，並採取專款專用，以保障您的權益 [2]。目前的履約保證期間為 2025 年 12 月 12 日至 2026 年 12 月 12 日 [1]。\n\nSources:\n[1] POYA Pay履保儲值金資訊 — https://www.poya.com.tw/warranty/\n[2] 儲值支付使用原則 — https://www.poya.com.tw/law_regulation/4",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly identifies that KGI Bank provides full performance guarantee for POYA Pay stored value and includes the correct guarantee period.",
+   "tool_calls": [
+    "search_promotion_text(query='POYA Pay 儲值金 銀行擔保')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/law_regulation/4",
+    "https://www.poya.com.tw/news-detail/346",
+    "https://www.poya.com.tw/warranty"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/warranty",
+    "https://www.poya.com.tw/law_regulation/4"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8125,
+   "tokens_out": 184,
+   "latency_ms": 2399,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 625,
+   "judge_tokens_out": 158,
+   "warnings": []
+  },
+  {
+   "id": "exact-01",
+   "category": "exact",
+   "lang": "zh",
+   "question": "買什麼可以拿到 MOFA'CE 去汙濕巾?",
+   "reference": "DM 上 55 大品牌衣物、香氛、居家清潔商品滿 $299，送 MOFA'CE 魔飛強效去汙濕巾一包(限量 16,000 包)。",
+   "answer": "您好！購買「55大品牌衣物/香氛/居家清潔商品」單筆滿 $299，即可獲贈「MOFA'CE魔飛強效去汙濕巾18抽-清新檸檬」乙包 [1]。\n\n**活動注意事項：**\n*   **指定品牌：** 需購買活動指定的 55 大品牌商品（包含蘇菲、靠得住、蕾妮亞、愛康、Mdmmd.、康乃馨、大王elis、大王Natura、天天、歐碧、小林製藥、舒芯、親顧、大耳狗、美樂蒂、酷洛米、Hello Kitty、HAHAHA、唯白、來復易、護得住等品牌）[1]。\n*   **領取方式：** 於架上取貨 [1]。\n*   **其他規則：** 可累贈、可跨品牌，限量 16,000 包，送完為止 [1]。\n\n建議您前往門市時，可參考現場 DM 或詢問門市人員確認該商品是否屬於活動指定品牌。\n\nSources:\n[1] 55大品牌衣物/香氛/居家清潔商品滿$299,贈送MOFA'CE魔飛強效去汙濕巾18抽-清新檸檬乙包 — https://www.poya.com.tw/events-detail/47/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer accurately states that purchasing $299 or more of products from 55 major clothing, fragrance, or home cleaning brands qualifies for the gift.",
+   "tool_calls": [
+    "search_promotion_text(query=\"MOFA'CE 去汙濕巾 贈品 優惠\")"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/events-detail/45",
+    "https://www.poya.com.tw/events-detail/46",
+    "https://www.poya.com.tw/events-detail/47",
+    "https://www.poya.com.tw/events-detail/48",
+    "https://www.poya.com.tw/news-detail/224"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/events-detail/47"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 7570,
+   "tokens_out": 342,
+   "latency_ms": 3080,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 788,
+   "judge_tokens_out": 223,
+   "warnings": []
+  },
+  {
+   "id": "exact-02",
+   "category": "exact",
+   "lang": "zh",
+   "question": "婦潔 VIGILL 沐浴露要怎麼拿?",
+   "reference": "買 21 大品牌衛生棉滿 $299 送一瓶(限量 10,000 瓶)，滿 $359 再折 $50。",
+   "answer": "您好！目前在寶雅購買指定品牌衛生棉商品，即可獲得「婦潔 VIGILL 私密沐浴露-蔓越莓」乙瓶。\n\n相關活動資訊如下：\n*   **活動內容**：購買指定品牌衛生棉商品滿 $299，即贈送「婦潔 VIGILL 私密沐浴露-蔓越莓」乙瓶；滿 $359 再現折 $50。\n*   **注意事項**：\n    *   限指定品牌，可跨品牌購買。\n    *   不限單包或組包，可累折，贈品可累贈。\n    *   限量 10,000 瓶，送完為止。\n\n詳細參與品牌清單及活動說明，請參考寶雅官網公告：[https://www.poya.com.tw/events-detail/48/](https://www.poya.com.tw/events-detail/48/)\n\nSources:\n[1] 21大品牌衛生棉商品滿$299,即贈送婦潔VIGILL私密沐浴露-蔓越莓乙瓶,滿$359現折$50 — https://www.poya.com.tw/events-detail/48/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly states all key facts and conditions for receiving the gift.",
+   "tool_calls": [
+    "search_promotion_text(query='婦潔 VIGILL 沐浴露 優惠 活動')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/events-detail/44",
+    "https://www.poya.com.tw/events-detail/48",
+    "https://www.poya.com.tw/news-detail/224",
+    "https://www.poya.com.tw/news-detail/362"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/events-detail/48"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8083,
+   "tokens_out": 312,
+   "latency_ms": 2968,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 749,
+   "judge_tokens_out": 189,
+   "warnings": []
+  },
+  {
+   "id": "exact-03",
+   "category": "exact",
+   "lang": "zh",
+   "question": "WECHAMP 衣架現在特價多少?",
+   "reference": "WECHAMP 雙桿 H 型可移動加厚衣架 $499。",
+   "answer": "WECHAMP 雙桿H型可移動加厚衣架目前的特價為 $499 [1]。\n\nSources:\n[1] HOT SALE 精選鈔低價 — https://www.poya.com.tw/events-detail/49/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer accurately states the special price of $499 for the WECHAMP hanger as given in the reference.",
+   "tool_calls": [
+    "search_promotion_text(query='WECHAMP 衣架 特價')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/events-detail/49",
+    "https://www.poya.com.tw/news-detail/188__28",
+    "https://www.poya.com.tw/news-detail/188__39",
+    "https://www.poya.com.tw/news-detail/188__41",
+    "https://www.poya.com.tw/news-detail/188__61"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/events-detail/49"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 6997,
+   "tokens_out": 82,
+   "latency_ms": 1775,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 501,
+   "judge_tokens_out": 146,
+   "warnings": []
+  },
+  {
+   "id": "exact-04",
+   "category": "exact",
+   "lang": "en",
+   "question": "How much is the 永悅 shower head filter on sale?",
+   "reference": "NT$42.",
+   "answer": "The \"永悅 晶鑽透明過濾三段蓮蓬頭濾心\" is currently on sale for $42 [1].\n\nAdditionally, if you purchase shower heads or filter cartridges at physical stores, you can participate in the \"十分賺\" promotion from 2026/10/07 to 2026/11/03, where spending over $299 on these items entitles you to a 10% rebate in the form of a cash voucher [2, 3].\n\nSources:\n[1] HOT SALE 精選鈔低價 — https://www.poya.com.tw/events-detail/49/\n[2] 十分賺-精選商品滿額贈現金抵用券 — https://www.poya.com.tw/events-detail/43/\n[3] 十分賺-精選商品滿額贈現金抵用券 — https://www.poya.com.tw/news-detail/361/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly states the sale price of NT$42.",
+   "tool_calls": [
+    "search_promotion_text(query='永悅 蓮蓬頭 濾心 優惠')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/events-detail/43",
+    "https://www.poya.com.tw/events-detail/49",
+    "https://www.poya.com.tw/news-detail/224",
+    "https://www.poya.com.tw/news-detail/361"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/events-detail/49",
+    "https://www.poya.com.tw/events-detail/43",
+    "https://www.poya.com.tw/news-detail/361"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 7879,
+   "tokens_out": 245,
+   "latency_ms": 2543,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 649,
+   "judge_tokens_out": 103,
+   "warnings": []
+  },
+  {
+   "id": "exact-05",
+   "category": "exact",
+   "lang": "zh",
+   "question": "07-7962244 是哪一家店的電話?",
+   "reference": "鳳山和成店(高雄市鳳山區和成路535號)。",
+   "answer": "電話號碼 07-7962244 是寶雅「鳳山和成店」的電話 [1]。\n\n該店位於高雄市鳳山區和成路 535 號，預計於 2026 年 10 月 17 日開幕 [1]。\n\nSources:\n[1] 【新店開幕】鳳山和成店 — https://www.poya.com.tw/news-detail/188__68/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly identifies 鳳山和成店 as the store corresponding to the phone number.",
+   "tool_calls": [
+    "search_promotion_text(query='07-7962244 是哪一家店的電話?')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/news-detail/188__10",
+    "https://www.poya.com.tw/news-detail/188__13",
+    "https://www.poya.com.tw/news-detail/188__40",
+    "https://www.poya.com.tw/news-detail/188__68",
+    "https://www.poya.com.tw/store"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/188__68"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 7292,
+   "tokens_out": 143,
+   "latency_ms": 1972,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 560,
+   "judge_tokens_out": 137,
+   "warnings": []
+  },
+  {
+   "id": "exact-06",
+   "category": "exact",
+   "lang": "en",
+   "question": "Which POYA store is at 南京東路五段118號?",
+   "reference": "南京三民店 (opened September 12, 2026).",
+   "answer": "The POYA store located at 南京東路五段118號 is the **南京三民店** [1, 2].\n\nSources:\n[1] 【新店開幕】南京三民店 — https://www.poya.com.tw/news-detail/188__65/\n[2] 門市查詢 — https://www.poya.com.tw/store/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly identifies the store at that address as 南京三民店.",
+   "tool_calls": [
+    "search_promotion_text(query='南京東路五段118號 寶雅')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/faq/8",
+    "https://www.poya.com.tw/news-detail/188__65",
+    "https://www.poya.com.tw/news-detail/356",
+    "https://www.poya.com.tw/news-detail/361",
+    "https://www.poya.com.tw/store"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/188__65",
+    "https://www.poya.com.tw/store"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 7531,
+   "tokens_out": 120,
+   "latency_ms": 2345,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 539,
+   "judge_tokens_out": 95,
+   "warnings": []
+  },
+  {
+   "id": "exact-07",
+   "category": "exact",
+   "lang": "zh",
+   "question": "台新信用卡的預借現金手續費怎麼算?",
+   "reference": "預借現金金額 × 3.5% + NT$150。",
+   "answer": "根據台新銀行的相關公告，台新信用卡的預借現金手續費計算方式為：**預借現金金額 × 3.5% + NT$150元** [1, 2]。\n\n此外，差別循環信用利率為 2.88% ~ 15%（依電腦評等而定）[1, 2]。若有其他相關費用或疑問，建議您直接洽詢台新銀行客服專線 (02)2655-3355 或參閱台新銀行官方網站 [2]。\n\nSources:\n[1] 【台新銀行】信用卡綁定POYA支付週二、週五享回饋 — https://www.poya.com.tw/news-detail/345/\n[2] 【寶雅x台新】新申辦台新Richart卡首刷達檻最高拿$1,000即享券 — https://www.poya.com.tw/news-detail/311/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer accurately provides the cash advance fee formula matching the reference.",
+   "tool_calls": [
+    "search_promotion_text(query='台新信用卡預借現金手續費')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/news-detail/311",
+    "https://www.poya.com.tw/news-detail/315",
+    "https://www.poya.com.tw/news-detail/345",
+    "https://www.poya.com.tw/news-detail/346"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/345",
+    "https://www.poya.com.tw/news-detail/311"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8241,
+   "tokens_out": 249,
+   "latency_ms": 2834,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 667,
+   "judge_tokens_out": 126,
+   "warnings": []
+  },
+  {
+   "id": "exact-08",
+   "category": "exact",
+   "lang": "zh",
+   "question": "提貨券號碼 150114121002 是寶雅發的嗎?",
+   "reference": "是，寶雅提貨券號碼範圍是 150114121002 到 150114141001。",
+   "answer": "是的，根據寶雅官網的提貨券說明，您提供的號碼「150114121002」屬於寶雅發行的提貨券號碼範圍（150114121002~150114141001）[1]。\n\n請注意以下關於提貨券的重要事項：\n*   **生效條件**：提貨券須加蓋寶雅公司提貨券專用章，始生效力[2]。\n*   **防偽與保管**：提貨券設有防偽設置，若有複製、影印、偽造或變造等經塗改者無效[2]。此券為無記名有價證券，請妥善保管，遺失、被竊或毀損致無法識別者，恕不掛失及補發[2]。\n*   **使用範圍**：適用於全台寶雅、寶家、寶雅居家用品及寶雅居家五金門市，無法使用於代收、代付、商品服務費、非消費行為、提貨券購買、菸品購買及其他指定商品[2]。\n*   **其他規定**：提貨券無使用期限，且僅得兌換等值商品，不得兌換現金、有價證券或抵付欠款[2]。\n\n若您對該券的真偽或使用有疑慮，建議您可攜帶該提貨券至鄰近的寶雅門市，請門市人員協助確認。\n\nSources:\n[1] 提貨券說明 — https://www.poya.com.tw/gift_card/\n[2] 提貨券說明 — https://www.poya.com.tw/gift_card/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly states that the voucher number was issued by POYA as it falls within the specified range.",
+   "tool_calls": [
+    "search_promotion_text(query='提貨券號碼 150114121002 是寶雅發的嗎？如何查詢提貨券真偽？')"
+   ],
+   "tool_urls": [
+    "https://www.edenred.com.tw/index.php/faq",
+    "https://www.poya.com.tw/faq/6",
+    "https://www.poya.com.tw/gift_card",
+    "https://www.poya.com.tw/voucher"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/gift_card"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 7959,
+   "tokens_out": 440,
+   "latency_ms": 2924,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 868,
+   "judge_tokens_out": 166,
+   "warnings": []
+  },
+  {
+   "id": "exact-09",
+   "category": "exact",
+   "lang": "zh",
+   "question": "衛部救字第1141364026號是哪個基金會?",
+   "reference": "伊甸基金會。",
+   "answer": "抱歉，我只能協助您查詢寶雅（POYA）的促銷活動、門市資訊或購物相關問題。關於衛部救字第1141364026號的基金會資訊，請您直接查詢衛生福利部或其他相關官方網站。",
+   "verdict": "wrong",
+   "declined": true,
+   "reason": "The answer declined to answer an answerable question.",
+   "tool_calls": [],
+   "tool_urls": [],
+   "cited": [],
+   "lang_ok": true,
+   "grounded": false,
+   "cites_golden": false,
+   "found_golden": false,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 3060,
+   "tokens_out": 61,
+   "latency_ms": 1056,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 501,
+   "judge_tokens_out": 171,
+   "warnings": []
+  },
+  {
+   "id": "exact-10",
+   "category": "exact",
+   "lang": "en",
+   "question": "What number do I call for Asia Miles questions about the POYA points exchange?",
+   "reference": "Cathay's customer service, +886 2 7727 6370.",
+   "answer": "For general inquiries regarding the POYA points exchange for \"Asia Miles\" (亞洲萬里通), you can contact the Cathay customer service line at **+886 2 7727 6370** [1].\n\nIf you have questions specifically related to POYA's membership or general services, you can contact the POYA customer service line at **0800-033-168** (or **02-8772-4981** if calling from a mobile phone) [2, 3]. Their service hours are Monday to Friday, 08:30–12:30 and 13:30–17:30 (excluding weekends and national holidays) [3, 4].\n\nSources:\n[1] 【點數交換】POYA寶雅點數兌換「亞洲萬里通」里數 — https://www.poya.com.tw/news-detail/340/\n[2] POYA點數×「亞洲萬里通」點數換里數!抽14,000豪「里」 — https://www.poya.com.tw/news-detail/322/\n[3] 會員專區-常見問題 | 點數相關 — https://www.poya.com.tw/faq/7\n[4] 會員專區-常見問題 | 點數期限 — https://www.poya.com.tw/faq/7",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly provides Cathay's customer service phone number (+886 2 7727 6370) for Asia Miles inquiries.",
+   "tool_calls": [
+    "search_promotion_text(query='Asia Miles 寶雅 點數兌換 客服電話')"
+   ],
+   "tool_urls": [
+    "https://www.cathaypacific.com/cx/zh_TW/legal-and-privacy/cathay-membership-terms-and-conditions.html",
+    "https://www.poya.com.tw/faq/7",
+    "https://www.poya.com.tw/news-detail/321",
+    "https://www.poya.com.tw/news-detail/322",
+    "https://www.poya.com.tw/news-detail/340"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/340",
+    "https://www.poya.com.tw/news-detail/322",
+    "https://www.poya.com.tw/faq/7"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 7706,
+   "tokens_out": 359,
+   "latency_ms": 3010,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 783,
+   "judge_tokens_out": 187,
+   "warnings": []
+  },
+  {
+   "id": "exact-11",
+   "category": "exact",
+   "lang": "zh",
+   "question": "ViVi PARK 的 Vi 幣一點等於多少錢?",
+   "reference": "1 點 = 新台幣 1 元。",
+   "answer": "根據 ViVi PARK 的活動說明，Vi 幣活動點數 1 點等於新台幣 1 元整 [1]。\n\nSources:\n[1] 【點數交換】點數也停車!POYA寶雅點數兌換ViVi PARK點數! — https://www.poya.com.tw/news-detail/351/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly states that 1 Vi Coin is equal to NT$1.",
+   "tool_calls": [
+    "search_promotion_text(query='ViVi PARK Vi幣 兌換比例')"
+   ],
+   "tool_urls": [
+    "https://webtoons.onelink.me/Jzmu/lztkf7y7",
+    "https://www.poya.com.tw/faq/7",
+    "https://www.poya.com.tw/news-detail/348",
+    "https://www.poya.com.tw/news-detail/351",
+    "https://www.poya.com.tw/news-detail/354"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/351"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8221,
+   "tokens_out": 106,
+   "latency_ms": 2700,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 517,
+   "judge_tokens_out": 171,
+   "warnings": []
+  },
+  {
+   "id": "exact-12",
+   "category": "exact",
+   "lang": "en",
+   "question": "What do I get for 9000 POYA points on Ocard?",
+   "reference": "25 Ocoin, up to 5 times per member.",
+   "answer": "You can exchange 9,000 POYA points for 25 Ocoin on Ocard [1].\n\n**Details:**\n*   **Activity Period:** 2026/10/01 to 2026/12/31 [1].\n*   **Limit:** Each member is limited to 5 redemptions, while supplies last [1].\n*   **How to redeem:**\n    1.  In the POYA APP, go to **會員專區** (Member Zone) > **點數兌換專區** (Points Redemption Zone) > **跨界點數交換** (Cross-brand Points Exchange).\n    2.  Select the Ocoin offer to generate a serial number [1].\n    3.  Open the **Ocard App**, go to **我的** (My) > **登錄兌換序號** (Register Redemption Serial Number) to complete the process [1, 3].\n\nSources:\n[1] 【點數交換】POYA寶雅點數限量兌換Ocoin! — https://www.poya.com.tw/news-detail/348/\n[3] 【點數交換】POYA寶雅點數限量兌換Ocoin! — https://www.poya.com.tw/news-detail/348/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer accurately provides all key facts from the reference, including 25 Ocoin and the 5-time limit per member.",
+   "tool_calls": [
+    "search_promotion_text(query='9000 寶雅點數 Ocard 兌換')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/faq/7",
+    "https://www.poya.com.tw/news-detail/348",
+    "https://www.poya.com.tw/news-detail/350",
+    "https://www.poya.com.tw/news-detail/351"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/348"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8182,
+   "tokens_out": 322,
+   "latency_ms": 2538,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 735,
+   "judge_tokens_out": 177,
+   "warnings": []
+  },
+  {
+   "id": "exact-13",
+   "category": "exact",
+   "lang": "zh",
+   "question": "Euthymol 牙膏有活動嗎?",
+   "reference": "有，DM 指定品牌美白口腔商品滿 $399，送優生抗菌酒精濕巾一包(限量 3,000 包)。",
+   "answer": "目前 Euthymol 牙膏在寶雅有以下優惠活動：\n\n*   **滿額贈好禮**：凡購買 DM 指定品牌美白口腔商品（包含 Euthymol）滿 $399，即贈送「優生 99.9% 抗菌酒精濕巾 8 抽 3 入-迷你包」乙包。\n    *   注意事項：限 DM 指定商品，架上取貨，可累贈/跨品牌，贈品以折價後金額計算，限量 3,000 包，送完為止 [1]。\n\n此外，若您前往特定門市（桃園中正店、台中大墩店、台中興安店、台南和緯店、台南健康店及澎湖北辰店），購買口腔商品（不含電動牙刷、刷頭）滿 $299，還可參加「十分賺」活動，享 10% 現金抵用券回饋 [2]。\n\n建議您前往門市時，可先確認該商品是否為當期 DM 指定商品，以確保符合活動資格。\n\nSources:\n[1] 購買DM指定品牌美白口腔商品滿$399,即贈優生99.9%抗菌酒精濕巾8抽3入-迷你包乙包 — https://www.poya.com.tw/events-detail/46/\n[2] 十分賺-限店精選商品滿額贈現金抵用券 — https://www.poya.com.tw/events-detail/44/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer accurately states the key promotion details for Euthymol toothpaste mentioned in the reference.",
+   "tool_calls": [
+    "search_promotion_text(query='Euthymol 牙膏 優惠')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/events-detail/44",
+    "https://www.poya.com.tw/events-detail/46",
+    "https://www.poya.com.tw/news-detail/224",
+    "https://www.poya.com.tw/news-detail/361",
+    "https://www.poya.com.tw/news-detail/362"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/events-detail/46",
+    "https://www.poya.com.tw/events-detail/44"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 7777,
+   "tokens_out": 366,
+   "latency_ms": 3085,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 800,
+   "judge_tokens_out": 175,
+   "warnings": []
+  },
+  {
+   "id": "exact-14",
+   "category": "exact",
+   "lang": "zh",
+   "question": "台中大墩店有十分賺的活動嗎?",
+   "reference": "有，限店版十分賺(護髮、身體乳液、開架彩妝、口腔商品滿額送 10% 回饋金)，2026/10/07 到 11/03。",
+   "answer": "台中大墩店目前有「十分賺-限店精選商品滿額贈現金抵用券」活動。\n\n活動詳情如下：\n*   **活動期間**：即日起至 2026 年 11 月 3 日。\n*   **活動內容**：購買精選商品消費滿額，即可獲得 10% 回饋金，單筆最高可享 5,000 元回饋。\n\n詳細活動規則與適用商品建議您可參考活動頁面：[https://www.poya.com.tw/events-detail/44/](https://www.poya.com.tw/events-detail/44/)\n\nSources:\n[1] 十分賺-限店精選商品滿額贈現金抵用券 — https://www.poya.com.tw/events-detail/44/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly confirms that the Taichung Dadun store has the store-exclusive 10% cashback promotion and provides the correct event details and end date.",
+   "tool_calls": [
+    "list_promotions(store='台中大墩店')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/events-detail/44"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/events-detail/44"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 6339,
+   "tokens_out": 211,
+   "latency_ms": 1654,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 667,
+   "judge_tokens_out": 320,
+   "warnings": []
+  },
+  {
+   "id": "exact-15",
+   "category": "exact",
+   "lang": "en",
+   "question": "What is the address of 台東中華二店?",
+   "reference": "台東縣台東市中華路二段415號.",
+   "answer": "The address of the 台東中華二店 store is No. 415, Section 2, Zhonghua Road, Taitung City, Taitung County (台東縣台東市中華路二段415號) [1].\n\nSources:\n[1] 【新店開幕】台東中華二店 — https://www.poya.com.tw/news-detail/188__48/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer provides the correct address matching the reference.",
+   "tool_calls": [
+    "search_promotion_text(query='台東中華二店 地址')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/news-detail/188__2",
+    "https://www.poya.com.tw/news-detail/188__29",
+    "https://www.poya.com.tw/news-detail/188__47",
+    "https://www.poya.com.tw/news-detail/188__48",
+    "https://www.poya.com.tw/news-detail/188__69"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/188__48"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 6820,
+   "tokens_out": 115,
+   "latency_ms": 2236,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 532,
+   "judge_tokens_out": 127,
+   "warnings": []
+  },
+  {
+   "id": "date-01",
+   "category": "date",
+   "lang": "zh",
+   "question": "LINE Pay 星期三的回饋活動到哪一天結束?",
+   "reference": "2026/12/30。",
+   "answer": "LINE Pay 星期三的「單筆滿額享 LINE POINTS 3% 回饋」活動，活動期間至 **2026 年 12 月 30 日（三）** 結束 [1]。\n\n請注意，此活動僅適用於活動期間內的每週三，且需單筆消費滿 650 元（LINE POINTS 及優惠券折抵金額不計入）方可享有回饋 [1]。此外，部分門市（如寶雅南港高鐵店、寶雅台北北車店等）及網路商店不適用此活動，建議您在消費前確認該門市是否參與 [1]。\n\nSources:\n[1] 【寶雅門市】每週三用LINE Pay,單筆滿額享LINE POINTS 3%回饋! — https://www.poya.com.tw/news-detail/357/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly states that the promotion ends on December 30, 2026.",
+   "tool_calls": [
+    "resolve_dates(year=2026, unit='month', month=10)",
+    "list_promotions(active_to='2026-10-31', payment_method='LINE Pay', active_from='2026-10-01')",
+    "get_promotion(id='533e7a46-e239-407a-8e10-72909d55e29c')"
+   ],
+   "tool_urls": [
+    "https://web-tw-pay.line.me/svc/event/display2/fd680776-7f6f-40aa-8254-94862fba8796",
+    "https://www.poya.com.tw/news-detail/357"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/357"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 14126,
+   "tokens_out": 327,
+   "latency_ms": 4013,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 632,
+   "judge_tokens_out": 163,
+   "warnings": []
+  },
+  {
+   "id": "date-02",
+   "category": "date",
+   "lang": "en",
+   "question": "When does the American Express extra points offer at POYA end?",
+   "reference": "October 15, 2026.",
+   "answer": "The American Express extra points offer at POYA ends on October 15, 2026 [1].\n\nUnder this promotion, you can earn an extra 2x \"Member Reward\" points on your purchases at POYA, with a maximum of 2,000 extra points [1].\n\nSources:\n[1] 2026 美國運通「在地好店」額外積分優惠 — https://www.poya.com.tw/news-detail/315/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly states that the promotion ends on October 15, 2026.",
+   "tool_calls": [
+    "list_promotions(payment_method='美國運通卡')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/news-detail/315"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/315"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 6312,
+   "tokens_out": 131,
+   "latency_ms": 1577,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 547,
+   "judge_tokens_out": 107,
+   "warnings": []
+  },
+  {
+   "id": "date-03",
+   "category": "date",
+   "lang": "zh",
+   "question": "十分賺送的抵用券什麼時候可以用?",
+   "reference": "2026/11/04 到 2026/12/01，在全台實體門市使用。",
+   "answer": "「十分賺」活動贈送的現金抵用券，使用期限為 **2026年11月4日至2026年12月1日**。\n\n使用時請留意以下規範：\n*   **適用範圍**：適用於寶雅全國實體門市，使用期限內全館商品皆可使用（排除專櫃商品、酒、縣市兩用袋及購物袋）。\n*   **使用方式**：每筆交易不限使用張數，可與其他活動併用。抵用券需一次使用完畢，不得找零、儲值、兌換現金或購買禮券，逾期即失效。\n*   **退貨說明**：若辦理全數或部分退貨，已使用之抵用券恕不退還，僅退還扣除抵用券後之支付金額。\n\n詳細活動內容請參考寶雅官網說明：[https://www.poya.com.tw/news-detail/361/](https://www.poya.com.tw/news-detail/361/)",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The response correctly states the exact usage period and location specified in the reference answer.",
+   "tool_calls": [
+    "search_promotion_text(query='十分賺送的抵用券使用期限')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/events-detail/43",
+    "https://www.poya.com.tw/events-detail/44",
+    "https://www.poya.com.tw/news-detail/311",
+    "https://www.poya.com.tw/news-detail/361"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/361"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8128,
+   "tokens_out": 265,
+   "latency_ms": 2859,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 696,
+   "judge_tokens_out": 139,
+   "warnings": []
+  },
+  {
+   "id": "date-04",
+   "category": "date",
+   "lang": "zh",
+   "question": "新店中正店哪天開幕?",
+   "reference": "2026/10/17(六) 10:00。",
+   "answer": "寶雅新店中正店將於 2026 年 10 月 17 日（六）上午 10:00 開幕。\n\n門市資訊如下：\n*   **地址：** 新北市新店區中正路 190 號 B1\n*   **電話：** 02-29112411\n\nSources:\n[1] 【新店開幕】新店中正店 — https://www.poya.com.tw/news-detail/188__67/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer accurately gives the correct opening date and time matching the reference.",
+   "tool_calls": [
+    "list_promotions(store='新店中正店', promo_types=['store_opening'])"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/news-detail/188__67"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/188__67"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 6324,
+   "tokens_out": 155,
+   "latency_ms": 1384,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 567,
+   "judge_tokens_out": 177,
+   "warnings": []
+  },
+  {
+   "id": "date-05",
+   "category": "date",
+   "lang": "en",
+   "question": "Until when can I collect stamps in the online 褲褲兔 stamp campaign?",
+   "reference": "Stamps until November 3, 2026. Gifts must be redeemed by December 1, 2026.",
+   "answer": "The \"褲褲兔\" (Ku Ku Rabbit) digital stamp collection campaign on the POYA online store (\"線上買\") runs until **November 3, 2026** [1, 3].\n\nPlease note the following details:\n*   **Stamp Collection Period:** September 2, 2026, to November 3, 2026 [3].\n*   **Redemption Period:** You can redeem your stamps for prizes until **December 1, 2026** [3].\n*   **Important:** All prizes are limited in quantity and available while supplies last; the campaign may end early if all prizes are claimed before the deadline [1, 3].\n\nSources:\n[1] 【兔力全開 軟萌應援】線上買獨家褲褲兔印花集點活動 — https://www.poya.com.tw/news-detail/335/\n[3] 【兔力全開 軟萌應援】線上買獨家褲褲兔印花集點活動 — https://www.poya.com.tw/news-detail/335/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly provides the stamp collection end date of November 3, 2026, as well as the redemption end date of December 1, 2026.",
+   "tool_calls": [
+    "search_promotion_text(query='褲褲兔 集點活動 截止日期')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/faq/7",
+    "https://www.poya.com.tw/news-detail/335"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/335"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8249,
+   "tokens_out": 272,
+   "latency_ms": 2819,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 704,
+   "judge_tokens_out": 167,
+   "warnings": []
+  },
+  {
+   "id": "date-06",
+   "category": "date",
+   "lang": "zh",
+   "question": "永康崑山店裝修期間關到什麼時候?",
+   "reference": "封館 2026/07/09 到 08/12，08/15 重新開幕。",
+   "answer": "寶雅永康崑山店已經完成裝修並重新開幕了。該店於 2026 年 8 月 15 日重新開幕 [2]。\n\n先前該店的改裝出清活動已於 2026 年 7 月 8 日結束 [1]。\n\nSources:\n[1] 【改裝出清】永康崑山店 — https://www.poya.com.tw/news-detail/188__39/\n[2] 【改裝開幕】永康崑山店 — https://www.poya.com.tw/news-detail/188__56/",
+   "verdict": "partial",
+   "declined": false,
+   "reason": "The answer correctly states the reopening date of 2026/08/15, but misses the specific closure period end date of 08/12.",
+   "tool_calls": [
+    "list_promotions(store='永康崑山店', promo_types=['clearance_sale', 'store_reopening'])"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/news-detail/188__39",
+    "https://www.poya.com.tw/news-detail/188__56"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/188__39",
+    "https://www.poya.com.tw/news-detail/188__56"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 6547,
+   "tokens_out": 182,
+   "latency_ms": 2054,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 600,
+   "judge_tokens_out": 373,
+   "warnings": []
+  },
+  {
+   "id": "date-07",
+   "category": "date",
+   "lang": "en",
+   "question": "I exchanged POYA points for Asia Miles. By when do I have to enter the code?",
+   "reference": "By December 31, 2026, on the Asia Miles code page.",
+   "answer": "You must enter your Asia Miles redemption code by **2026/12/31 (Thursday)**.\n\nPlease ensure you complete the account crediting process on the Asia Miles redemption page before this deadline. If the code is lost or not redeemed by the deadline, it will be considered as automatically forfeited [1].\n\nSources:\n[1] 【點數交換】POYA寶雅點數兌換「亞洲萬里通」里數 — https://www.poya.com.tw/news-detail/340/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly identifies the deadline as December 31, 2026.",
+   "tool_calls": [
+    "search_promotion_text(query='寶雅點數兌換亞洲萬里通 兌換碼 有效期限')"
+   ],
+   "tool_urls": [
+    "https://line.me/R/ti/p/%40382trgpw",
+    "https://www.cathaypacific.com/cx/zh_TW/legal-and-privacy/cathay-membership-terms-and-conditions.html",
+    "https://www.cathaypacific.com/cx/zh_TW/membership/sign-up.html",
+    "https://www.poya.com.tw/news-detail/340",
+    "https://www.poya.com.tw/news-detail/348",
+    "https://www.poya.com.tw/news-detail/350"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/340"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8223,
+   "tokens_out": 148,
+   "latency_ms": 3316,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 566,
+   "judge_tokens_out": 160,
+   "warnings": []
+  },
+  {
+   "id": "date-08",
+   "category": "date",
+   "lang": "zh",
+   "question": "台新 Richart 卡要在什麼時候前辦，才拿得到首刷禮?",
+   "reference": "2026/8/1 到 12/31 透過寶雅專屬連結申辦，2027/1/7 前核卡。",
+   "answer": "若您想參加「寶雅 x 台新」新申辦台新 Richart 卡的首刷禮活動，需於 **2026 年 12 月 31 日前**透過活動專屬連結完成申辦，並於 **2027 年 1 月 7 日（含）前**核卡 [1, 4]。\n\n此外，核卡後還需符合以下條件才能領取首刷禮：\n*   **消費門檻**：核卡後 30 天內，使用該卡於 POYA Pay 綁定並累積消費滿 NT$1,000 [1, 4]。\n*   **回饋資格**：\n    *   **新戶**（申請日前 6 個月內未持有台新銀行任一信用卡正卡者）：可享寶雅電子即享券 1,000 元 [1, 4]。\n    *   **新卡友**（申請日前 6 個月內未持有台新 Richart 卡正卡者）：可享超商電子即享券 200 元 [4]。\n\n請注意，消費認列需於 2027 年 2 月 12 日（含）前入帳之交易，且部分消費項目（如稅款、分期交易、年費等）不列入計算 [1]。\n\n詳細活動規範請參考寶雅官網說明：[https://www.poya.com.tw/news-detail/311/](https://www.poya.com.tw/news-detail/311/)\n\nSources:\n[1] 【寶雅x台新】新申辦台新Richart卡首刷達檻最高拿$1,000即享券 — https://www.poya.com.tw/news-detail/311/\n[4] 【寶雅x台新】新申辦台新Richart卡首刷達檻最高拿$1,000即享券 — https://www.poya.com.tw/news-detail/311/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer accurately states both the application deadline (2026/12/31 via the dedicated link) and the card approval deadline (2027/1/7).",
+   "tool_calls": [
+    "search_promotion_text(query='台新 Richart 卡 首刷禮 期限')"
+   ],
+   "tool_urls": [
+    "http://www.family.com.tw",
+    "https://www.edenred.com.tw/index.php/store/poya",
+    "https://www.poya.com.tw/news-detail/311"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/311"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8631,
+   "tokens_out": 488,
+   "latency_ms": 3393,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 930,
+   "judge_tokens_out": 186,
+   "warnings": []
+  },
+  {
+   "id": "date-09",
+   "category": "date",
+   "lang": "zh",
+   "question": "國泰世華十月儲值送的小樹點什麼時候會給?",
+   "reference": "預計 2027/1/1 前回饋。",
+   "answer": "針對您詢問的「國泰世華 POYA 支付儲值贈送小樹點」回饋時間，根據活動說明，2026 年 10 月份（計算區間為 2026/10/01 至 10/31）符合資格的消費，預計將於 **2027 年 1 月 1 日前**回饋小樹點（信用卡）[1]。\n\n**注意事項：**\n* 若於回饋日前解除信用卡綁定、交易失敗、取消或退貨，將無法享有回饋 [1]。\n* 此活動回饋之小樹點由國泰世華銀行處理，若有相關疑問，可聯繫國泰世華 24 小時客戶服務中心（電話：02-2383-1000 或 0800-818-001）[1]。\n\nSources:\n[1] 【國泰世華】POYA支付儲值單筆滿$800贈5%小樹點(信用卡) — https://www.poya.com.tw/news-detail/346/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly states that the points are expected to be credited before January 1, 2027.",
+   "tool_calls": [
+    "resolve_dates(unit='month', month=10)",
+    "list_promotions(active_to='2026-10-31', payment_method='國泰世華', active_from='2026-10-01')",
+    "get_promotion(id='53b9d392-2e8d-4e3f-8aee-473cc54427ed')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/news-detail/346"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/346"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 14287,
+   "tokens_out": 380,
+   "latency_ms": 3596,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 700,
+   "judge_tokens_out": 127,
+   "warnings": []
+  },
+  {
+   "id": "date-10",
+   "category": "date",
+   "lang": "en",
+   "question": "When will the winners of the cancer foundation points donation draw be announced?",
+   "reference": "By January 8, 2027, on the POYA website.",
+   "answer": "The winners of the \"Donate Points to Help Cancer Patients\" (捐點數抽好禮!寶雅邀請您一起幫助癌友) activity will be announced on the POYA official website by **January 8, 2027 (Friday)** [3].\n\nSources:\n[3] 【點數公益】捐點數抽好禮!寶雅邀請您一起幫助癌友 — https://www.poya.com.tw/news-detail/341/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly states that the winners will be announced by January 8, 2027, on the POYA official website.",
+   "tool_calls": [
+    "search_promotion_text(query='癌症基金會 點數捐贈 抽獎 公布得獎名單')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/news-detail/341",
+    "https://www.poya.com.tw/news-detail/364",
+    "https://www.poya.com.tw/news-detail/365",
+    "https://www.poya.com.tw/voucher/9/5"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/341"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8549,
+   "tokens_out": 137,
+   "latency_ms": 2198,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 548,
+   "judge_tokens_out": 147,
+   "warnings": []
+  },
+  {
+   "id": "date-11",
+   "category": "date",
+   "lang": "zh",
+   "question": "嗶悠遊卡送的 40 元回饋券要在什麼時候前用完?",
+   "reference": "2027/1/31 前，在寶雅實體門市用悠遊付付款時使用。",
+   "answer": "「嗶悠遊卡送 40 元悠遊付現金回饋券」的使用期限為 **2027 年 1 月 31 日前**，請務必於期限內使用，逾期將視為放棄且無法補發。\n\n詳細使用說明如下：\n*   **使用通路**：限於寶雅實體門市購物使用。\n*   **使用方式**：限以悠遊付單筆支付滿 40 元以上時使用 1 張。\n*   **注意事項**：詳細內容請以您悠遊付 APP 內「我的優惠券」上所載之說明為準。\n\nSources:\n[1] 【寶雅限定】週五~週日 嗶悠遊卡送$40悠遊付現金券 — https://www.poya.com.tw/news-detail/292/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly states that the coupon must be used before January 31, 2027.",
+   "tool_calls": [
+    "search_promotion_text(query='嗶悠遊卡送的 40 元回饋券使用期限')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/news-detail/292"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/292"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8506,
+   "tokens_out": 223,
+   "latency_ms": 2541,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 651,
+   "judge_tokens_out": 201,
+   "warnings": []
+  },
+  {
+   "id": "date-12",
+   "category": "date",
+   "lang": "en",
+   "question": "Until when can I spend the Rakuten points I get from POYA points?",
+   "reference": "January 31, 2027.",
+   "answer": "For the Rakuten points obtained by exchanging POYA points during the current promotion (2026/10/01–2026/12/31), the usage period for these Rakuten points is until **2027/01/31** [1].\n\nPlease note that the POYA point exchange serial number itself must be redeemed and registered on the Rakuten website by 2026/12/31 [1, 4].\n\nSources:\n[1] 【點數交換】POYA寶雅點數兌換台灣樂天市場點數! — https://www.poya.com.tw/news-detail/349/\n[4] 【點數交換】POYA寶雅點數兌換台灣樂天市場點數! — https://www.poya.com.tw/news-detail/349/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly states that the Rakuten points can be used until January 31, 2027.",
+   "tool_calls": [
+    "search_promotion_text(query='寶雅 樂天點數 使用期限')"
+   ],
+   "tool_urls": [
+    "https://line.me/R/ti/p/%40382trgpw",
+    "https://www.poya.com.tw/faq/7",
+    "https://www.poya.com.tw/news-detail/321",
+    "https://www.poya.com.tw/news-detail/349",
+    "https://www.poya.com.tw/news-detail/350"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/349"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8277,
+   "tokens_out": 220,
+   "latency_ms": 3096,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 635,
+   "judge_tokens_out": 147,
+   "warnings": []
+  },
+  {
+   "id": "list-01",
+   "category": "list",
+   "lang": "en",
+   "question": "Which new stores open in October?",
+   "reference": "新店中正店 and 鳳山和成店 (October 17), 台中興安店 (October 24).",
+   "answer": "In October 2026, the following new POYA stores are scheduled to open:\n\n*   **新店中正店** (New Taipei City): Opening on October 17, 2026, at 10:00 AM. Located at B1, No. 190, Zhongzheng Rd., Xindian Dist., New Taipei City [1].\n*   **鳳山和成店** (Kaohsiung City): Opening on October 17, 2026, at 10:00 AM. Located at No. 535, Hecheng Rd., Fengshan Dist., Kaohsiung City [2].\n*   **台中興安店** (Taichung City): Opening on October 24, 2026, at 10:00 AM. Located at No. 288, Sec. 1, Xing'an Rd., Beitun Dist., Taichung City [3].\n\nSources:\n[1] 【新店開幕】新店中正店 — https://www.poya.com.tw/news-detail/188__67/\n[2] 【新店開幕】鳳山和成店 — https://www.poya.com.tw/news-detail/188__68/\n[3] 【新店開幕】台中興安店 — https://www.poya.com.tw/news-detail/188__69/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly identifies all three new stores opening in October along with their respective opening dates.",
+   "tool_calls": [
+    "resolve_dates(month=10, unit='month', year=2026)",
+    "list_promotions(promo_types=['store_opening'], start_from='2026-10-01', start_to='2026-10-31')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/news-detail/188__67",
+    "https://www.poya.com.tw/news-detail/188__68",
+    "https://www.poya.com.tw/news-detail/188__69"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/188__67",
+    "https://www.poya.com.tw/news-detail/188__68",
+    "https://www.poya.com.tw/news-detail/188__69"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 9916,
+   "tokens_out": 409,
+   "latency_ms": 2516,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 776,
+   "judge_tokens_out": 159,
+   "warnings": []
+  },
+  {
+   "id": "list-02",
+   "category": "list",
+   "lang": "zh",
+   "question": "寶雅點數可以拿來換哪些跟開車有關的東西?",
+   "reference": "ViVi PARK 停車點數、固得租車點數、特爾電力電動車充電金。",
+   "answer": "寶雅點數目前可以透過「跨界點數交換」功能，兌換為「固得租車 (Good Cars)」的點數，用於租車折抵，協助您節省交通費用 [3]。\n\n**兌換方式說明：**\n1. 請登入或註冊 **POYA寶雅 APP**。\n2. 進入【會員專區】→【點數兌換專區】→【跨界點數交換】。\n3. 選擇「固得租車」優惠並產出序號。\n4. 憑序號至「固得租車」合作網站的【點數專區】完成歸戶即可使用 [3]。\n\n**兌換方案（活動期間至 2026/12/31）：**\n*   300 POYA點數 → 兌換 300 固得點數\n*   800 POYA點數 → 兌換 800 固得點數\n（每位會員任一方案限兌換 10 次，換完為止）[3]\n\n除了跨界兌換外，寶雅點數亦可用於門市消費折抵（300點折抵1元）或在 APP 內兌換其他商品 [1]。建議您可隨時透過 POYA寶雅 APP 的「點數兌換專區」查看最新的兌換項目 [1, 3]。\n\nSources:\n[1] 會員專區-常見問題 — https://www.poya.com.tw/faq/7\n[3] 【會員專屬】POYA寶雅點數超值兌換固得租車GoodCars點數! — https://www.poya.com.tw/news-detail/352/",
+   "verdict": "partial",
+   "declined": false,
+   "reason": "The answer only mentions Good Cars rental points, missing ViVi PARK parking points and Tail Power EV charging funds.",
+   "tool_calls": [
+    "search_promotion_text(query='寶雅點數 兌換 開車 汽車用品')"
+   ],
+   "tool_urls": [
+    "https://www.goodcars.tw/?company=POYA",
+    "https://www.poya.com.tw/events-detail/50",
+    "https://www.poya.com.tw/faq/7",
+    "https://www.poya.com.tw/news-detail/321",
+    "https://www.poya.com.tw/news-detail/352"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/faq/7",
+    "https://www.poya.com.tw/news-detail/352"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 7963,
+   "tokens_out": 420,
+   "latency_ms": 8393,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 843,
+   "judge_tokens_out": 153,
+   "warnings": []
+  },
+  {
+   "id": "list-03",
+   "category": "list",
+   "lang": "zh",
+   "question": "信用卡綁 POYA 支付有哪些優惠?",
+   "reference": "台新信用卡週二、五單筆滿 $799 送 10,000 點；國泰世華信用卡儲值滿 $800 送 5% 小樹點。(台新 Richart 新卡綁 POYA Pay 消費滿額有首刷禮。)",
+   "answer": "目前使用信用卡綁定 POYA 支付，有以下兩項優惠活動：\n\n1.  **【台新銀行】信用卡綁定 POYA 支付週二、週五享回饋**\n    *   **優惠內容**：每週二、五消費或儲值，單筆滿 $799 贈 10,000 點。\n    *   **活動期間**：即日起至 2026 年 12 月 31 日。\n    *   **適用通路**：門市及線上購物。\n\n2.  **【國泰世華】POYA 支付儲值單筆滿 $800 贈 5% 小樹點**\n    *   **優惠內容**：使用 POYA 支付綁定國泰世華信用卡，天天儲值單筆滿 $800 贈 5% 小樹點。\n    *   **活動期間**：即日起至 2026 年 12 月 31 日。\n    *   **適用通路**：門市及線上購物。\n\nSources:\n[1] 【台新銀行】信用卡綁定POYA支付週二、週五享回饋 — https://www.poya.com.tw/news-detail/345/\n[2] 【國泰世華】POYA支付儲值單筆滿$800贈5%小樹點(信用卡) — https://www.poya.com.tw/news-detail/346/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly identifies the promotion details for both Taishin Bank and Cathay United Bank credit cards bound to POYA Pay.",
+   "tool_calls": [
+    "resolve_dates(unit='month')",
+    "list_promotions(active_from='2026-10-10', active_to='2026-10-10', payment_method='POYA支付')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/news-detail/345",
+    "https://www.poya.com.tw/news-detail/346"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/345",
+    "https://www.poya.com.tw/news-detail/346"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 9761,
+   "tokens_out": 407,
+   "latency_ms": 2770,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 823,
+   "judge_tokens_out": 228,
+   "warnings": []
+  },
+  {
+   "id": "list-04",
+   "category": "list",
+   "lang": "en",
+   "question": "Which offers are only for gold card members?",
+   "reference": "The 築間 hot pot meat coupon (October 2026) and the monthly POYA GIFT coupon. Gold members also get a bigger monthly LINE points coupon.",
+   "answer": "Currently, there are two main offers for POYA gold card members:\n\n1.  **POYA × 築間幸福鍋物 \"0元\" Meat/Seafood Voucher**:\n    *   **Period**: 2026/10/01 – 2026/10/31.\n    *   **Details**: Eligible gold card members can claim a voucher for a free meat or seafood item (5 options available) at 築間幸福鍋物.\n    *   **Usage**: Valid for dine-in only at all 築間幸福鍋物 locations when ordering a set meal. You must present the voucher in the POYA APP. Limited to 20,000 vouchers, while supplies last [1, 2].\n\n2.  **2026 POYA GIFT Gold Card Member Benefits**:\n    *   **Period**: 2026/01/01 – 2026/12/31.\n    *   **Details**: Gold card members who have made at least one purchase (any amount) on \"POYA線上買\" (POYA Online) within the specified qualification period are eligible to claim a POYA GIFT voucher.\n    *   **How to claim**: Vouchers are released on the 1st of each month at 10:00 AM in the POYA APP. Quantities are limited and available while supplies last [3, 4].\n\nSources:\n[1] 【金卡限定】寶雅×築間幸福鍋物「0元」肉品兌換券! — https://www.poya.com.tw/news-detail/337/\n[2] 【金卡限定】寶雅×築間幸福鍋物「0元」肉品兌換券! — https://www.poya.com.tw/news-detail/337/\n[3] 2026 POYA GIFT金卡會員禮遇說明 — https://www.poya.com.tw/news-detail/163/\n[4] 2026 POYA GIFT金卡會員禮遇說明 — https://www.poya.com.tw/news-detail/163/",
+   "verdict": "partial",
+   "declined": false,
+   "reason": "The answer accurately identifies the 築間 coupon and POYA GIFT benefit, but misses the larger monthly LINE points coupon offer.",
+   "tool_calls": [
+    "search_promotion_text(query='金卡會員 專屬優惠')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/news-detail/163",
+    "https://www.poya.com.tw/news-detail/337"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/337",
+    "https://www.poya.com.tw/news-detail/163"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8425,
+   "tokens_out": 506,
+   "latency_ms": 2800,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 940,
+   "judge_tokens_out": 173,
+   "warnings": []
+  },
+  {
+   "id": "list-05",
+   "category": "list",
+   "lang": "zh",
+   "question": "這個月禮拜五去寶雅結帳有什麼優惠?",
+   "reference": "週五用街口支付滿 $800 打 88 折；台新信用卡綁 POYA 支付週二、五滿 $799 送 10,000 點；週五到週日嗶悠遊卡滿 $299 送 $40 券。",
+   "answer": "這個月（10月）週五在寶雅結帳，有多項針對不同支付方式的優惠活動：\n\n*   **街口支付：** 週五使用街口支付，單筆消費滿 $800 享 88 折優惠（最高折抵 $100）[1]。\n*   **台新銀行信用卡：** 信用卡綁定 POYA 支付，每週五（及週二）消費或儲值單筆滿 $799，贈 10,000 點 [2]。\n*   **悠遊卡：** 每週五至週日，於寶雅實體門市以悠遊卡功能單筆扣款消費滿 $299，贈 40 元悠遊付現金回饋券 1 份 [3]。\n\n建議您結帳前確認該門市是否適用上述支付方式，並留意各活動的詳細規範。\n\nSources:\n[1] 【寶雅 X 街口支付】 週五用街口!領券現享88折 — https://www.poya.com.tw/news-detail/356/\n[2] 【台新銀行】信用卡綁定POYA支付週二、週五享回饋 — https://www.poya.com.tw/news-detail/345/\n[3] 【寶雅限定】週五~週日 嗶悠遊卡送$40悠遊付現金券 — https://www.poya.com.tw/news-detail/292/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer accurately includes all key Friday payment promotions mentioned in the reference.",
+   "tool_calls": [
+    "resolve_dates(month=10, weekdays=['fri'], unit='month')",
+    "list_promotions(active_from='2026-10-01', active_to='2026-10-31')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/events-detail/45",
+    "https://www.poya.com.tw/events-detail/46",
+    "https://www.poya.com.tw/events-detail/47",
+    "https://www.poya.com.tw/events-detail/48",
+    "https://www.poya.com.tw/events-detail/49",
+    "https://www.poya.com.tw/news-detail/163",
+    "https://www.poya.com.tw/news-detail/224",
+    "https://www.poya.com.tw/news-detail/292",
+    "https://www.poya.com.tw/news-detail/311",
+    "https://www.poya.com.tw/news-detail/315",
+    "https://www.poya.com.tw/news-detail/321",
+    "https://www.poya.com.tw/news-detail/331",
+    "https://www.poya.com.tw/news-detail/335",
+    "https://www.poya.com.tw/news-detail/343",
+    "https://www.poya.com.tw/news-detail/345",
+    "https://www.poya.com.tw/news-detail/346",
+    "https://www.poya.com.tw/news-detail/352",
+    "https://www.poya.com.tw/news-detail/353",
+    "https://www.poya.com.tw/news-detail/354",
+    "https://www.poya.com.tw/news-detail/356"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/356",
+    "https://www.poya.com.tw/news-detail/345",
+    "https://www.poya.com.tw/news-detail/292"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 12915,
+   "tokens_out": 415,
+   "latency_ms": 2723,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 835,
+   "judge_tokens_out": 218,
+   "warnings": []
+  },
+  {
+   "id": "list-06",
+   "category": "list",
+   "lang": "en",
+   "question": "Which new POYA stores opened in Kaohsiung in 2026?",
+   "reference": "鳳山光遠店 (May 9), 高雄九如店 (May 16), 路竹大社店 (May 23), 高雄茄萣店 (Aug 15), 鼓山大順店 (Aug 22), and 鳳山和成店 opens October 17.",
+   "answer": "In 2026, the following new POYA stores opened in Kaohsiung:\n\n*   **鳳山光遠店**: Opened on May 9, 2026 [1].\n*   **高雄九如店**: Opened on May 16, 2026 [2].\n*   **路竹大社店**: Opened on May 23, 2026 [3].\n*   **高雄茄萣店**: Opened on August 15, 2026 [4].\n*   **鼓山大順店**: Opened on August 22, 2026 [5].\n\nSources:\n[1] 【新店開幕】鳳山光遠店 — https://www.poya.com.tw/news-detail/188__19/\n[2] 【新店開幕】高雄九如店 — https://www.poya.com.tw/news-detail/188__22/\n[3] 【新店開幕】路竹大社店 — https://www.poya.com.tw/news-detail/188__31/\n[4] 【新店開幕】高雄茄萣店 — https://www.poya.com.tw/news-detail/188__55/\n[5] 【新店開幕】鼓山大順店 — https://www.poya.com.tw/news-detail/188__57/",
+   "verdict": "partial",
+   "declined": false,
+   "reason": "The answer lists most of the new stores opened in Kaohsiung in 2026, but misses 鳳山和成店.",
+   "tool_calls": [
+    "resolve_dates(unit='year', year=2026)",
+    "list_promotions(start_to='2026-10-10', city='高雄市', promo_types=['store_opening'], start_from='2026-01-01')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/news-detail/188__19",
+    "https://www.poya.com.tw/news-detail/188__22",
+    "https://www.poya.com.tw/news-detail/188__31",
+    "https://www.poya.com.tw/news-detail/188__55",
+    "https://www.poya.com.tw/news-detail/188__57"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/188__19",
+    "https://www.poya.com.tw/news-detail/188__22",
+    "https://www.poya.com.tw/news-detail/188__31",
+    "https://www.poya.com.tw/news-detail/188__55",
+    "https://www.poya.com.tw/news-detail/188__57"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 10296,
+   "tokens_out": 417,
+   "latency_ms": 2093,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 834,
+   "judge_tokens_out": 315,
+   "warnings": []
+  },
+  {
+   "id": "list-07",
+   "category": "list",
+   "lang": "zh",
+   "question": "哪些分店不能用即享券?",
+   "reference": "百貨和特殊門市及離島門市，例如高島屋天母、南港高鐵、台北北車、環球林口、金門伯玉、澎湖北辰等 22 家。",
+   "answer": "以下分店不適用即享券 [1]：\n\n**北部地區**\n*   高島屋天母店\n*   內湖捷運店\n*   南港高鐵店\n*   欣欣林森北店\n*   台北北車店\n*   誠品武昌店\n*   環球林口店\n*   環球中和店\n*   環球長庚店\n*   台茂南崁店\n*   中壢崇光店\n*   桃園大江店\n*   新竹大遠百店\n\n**中南部地區**\n*   嘉義耐斯店\n*   嘉義民族店\n*   遠百成功店\n*   台南中山店\n*   台南三井店\n*   義享天地店\n*   高雄大遠百店\n\n**離島地區**\n*   金門伯玉店\n*   澎湖北辰店\n\n建議您在前往消費前，可再次確認寶雅官網的最新公告 [1]。\n\nSources:\n[1] 即享券不適用門市 — https://www.poya.com.tw/voucher-detail/3",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer accurately lists all 22 store locations that do not accept Instant Coupons, including the key examples mentioned in the reference.",
+   "tool_calls": [
+    "search_promotion_text(query='哪些分店不能用即享券')"
+   ],
+   "tool_urls": [
+    "http://www.family.com.tw",
+    "https://www.edenred.com.tw/index.php/store/poya",
+    "https://www.poya.com.tw/news-detail/311",
+    "https://www.poya.com.tw/voucher",
+    "https://www.poya.com.tw/voucher-detail/3",
+    "https://www.poyabuy.com.tw"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/voucher-detail/3"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8265,
+   "tokens_out": 277,
+   "latency_ms": 2398,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 720,
+   "judge_tokens_out": 242,
+   "warnings": []
+  },
+  {
+   "id": "list-08",
+   "category": "list",
+   "lang": "zh",
+   "question": "這期 DM 買什麼東西滿額會送小贈品?",
+   "reference": "身體保養滿 $888 送軟糖；美白口腔滿 $399 送酒精濕巾；衣物/居家清潔滿 $299 送去汙濕巾；衛生棉滿 $299 送私密沐浴露。",
+   "answer": "目前寶雅有幾項滿額贈禮活動，您可以參考以下資訊：\n\n*   **衣物/香氛/居家清潔商品**：購買 55 大品牌指定商品滿 $299，贈送「MOFA'CE 魔飛強效去汙濕巾 18 抽-清新檸檬」乙包 [1]。\n*   **美白口腔商品**：購買 DM 指定品牌美白口腔商品滿 $399，贈送「優生 99.9% 抗菌酒精濕巾 8 抽 3 入-迷你包」乙包 [2]。\n*   **身體換季保養商品**：購買 15 大品牌身體換季保養指定商品滿 $888，贈送「POYA PURE+ 活力 B 脆皮軟糖」乙包 [3]。\n\n此外，還有針對新會員的活動：\n*   **新戶限定**：新加入 POYA APP 會員並綁定 LINE 官方好友，贈送「旅電科技共享行動電源」共 3 小時免費借電券 [4]。\n\n建議您前往門市或查看寶雅官網確認詳細的指定品牌清單與活動細節。\n\nSources:\n[1] 55大品牌衣物/香氛/居家清潔商品滿$299,贈送MOFA'CE魔飛強效去汙濕巾18抽-清新檸檬乙包 — https://www.poya.com.tw/events-detail/47/\n[2] 購買DM指定品牌美白口腔商品滿$399,即贈優生99.9%抗菌酒精濕巾8抽3入-迷你包乙包 — https://www.poya.com.tw/events-detail/46/\n[3] 購買15大品牌身體換季保養指定商品滿$888,即贈POYA PURE+活力B脆皮軟糖乙包 — https://www.poya.com.tw/events-detail/45/\n[4] 【新戶限定】寶雅祭出隱藏福利!完成任務「3小時免費電力」立刻入袋! — https://www.poya.com.tw/news-detail/355/",
+   "verdict": "partial",
+   "declined": false,
+   "reason": "The answer lists three of the four threshold gift promotions mentioned in the reference, missing the sanitary pad promotion.",
+   "tool_calls": [
+    "resolve_dates(month=10, year=2026, unit='month')",
+    "list_promotions(active_from='2026-10-10', active_to='2026-10-10', promo_types=['gift'])"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/events-detail/45",
+    "https://www.poya.com.tw/events-detail/46",
+    "https://www.poya.com.tw/events-detail/47",
+    "https://www.poya.com.tw/news-detail/163",
+    "https://www.poya.com.tw/news-detail/355"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/events-detail/47",
+    "https://www.poya.com.tw/events-detail/46",
+    "https://www.poya.com.tw/events-detail/45",
+    "https://www.poya.com.tw/news-detail/355"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 10237,
+   "tokens_out": 581,
+   "latency_ms": 2697,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 984,
+   "judge_tokens_out": 255,
+   "warnings": []
+  },
+  {
+   "id": "list-09",
+   "category": "list",
+   "lang": "zh",
+   "question": "寶雅網路商店可以用哪些方式付錢?",
+   "reference": "POYA 支付、信用卡、超商付款取貨、LINE Pay、街口支付、Apple Pay、Google Pay、AFTEE 先享後付、悠遊付、即享券。",
+   "answer": "寶雅線上買（網路商店）支援多種付款方式，您可以根據需求選擇：\n\n*   **行動支付與電子支付：**\n    *   POYA支付（可累積會員點數）\n    *   LINE Pay\n    *   街口支付\n    *   Apple Pay\n    *   Google Pay\n    *   悠遊付\n*   **信用卡：** 信用卡即時線上一次刷卡付款。\n*   **超商服務：** 超商付款取貨。\n*   **其他：**\n    *   AFTEE先享後付（支援繳費月結制、無卡分期等）\n    *   即享券（可與其他支付方式合併結帳）\n\n詳細資訊請參考寶雅線上買常見問題頁面：[https://www.poya.com.tw/faq/6](https://www.poya.com.tw/faq/6) [1][2]",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer accurately lists all the payment methods mentioned in the reference answer.",
+   "tool_calls": [
+    "search_promotion_text(query='寶雅網路商店付款方式')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/faq/6",
+    "https://www.poya.com.tw/law_regulation/4"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/faq/6"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 7949,
+   "tokens_out": 229,
+   "latency_ms": 2284,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 671,
+   "judge_tokens_out": 196,
+   "warnings": []
+  },
+  {
+   "id": "list-10",
+   "category": "list",
+   "lang": "en",
+   "question": "What gifts can I get in the 褲褲兔 stamp campaign?",
+   "reference": "A phone stand, a two-sided pouch, two drink bags, a multi-use shawl and two handheld fans.",
+   "answer": "In the \"兔力全開 軟萌應援\" (Rabbit Power Full Open, Soft & Cute Support) digital stamp campaign, you can redeem the following gifts using the required number of digital stamps:\n\n*   **外貌check手機支架** (Appearance Check Phone Stand) - 3 designs, distributed randomly\n*   **褲褲兔嘻嘻不嘻嘻雙面收納包** (Kuku Rabbit Hee-Hee Not Hee-Hee Double-Sided Storage Bag)\n*   **如飲隨行飲料提袋 - 貪杯款** (Drink-Along Beverage Bag - Greedy Cup Style)\n*   **如飲隨行飲料提袋 - 充電款** (Drink-Along Beverage Bag - Charging Style)\n*   **萌應援多功能披肩** (Cute Support Multi-functional Shawl)\n*   **走路有風手持風扇 - 應援款** (Walking with Wind Handheld Fan - Support Style)\n*   **走路有風手持風扇 - C位款** (Walking with Wind Handheld Fan - Center Position Style)\n\n**Important Details:**\n*   **Platform:** This campaign is exclusive to \"POYA寶雅線上買\" (POYA Online Buy).\n*   **Campaign Period:** Stamps can be collected from 2026/09/02 to 2026/11/03. Gifts must be redeemed by 2026/12/01.\n*   **How to Collect:** You earn 1 digital stamp for every $200 spent (excluding shipping) on a single order via the POYA app.\n*   **Availability:** Gifts are limited in quantity and available while supplies last.\n\nFor more information, please refer to the official campaign page: [https://www.poya.com.tw/news-detail/335/](https://www.poya.com.tw/news-detail/335/)\n\nSources:\n[1] 【兔力全開 軟萌應援】線上買獨家褲褲兔印花集點活動 — https://www.poya.com.tw/news-detail/335/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer accurately lists all the gifts included in the campaign matching the reference answer.",
+   "tool_calls": [
+    "search_promotion_text(query='褲褲兔 集點活動 贈品')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/news-detail/224",
+    "https://www.poya.com.tw/news-detail/335"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/335"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8264,
+   "tokens_out": 498,
+   "latency_ms": 5786,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 924,
+   "judge_tokens_out": 251,
+   "warnings": []
+  },
+  {
+   "id": "list-11",
+   "category": "list",
+   "lang": "zh",
+   "question": "台中今年有哪些店新開或重新開幕?",
+   "reference": "大里國光店(4/18 改裝開幕)、台中東勢店(7/18 改裝開幕)、台中五權西店(9/5 新開)、台中興安店(10/24 新開)。",
+   "answer": "2026 年台中市共有 4 間門市新開或重新開幕：\n\n*   **新店開幕：**\n    *   **台中五權西店**：已於 2026 年 9 月 5 日開幕 [3]。\n    *   **台中興安店**：預計於 2026 年 10 月 24 日開幕 [4]。\n\n*   **重新開幕（改裝）：**\n    *   **大里國光店**：已於 2026 年 4 月 18 日重新開幕 [1]。\n    *   **台中東勢店**：已於 2026 年 7 月 18 日重新開幕 [2]。\n\nSources:\n[1] 【改裝開幕】大里國光店 — https://www.poya.com.tw/news-detail/188__5/\n[2] 【改裝開幕】台中東勢店 — https://www.poya.com.tw/news-detail/188__47/\n[3] 【新店開幕】台中五權西店 — https://www.poya.com.tw/news-detail/188__62/\n[4] 【新店開幕】台中興安店 — https://www.poya.com.tw/news-detail/188__69/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly lists all four store openings and reopenings in Taichung for the year with accurate dates.",
+   "tool_calls": [
+    "resolve_dates(year=2026, unit='year')",
+    "list_promotions(city='台中市', start_to='2026-12-31', start_from='2026-01-01', promo_types=['store_opening', 'store_reopening'])"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/news-detail/188__47",
+    "https://www.poya.com.tw/news-detail/188__5",
+    "https://www.poya.com.tw/news-detail/188__62",
+    "https://www.poya.com.tw/news-detail/188__69"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/188__5",
+    "https://www.poya.com.tw/news-detail/188__47",
+    "https://www.poya.com.tw/news-detail/188__62",
+    "https://www.poya.com.tw/news-detail/188__69"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 10105,
+   "tokens_out": 404,
+   "latency_ms": 2112,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 789,
+   "judge_tokens_out": 213,
+   "warnings": []
+  },
+  {
+   "id": "count-01",
+   "category": "count",
+   "lang": "zh",
+   "question": "寶雅點數可以拿去換幾種別家的點數或服務?",
+   "reference": "11 種：LINE TV、亞洲萬里通、特爾電力、全家、Ocoin、樂天、SUPER POINT、ViVi PARK、固得租車、旅電、LINE WEBTOON。",
+   "answer": "目前寶雅點數可透過「POYA寶雅APP」的【跨界點數交換】功能，兌換以下 5 種合作夥伴的點數：\n\n1.  **全家便利商店**：兌換「全家FamiPoints」（全Fa點）[1]。\n2.  **台灣樂天市場**：兌換「樂天點數」[2]。\n3.  **SUPER POINT**：兌換「SUPER POINT」[3]。\n4.  **固得租車 (Good Cars)**：兌換「固得點數」[4]。\n5.  **ViVi PARK**：兌換「Vi幣」[5]。\n\n**操作方式：**\n登入 POYA 寶雅 APP，點選【會員專區】→【點數兌換專區】→【跨界點數交換】，選擇欲交換的品牌優惠後產出序號，再至該合作夥伴的 APP 或指定頁面完成序號歸戶即可 [1][2][3][4][5]。\n\n上述活動期間均為 2026/10/01 至 2026/12/31，各項兌換皆有次數限制，換完為止 [1][2][3][4][5]。\n\nSources:\n[1] 【點數交換】POYA寶雅點數限量兌換全家FamiPoints! — https://www.poya.com.tw/news-detail/347/\n[2] 【點數交換】POYA寶雅點數兌換台灣樂天市場點數! — https://www.poya.com.tw/news-detail/349/\n[3] 【點數交換】POYA寶雅點數兌換SUPER POINT! — https://www.poya.com.tw/news-detail/350/\n[4] 【會員專屬】POYA寶雅點數超值兌換固得租車GoodCars點數! — https://www.poya.com.tw/news-detail/352/\n[5] 【點數交換】點數也停車!POYA寶雅點數兌換ViVi PARK點數! — https://www.poya.com.tw/news-detail/351/",
+   "verdict": "partial",
+   "declined": false,
+   "reason": "The answer only lists 5 partner point/service types instead of the 11 specified in the reference.",
+   "tool_calls": [
+    "search_promotion_text(query='寶雅點數兌換別家點數或服務')"
+   ],
+   "tool_urls": [
+    "https://www.goodcars.tw/?company=POYA",
+    "https://www.poya.com.tw/news-detail/347",
+    "https://www.poya.com.tw/news-detail/349",
+    "https://www.poya.com.tw/news-detail/350",
+    "https://www.poya.com.tw/news-detail/351",
+    "https://www.poya.com.tw/news-detail/352"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/347",
+    "https://www.poya.com.tw/news-detail/349",
+    "https://www.poya.com.tw/news-detail/350",
+    "https://www.poya.com.tw/news-detail/352",
+    "https://www.poya.com.tw/news-detail/351"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8532,
+   "tokens_out": 538,
+   "latency_ms": 2884,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 985,
+   "judge_tokens_out": 254,
+   "warnings": []
+  },
+  {
+   "id": "count-02",
+   "category": "count",
+   "lang": "en",
+   "question": "How many new stores opened in August?",
+   "reference": "6 new stores. (3 more stores reopened after renovation.)",
+   "answer": "In August 2026, a total of 6 new POYA stores opened:\n\n*   **士林延平北店** (Taipei City): Opened on 2026-08-08 [1]\n*   **大林中正店** (Chiayi County): Opened on 2026-08-08 [2]\n*   **松江四平店** (Taipei City): Opened on 2026-08-08 [3]\n*   **高雄茄萣店** (Kaohsiung City): Opened on 2026-08-15 [4]\n*   **彰化大埔店** (Changhua County): Opened on 2026-08-22 [5]\n*   **鼓山大順店** (Kaohsiung City): Opened on 2026-08-22 [6]\n\nSources:\n[1] 【新店開幕】士林延平北店 — https://www.poya.com.tw/news-detail/188__52/\n[2] 【新店開幕】大林中正店 — https://www.poya.com.tw/news-detail/188__53/\n[3] 【新店開幕】松江四平店 — https://www.poya.com.tw/news-detail/188__54/\n[4] 【新店開幕】高雄茄萣店 — https://www.poya.com.tw/news-detail/188__55/\n[5] 【新店開幕】彰化大埔店 — https://www.poya.com.tw/news-detail/188__58/\n[6] 【新店開幕】鼓山大順店 — https://www.poya.com.tw/news-detail/188__57/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly identifies that 6 new stores opened in August.",
+   "tool_calls": [
+    "resolve_dates(year=2026, unit='month', month=8)",
+    "list_promotions(start_to='2026-08-31', promo_types=['store_opening'], start_from='2026-08-01')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/news-detail/188__52",
+    "https://www.poya.com.tw/news-detail/188__53",
+    "https://www.poya.com.tw/news-detail/188__54",
+    "https://www.poya.com.tw/news-detail/188__55",
+    "https://www.poya.com.tw/news-detail/188__57",
+    "https://www.poya.com.tw/news-detail/188__58"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/188__52",
+    "https://www.poya.com.tw/news-detail/188__53",
+    "https://www.poya.com.tw/news-detail/188__54",
+    "https://www.poya.com.tw/news-detail/188__55",
+    "https://www.poya.com.tw/news-detail/188__58",
+    "https://www.poya.com.tw/news-detail/188__57"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 10444,
+   "tokens_out": 520,
+   "latency_ms": 2632,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 873,
+   "judge_tokens_out": 96,
+   "warnings": []
+  },
+  {
+   "id": "count-03",
+   "category": "count",
+   "lang": "zh",
+   "question": "六月有幾家店整修完重新開幕?",
+   "reference": "5 家：士林芝山、台南北門、彰化秀水(6/6)，左營華夏(6/13)，汐止中興(6/20)。",
+   "answer": "2026 年 6 月共有 5 家門市整修後重新開幕：\n\n*   **6 月 6 日**：台南北門店、士林芝山店、彰化秀水店\n*   **6 月 13 日**：左營華夏店\n*   **6 月 20 日**：汐止中興店\n\nSources:\n[1] 【改裝開幕】台南北門店 — https://www.poya.com.tw/news-detail/188__36/\n[2] 【改裝開幕】士林芝山店 — https://www.poya.com.tw/news-detail/188__35/\n[3] 【改裝開幕】彰化秀水店 — https://www.poya.com.tw/news-detail/188__37/\n[4] 【改裝開幕】左營華夏店 — https://www.poya.com.tw/news-detail/188__42/\n[5] 【改裝開幕】汐止中興店 — https://www.poya.com.tw/news-detail/188__43/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly identifies all 5 stores and their reopening dates in June.",
+   "tool_calls": [
+    "resolve_dates(month=6, year=2026, unit='month')",
+    "list_promotions(promo_types=['store_reopening'], active_from='2026-06-01', active_to='2026-06-30')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/news-detail/188__35",
+    "https://www.poya.com.tw/news-detail/188__36",
+    "https://www.poya.com.tw/news-detail/188__37",
+    "https://www.poya.com.tw/news-detail/188__42",
+    "https://www.poya.com.tw/news-detail/188__43"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/188__36",
+    "https://www.poya.com.tw/news-detail/188__35",
+    "https://www.poya.com.tw/news-detail/188__37",
+    "https://www.poya.com.tw/news-detail/188__42",
+    "https://www.poya.com.tw/news-detail/188__43"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 10290,
+   "tokens_out": 351,
+   "latency_ms": 2069,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 736,
+   "judge_tokens_out": 114,
+   "warnings": []
+  },
+  {
+   "id": "count-04",
+   "category": "count",
+   "lang": "zh",
+   "question": "現在有幾個信用卡的優惠活動?",
+   "reference": "4 個：台新 Richart 首刷禮、美國運通額外積分、台新綁 POYA 支付送點、國泰世華儲值送小樹點。",
+   "answer": "目前寶雅共有 6 個與信用卡或支付工具相關的優惠活動：\n\n1.  **【寶雅限定】週五~週日 嗶悠遊卡送$40悠遊付現金券**：於實體門市以悠遊卡功能單筆扣款滿 $299，贈 $40 悠遊付現金回饋券 [1]。\n2.  **【寶雅x台新】新申辦台新Richart卡首刷達檻最高拿$1,000即享券**：新申辦並綁定 POYA Pay 且累積消費滿 $1,000，享最高 $1,000 電子即享券 [2]。\n3.  **2026 美國運通「在地好店」額外積分優惠**：消費享額外 2 倍「會員酬賓」積分（活動至 2026/10/15） [3]。\n4.  **【台新銀行】信用卡綁定POYA支付週二、週五享回饋**：每週二、五消費或儲值單筆滿 $799 贈 10,000 點 [4]。\n5.  **【國泰世華】POYA支付儲值單筆滿$800贈5%小樹點(信用卡)**：使用 POYA 支付綁定國泰世華信用卡天天儲值單筆滿 $800 贈 5% 小樹點 [5]。\n6.  **【寶雅 X 街口支付】 週五用街口!領券現享88折**：週五使用街口支付單筆消費滿 $800 享 88 折（最高折抵 $100） [6]。\n\nSources:\n[1] 【寶雅限定】週五~週日 嗶悠遊卡送$40悠遊付現金券 — https://www.poya.com.tw/news-detail/292/\n[2] 【寶雅x台新】新申辦台新Richart卡首刷達檻最高拿$1,000即享券 — https://www.poya.com.tw/news-detail/311/\n[3] 2026 美國運通「在地好店」額外積分優惠 — https://www.poya.com.tw/news-detail/315/\n[4] 【台新銀行】信用卡綁定POYA支付週二、週五享回饋 — https://www.poya.com.tw/news-detail/345/\n[5] 【國泰世華】POYA支付儲值單筆滿$800贈5%小樹點(信用卡) — https://www.poya.com.tw/news-detail/346/\n[6] 【寶雅 X 街口支付】 週五用街口!領券現享88折 — https://www.poya.com.tw/news-detail/356/",
+   "verdict": "partial",
+   "declined": false,
+   "reason": "The answer correctly lists the 4 credit card promotions from the reference, but includes two non-credit-card payment promotions and misstates the count as 6.",
+   "tool_calls": [
+    "resolve_dates(unit='month')",
+    "list_promotions(active_to='2026-10-10', active_from='2026-10-10')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/events-detail/45",
+    "https://www.poya.com.tw/events-detail/46",
+    "https://www.poya.com.tw/events-detail/47",
+    "https://www.poya.com.tw/events-detail/48",
+    "https://www.poya.com.tw/events-detail/49",
+    "https://www.poya.com.tw/news-detail/163",
+    "https://www.poya.com.tw/news-detail/224",
+    "https://www.poya.com.tw/news-detail/292",
+    "https://www.poya.com.tw/news-detail/311",
+    "https://www.poya.com.tw/news-detail/315",
+    "https://www.poya.com.tw/news-detail/321",
+    "https://www.poya.com.tw/news-detail/331",
+    "https://www.poya.com.tw/news-detail/335",
+    "https://www.poya.com.tw/news-detail/343",
+    "https://www.poya.com.tw/news-detail/345",
+    "https://www.poya.com.tw/news-detail/346",
+    "https://www.poya.com.tw/news-detail/352",
+    "https://www.poya.com.tw/news-detail/353",
+    "https://www.poya.com.tw/news-detail/354",
+    "https://www.poya.com.tw/news-detail/356"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/292",
+    "https://www.poya.com.tw/news-detail/311",
+    "https://www.poya.com.tw/news-detail/315",
+    "https://www.poya.com.tw/news-detail/345",
+    "https://www.poya.com.tw/news-detail/346",
+    "https://www.poya.com.tw/news-detail/356"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 12739,
+   "tokens_out": 743,
+   "latency_ms": 3113,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 1143,
+   "judge_tokens_out": 314,
+   "warnings": []
+  },
+  {
+   "id": "count-05",
+   "category": "count",
+   "lang": "en",
+   "question": "How many stores started a clearance sale before renovation in May 2026?",
+   "reference": "4, all from May 7: 永康中正, 嘉義朴子, 台南金華, 台中東勢.",
+   "answer": "In May 2026, there were 4 stores that started a clearance sale before renovation:\n\n*   **台中東勢店** (started 2026/05/07) [1]\n*   **台南金華店** (started 2026/05/07) [2]\n*   **嘉義朴子店** (started 2026/05/07) [3]\n*   **永康中正店** (started 2026/05/07) [4]\n\nSources:\n[1] 【改裝出清】台中東勢店 — https://www.poya.com.tw/news-detail/188__28/\n[2] 【改裝出清】台南金華店 — https://www.poya.com.tw/news-detail/188__27/\n[3] 【改裝出清】嘉義朴子店 — https://www.poya.com.tw/news-detail/188__26/\n[4] 【改裝出清】永康中正店 — https://www.poya.com.tw/news-detail/188__25/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly identifies all four stores and their start date as listed in the reference answer.",
+   "tool_calls": [
+    "resolve_dates(unit='month', month=5, year=2026)",
+    "list_promotions(promo_types=['clearance_sale'], start_from='2026-05-01', start_to='2026-05-31')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/news-detail/188__25",
+    "https://www.poya.com.tw/news-detail/188__26",
+    "https://www.poya.com.tw/news-detail/188__27",
+    "https://www.poya.com.tw/news-detail/188__28"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/188__28",
+    "https://www.poya.com.tw/news-detail/188__27",
+    "https://www.poya.com.tw/news-detail/188__26",
+    "https://www.poya.com.tw/news-detail/188__25"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 10232,
+   "tokens_out": 365,
+   "latency_ms": 4093,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 743,
+   "judge_tokens_out": 189,
+   "warnings": []
+  },
+  {
+   "id": "count-06",
+   "category": "count",
+   "lang": "zh",
+   "question": "現在可以把點數捐給幾個基金會?",
+   "reference": "2 個：台灣癌症基金會和伊甸基金會，到 2026/12/31。",
+   "answer": "目前您可以透過 POYA APP 將點數捐贈給 **2 個** 基金會，分別是：\n\n1.  **財團法人台灣癌症基金會** [1]\n2.  **伊甸基金會** [2]\n\n**捐贈方式：**\n於 POYA APP 點選「會員專區」>「點數兌換專區」>「跨界點數交換」，即可選擇上述基金會進行點數捐贈 [1, 2]。\n\n活動期間（2026/10/01 ~ 2026/12/31）內，每捐贈 1,000 點，寶雅即會加碼捐贈 $5 元予該基金會，且完成捐贈還有機會抽中「POYA寶雅即享券$1,000」 [1, 2]。\n\nSources:\n[1] 【點數公益】捐點數抽好禮!寶雅邀請您一起幫助癌友 — https://www.poya.com.tw/news-detail/341/\n[2] 【點數公益】捐點送愛 守護伊甸慢飛天使勇敢長大 — https://www.poya.com.tw/news-detail/342/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly identifies that points can be donated to 2 foundations: Taiwan Cancer Foundation and Eden Social Welfare Foundation.",
+   "tool_calls": [
+    "search_promotion_text(query='寶雅點數捐贈 基金會 數量')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/news-detail/341",
+    "https://www.poya.com.tw/news-detail/342",
+    "https://www.poya.com.tw/news-detail/364",
+    "https://www.poya.com.tw/news-detail/365"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/341",
+    "https://www.poya.com.tw/news-detail/342"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8700,
+   "tokens_out": 310,
+   "latency_ms": 2175,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 733,
+   "judge_tokens_out": 189,
+   "warnings": []
+  },
+  {
+   "id": "count-07",
+   "category": "count",
+   "lang": "zh",
+   "question": "今年四月有幾家全新的店開幕?",
+   "reference": "2 家：西門成都店和板橋合宜店，都在 4/11。(另有 7 家改裝後重新開幕。)",
+   "answer": "今年四月共有 2 家全新的寶雅門市開幕：\n\n1. **板橋合宜店**：於 2026 年 4 月 11 日開幕 [1]。\n2. **西門成都店**：於 2026 年 4 月 11 日開幕 [2]。\n\nSources:\n[1] 【新店開幕】板橋合宜店 — https://www.poya.com.tw/news-detail/188__1/\n[2] 【新店開幕】西門成都店 — https://www.poya.com.tw/news-detail/188/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly identifies the 2 new stores that opened in April and their opening date.",
+   "tool_calls": [
+    "resolve_dates(year=2026, unit='month', month=4)",
+    "list_promotions(start_to='2026-04-30', start_from='2026-04-01', promo_types=['store_opening'])"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/news-detail/188",
+    "https://www.poya.com.tw/news-detail/188__1"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/188__1",
+    "https://www.poya.com.tw/news-detail/188"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 9737,
+   "tokens_out": 225,
+   "latency_ms": 2117,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 600,
+   "judge_tokens_out": 152,
+   "warnings": []
+  },
+  {
+   "id": "count-08",
+   "category": "count",
+   "lang": "en",
+   "question": "How many stores held a clearance sale before renovation in 2026?",
+   "reference": "16, from March (高雄五甲 and others) to August (環球青埔, before its counter changes).",
+   "answer": "In 2026, there were 16 stores that held a clearance sale before renovation.",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly states that 16 stores held a clearance sale before renovation in 2026.",
+   "tool_calls": [
+    "resolve_dates(year=2026, unit='year')",
+    "count_promotions(promo_types=['clearance_sale'], active_to='2026-12-31', active_from='2026-01-01')"
+   ],
+   "tool_urls": [],
+   "cited": [],
+   "lang_ok": true,
+   "grounded": false,
+   "cites_golden": false,
+   "found_golden": false,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 9415,
+   "tokens_out": 100,
+   "latency_ms": 1852,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 476,
+   "judge_tokens_out": 199,
+   "warnings": []
+  },
+  {
+   "id": "none-01",
+   "category": "unanswerable",
+   "lang": "en",
+   "question": "Does POYA sell iPhones?",
+   "reference": null,
+   "answer": "I could not find any information on POYA's pages indicating that they sell iPhones.\n\nSources:\n[1] 寶雅線上買-常見問題 — https://www.poya.com.tw/faq/6\n[2] 門市相關-常見問題 | 退換貨規範 — https://www.poya.com.tw/faq/8\n[3] 首次綁定LINE送門市$50折價金,再享月月領點數券! — https://www.poya.com.tw/news-detail/224/\n[4] 退貨換貨相關規範 — https://www.poya.com.tw/law_regulation/5\n[5] 十分賺-精選商品滿額贈現金抵用券 — https://www.poya.com.tw/news-detail/361/",
+   "verdict": "correct",
+   "declined": true,
+   "reason": "The assistant correctly states that it could not find information on POYA's pages regarding iPhone sales.",
+   "tool_calls": [
+    "search_promotion_text(query='寶雅有賣 iPhone 嗎？')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/faq/6",
+    "https://www.poya.com.tw/faq/8",
+    "https://www.poya.com.tw/law_regulation/5",
+    "https://www.poya.com.tw/news-detail/224",
+    "https://www.poya.com.tw/news-detail/361"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/faq/6",
+    "https://www.poya.com.tw/faq/8",
+    "https://www.poya.com.tw/news-detail/224",
+    "https://www.poya.com.tw/law_regulation/5",
+    "https://www.poya.com.tw/news-detail/361"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": null,
+   "found_golden": null,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8391,
+   "tokens_out": 216,
+   "latency_ms": 2031,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 625,
+   "judge_tokens_out": 143,
+   "warnings": []
+  },
+  {
+   "id": "none-02",
+   "category": "unanswerable",
+   "lang": "en",
+   "question": "Is there a Black Friday sale at POYA this year?",
+   "reference": null,
+   "answer": "I could not find any information regarding a \"Black Friday\" sale at POYA for this year on their official website.\n\nCurrently, POYA has several other promotions running, such as:\n*   **\"十分賺\" (Ten Times Earn):** Selected products offer cash vouchers for meeting spending thresholds (2026-10-07 to 2026-11-03) [2].\n*   **POYA x JKO Pay (街口支付):** Every Friday, you can use a coupon for 12% off (88折) on single purchases over $800 at physical stores (2026-10-01 to 2026-12-31) [3].\n*   **HOT SALE:** Selected household items are on sale starting from $42 [4].\n\nSources:\n[2] 十分賺-精選商品滿額贈現金抵用券 — https://www.poya.com.tw/news-detail/361/\n[3] 【寶雅 X 街口支付】 週五用街口!領券現享88折 — https://www.poya.com.tw/news-detail/356/\n[4] HOT SALE 精選鈔低價 — https://www.poya.com.tw/events-detail/49/",
+   "verdict": "correct",
+   "declined": true,
+   "reason": "The answer correctly states that no information about a Black Friday sale could be found on POYA's official website.",
+   "tool_calls": [
+    "search_promotion_text(query='寶雅 黑色星期五 Black Friday 優惠')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/events-detail/49",
+    "https://www.poya.com.tw/events-detail/50",
+    "https://www.poya.com.tw/news-detail/224",
+    "https://www.poya.com.tw/news-detail/356",
+    "https://www.poya.com.tw/news-detail/361"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/361",
+    "https://www.poya.com.tw/news-detail/356",
+    "https://www.poya.com.tw/events-detail/49"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": null,
+   "found_golden": null,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 7426,
+   "tokens_out": 325,
+   "latency_ms": 2803,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 738,
+   "judge_tokens_out": 167,
+   "warnings": []
+  },
+  {
+   "id": "none-03",
+   "category": "unanswerable",
+   "lang": "zh",
+   "question": "寶雅週年慶是什麼時候?",
+   "reference": null,
+   "answer": "目前寶雅官網並未直接標示「週年慶」活動，但目前正進行「十分賺-精選商品滿額贈現金抵用券」活動，活動期間為 2026 年 10 月 7 日至 2026 年 11 月 3 日 [1, 2]。\n\n在此期間，於寶雅實體門市購買精選商品（如隱形眼鏡、洗潤髮、毛浴巾、蓮蓬頭/濾芯）達指定門檻，即可獲得 10% 回饋金（現金抵用券）[2]。\n\n建議您可以持續關注寶雅官網或 POYA 寶雅 APP 的最新公告，以獲取最準確的活動資訊 [3]。\n\nSources:\n[1] 十分賺-精選商品滿額贈現金抵用券 — https://www.poya.com.tw/news-detail/361/\n[2] 十分賺-精選商品滿額贈現金抵用券 — https://www.poya.com.tw/news-detail/361/\n[3] POYA寶雅 APP點數兌換活動 — https://www.poya.com.tw/events-detail/50/",
+   "verdict": "correct",
+   "declined": true,
+   "reason": "The answer correctly states that POYA's website does not list anniversary sale information and mentions a current related promotion separately.",
+   "tool_calls": [
+    "search_promotion_text(query='寶雅週年慶是什麼時候')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/events-detail/50",
+    "https://www.poya.com.tw/news-detail/163",
+    "https://www.poya.com.tw/news-detail/361",
+    "https://www.poya.com.tw/news-detail/362"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/361",
+    "https://www.poya.com.tw/events-detail/50"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": null,
+   "found_golden": null,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 7859,
+   "tokens_out": 299,
+   "latency_ms": 2391,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 711,
+   "judge_tokens_out": 356,
+   "warnings": []
+  },
+  {
+   "id": "none-04",
+   "category": "unanswerable",
+   "lang": "zh",
+   "question": "用 Apple Pay 付款有回饋嗎?",
+   "reference": null,
+   "answer": "目前寶雅官網的優惠活動中，並未包含針對使用 Apple Pay 付款的專屬回饋。\n\n寶雅目前的信用卡相關優惠活動，主要皆是針對綁定「POYA 支付」進行消費或儲值所提供的回饋（例如台新銀行或國泰世華銀行的相關活動）[1][2][4]。\n\n建議您在結帳時，可留意門市現場是否有其他銀行或支付工具的最新公告。\n\nSources:\n[1] 【台新銀行】信用卡綁定POYA支付週二、週五享回饋 — https://www.poya.com.tw/news-detail/345/\n[2] 【國泰世華】POYA支付儲值單筆滿$800贈5%小樹點(信用卡) — https://www.poya.com.tw/news-detail/346/\n[4] 【國泰世華】POYA支付儲值單筆滿$800贈5%小樹點(信用卡) — https://www.poya.com.tw/news-detail/346/",
+   "verdict": "correct",
+   "declined": true,
+   "reason": "The answer correctly states that there are no Apple Pay specific rewards found on POYA's website while mentioning other available payment promotions.",
+   "tool_calls": [
+    "list_promotions(active_from='2026-10-10', active_to='2026-10-10', payment_method='Apple Pay')",
+    "search_promotion_text(query='Apple Pay 付款有回饋嗎?')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/news-detail/311",
+    "https://www.poya.com.tw/news-detail/345",
+    "https://www.poya.com.tw/news-detail/346"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/345",
+    "https://www.poya.com.tw/news-detail/346"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": null,
+   "found_golden": null,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 11707,
+   "tokens_out": 328,
+   "latency_ms": 2927,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 686,
+   "judge_tokens_out": 274,
+   "warnings": []
+  },
+  {
+   "id": "none-05",
+   "category": "unanswerable",
+   "lang": "en",
+   "question": "What is the phone number of the POYA store in Hualien?",
+   "reference": null,
+   "answer": "I could not find the phone number for the POYA store in Hualien on the website. The available information only provides the general customer service hotline: 0800-033-168 (or 02-8772-4981 from a mobile phone) [1, 2, 3].\n\nSources:\n[1] 個人資料保護原則 — https://www.poya.com.tw/law_regulation/3\n[2] 十分賺-精選商品滿額贈現金抵用券 — https://www.poya.com.tw/news-detail/361/\n[3] 會員專區-常見問題 — https://www.poya.com.tw/faq/7",
+   "verdict": "correct",
+   "declined": true,
+   "reason": "The answer correctly states that the phone number for the Hualien store could not be found on POYA's website.",
+   "tool_calls": [
+    "search_promotion_text(query='花蓮 寶雅 電話')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/faq/7",
+    "https://www.poya.com.tw/faq/8",
+    "https://www.poya.com.tw/law_regulation/3",
+    "https://www.poya.com.tw/news-detail/224",
+    "https://www.poya.com.tw/news-detail/361"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/law_regulation/3",
+    "https://www.poya.com.tw/news-detail/361",
+    "https://www.poya.com.tw/faq/7"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": null,
+   "found_golden": null,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 7508,
+   "tokens_out": 187,
+   "latency_ms": 2352,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 607,
+   "judge_tokens_out": 190,
+   "warnings": []
+  },
+  {
+   "id": "none-06",
+   "category": "unanswerable",
+   "lang": "zh",
+   "question": "寶雅門市在徵兼職嗎? 時薪多少?",
+   "reference": null,
+   "answer": "抱歉，我無法在寶雅的官方網站上找到關於門市徵才或兼職時薪的相關資訊。我僅能協助您查詢寶雅的促銷活動、門市資訊及購物相關政策。建議您可以直接前往寶雅各門市詢問，或透過人力銀行網站查詢相關職缺。",
+   "verdict": "correct",
+   "declined": true,
+   "reason": "The model correctly states that the information regarding part-time recruitment and hourly wages is not available on POYA's official website.",
+   "tool_calls": [
+    "search_promotion_text(query='寶雅門市徵才 兼職 時薪')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/faq/8",
+    "https://www.poya.com.tw/law_regulation",
+    "https://www.poya.com.tw/law_regulation/3",
+    "https://www.poya.com.tw/news-detail/361"
+   ],
+   "cited": [],
+   "lang_ok": true,
+   "grounded": false,
+   "cites_golden": null,
+   "found_golden": null,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 7950,
+   "tokens_out": 98,
+   "latency_ms": 2041,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 512,
+   "judge_tokens_out": 197,
+   "warnings": []
+  },
+  {
+   "id": "none-07",
+   "category": "unanswerable",
+   "lang": "zh",
+   "question": "寶雅有賣 Dyson 吹風機嗎?",
+   "reference": null,
+   "answer": "抱歉，我無法在寶雅的網站上找到關於販售 Dyson 吹風機的資訊。建議您可以直接前往鄰近的寶雅門市詢問，或透過寶雅線上買網站搜尋確認。\n\nSources:\n[1] 門市相關-常見問題 https://www.poya.com.tw/faq/8",
+   "verdict": "correct",
+   "declined": true,
+   "reason": "The answer correctly states that the information could not be found on POYA's website.",
+   "tool_calls": [
+    "search_promotion_text(query='寶雅有賣 Dyson 吹風機嗎？')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/events-detail/49",
+    "https://www.poya.com.tw/faq/6",
+    "https://www.poya.com.tw/faq/8",
+    "https://www.poya.com.tw/law_regulation/5",
+    "https://www.poya.com.tw/news-detail/361"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/faq/8"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": null,
+   "found_golden": null,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8230,
+   "tokens_out": 103,
+   "latency_ms": 2076,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 514,
+   "judge_tokens_out": 182,
+   "warnings": []
+  },
+  {
+   "id": "none-08",
+   "category": "unanswerable",
+   "lang": "en",
+   "question": "Does POYA have a store in Hong Kong?",
+   "reference": null,
+   "answer": "I am sorry, but I can only help with questions about POYA's promotions, stores, and shopping policies in Taiwan. I do not have information regarding stores outside of Taiwan.",
+   "verdict": "correct",
+   "declined": true,
+   "reason": "The answer correctly states that it does not have information about stores outside of Taiwan.",
+   "tool_calls": [],
+   "tool_urls": [],
+   "cited": [],
+   "lang_ok": true,
+   "grounded": false,
+   "cites_golden": null,
+   "found_golden": null,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 3049,
+   "tokens_out": 37,
+   "latency_ms": 722,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 475,
+   "judge_tokens_out": 208,
+   "warnings": []
+  },
+  {
+   "id": "none-09",
+   "category": "unanswerable",
+   "lang": "zh",
+   "question": "雙11 寶雅線上買有什麼活動?",
+   "reference": null,
+   "answer": "目前寶雅線上買（POYA Buy）尚未發布針對「雙11」的專屬活動。\n\n不過，目前線上買有以下持續進行中的優惠活動，活動期間皆涵蓋至 2026 年 11 月 3 日：\n\n*   **寶雅邀請好友雙享好康**：新朋友註冊可獲 $100 神券（滿 $500 折抵），結帳輸入好友優惠碼再加碼 $50 折價券（滿 $399 折抵）；邀請人可獲得 $200 折價券（滿 $1,500 折抵）[1]。\n*   **【兔力全開 軟萌應援】線上買獨家褲褲兔印花集點**：單筆消費滿 $200 贈 1 枚數位印花，可兌換褲褲兔系列贈品（兌換至 2026/12/01）[4]。\n*   **十分賺-精選商品滿額贈現金抵用券**：活動至 2026/11/03 止 [5]。\n\n此外，還有長期進行的會員禮遇與信用卡回饋：\n*   **2026 POYA GIFT 金卡會員禮遇**：金卡會員於線上買完成訂單，可於 APP 領取兌換券至門市兌換贈品（至 2026/12/31）[1]。\n*   **信用卡回饋**：包含台新銀行信用卡（週二、五滿 $799 贈 10,000 點）[1] 及國泰世華信用卡（天天儲值滿 $800 贈 5% 小樹點）[1] 等優惠。\n\n建議您可以持續關注寶雅官網或 APP 的最新公告，以獲取後續可能推出的雙 11 相關活動資訊。\n\nSources:\n[1] 2026 POYA GIFT金卡會員禮遇說明 — https://www.poya.com.tw/news-detail/163/\n[4] 【兔力全開 軟萌應援】線上買獨家褲褲兔印花集點活動 — https://www.poya.com.tw/news-detail/335/\n[5] 十分賺-精選商品滿額贈現金抵用券 — https://www.poya.com.tw/news-detail/361/",
+   "verdict": "correct",
+   "declined": true,
+   "reason": "The answer correctly states that no Double 11 events have been announced yet, while providing other ongoing promotions separately.",
+   "tool_calls": [
+    "resolve_dates(unit='month', year=2026, month=11)",
+    "list_promotions(channel='online', active_to='2026-11-30', active_from='2026-11-01')",
+    "search_promotion_text(query='寶雅線上買 雙11 活動')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/events-detail/50",
+    "https://www.poya.com.tw/news-detail/163",
+    "https://www.poya.com.tw/news-detail/224",
+    "https://www.poya.com.tw/news-detail/311",
+    "https://www.poya.com.tw/news-detail/335",
+    "https://www.poya.com.tw/news-detail/345",
+    "https://www.poya.com.tw/news-detail/346",
+    "https://www.poya.com.tw/news-detail/361",
+    "https://www.poya.com.tw/news-detail/362"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/163",
+    "https://www.poya.com.tw/news-detail/335",
+    "https://www.poya.com.tw/news-detail/361"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": null,
+   "found_golden": null,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 16572,
+   "tokens_out": 658,
+   "latency_ms": 5007,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 993,
+   "judge_tokens_out": 315,
+   "warnings": []
+  },
+  {
+   "id": "none-10",
+   "category": "unanswerable",
+   "lang": "zh",
+   "question": "全聯的點數可以換成寶雅點數嗎?",
+   "reference": null,
+   "answer": "目前寶雅的官方網站並未提供將「全聯點數」兌換為「寶雅點數」的服務。\n\n寶雅目前有與其他品牌進行點數交換合作（例如：台新Point 可兌換為寶雅點數，或將寶雅點數兌換為全家 FamiPoints、SUPER POINT、Ocoin 等），但其中並不包含全聯的點數。\n\n建議您可以持續關注寶雅官方網站的最新公告，以獲取最新的點數服務資訊。\n\nSources:\n[1] 【點數交換】POYA寶雅點數限量兌換全家FamiPoints! — https://www.poya.com.tw/news-detail/347/\n[2] 【點數交換】POYA寶雅點數兌換SUPER POINT! — https://www.poya.com.tw/news-detail/350/\n[3] 【點數交換】POYA寶雅點數限量兌換Ocoin! — https://www.poya.com.tw/news-detail/348/\n[4] 【點數交換】台新Point兌換POYA寶雅點數! — https://www.poya.com.tw/news-detail/321/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly states that POYA does not offer point exchange services for PX Mart (全聯) points.",
+   "tool_calls": [
+    "search_promotion_text(query='全聯點數 寶雅點數 兌換')"
+   ],
+   "tool_urls": [
+    "https://www.family.com.tw/marketing/contacts01.aspx",
+    "https://www.poya.com.tw/news-detail/321",
+    "https://www.poya.com.tw/news-detail/347",
+    "https://www.poya.com.tw/news-detail/348",
+    "https://www.poya.com.tw/news-detail/350"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/347",
+    "https://www.poya.com.tw/news-detail/350",
+    "https://www.poya.com.tw/news-detail/348",
+    "https://www.poya.com.tw/news-detail/321"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": null,
+   "found_golden": null,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8386,
+   "tokens_out": 308,
+   "latency_ms": 3012,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 721,
+   "judge_tokens_out": 428,
+   "warnings": []
+  },
+  {
+   "id": "none-11",
+   "category": "unanswerable",
+   "lang": "en",
+   "question": "Can I exchange POYA points for Starbucks stars?",
+   "reference": null,
+   "answer": "I could not find any information on POYA's website indicating that POYA points can be exchanged for Starbucks stars.\n\nCurrently, POYA offers point exchange programs for SUPER POINT [1] and Ocoin [2], which can be accessed through the \"Member Zone\" (會員專區) in the POYA app under \"Cross-platform Point Exchange\" (跨界點數交換).\n\nSources:\n[1] 【點數交換】POYA寶雅點數兌換SUPER POINT! — https://www.poya.com.tw/news-detail/350/\n[2] 【點數交換】POYA寶雅點數限量兌換Ocoin! — https://www.poya.com.tw/news-detail/348/",
+   "verdict": "correct",
+   "declined": true,
+   "reason": "The answer correctly states that no information was found on POYA's website regarding exchanging points for Starbucks stars.",
+   "tool_calls": [
+    "search_promotion_text(query='寶雅點數兌換星巴克星星')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/events-detail/50",
+    "https://www.poya.com.tw/faq/7",
+    "https://www.poya.com.tw/news-detail/348",
+    "https://www.poya.com.tw/news-detail/350"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/350",
+    "https://www.poya.com.tw/news-detail/348"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": null,
+   "found_golden": null,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 7860,
+   "tokens_out": 191,
+   "latency_ms": 2540,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 602,
+   "judge_tokens_out": 230,
+   "warnings": []
+  },
+  {
+   "id": "none-12",
+   "category": "unanswerable",
+   "lang": "zh",
+   "question": "寶雅的會員點數可以轉給家人用嗎?",
+   "reference": null,
+   "answer": "關於寶雅會員點數是否可以轉讓給家人，目前寶雅的官方網站與常見問題中並未提供「會員點數轉讓」的相關服務或功能說明 [4]。\n\n寶雅的會員點數主要用於消費折抵（實體門市或寶雅線上買）或兌換商品 [4]。若您有相關需求，建議可直接聯繫寶雅客服專線確認：\n*   **POYA 客服專線：** 0800-033-168 / 手機請改撥付費電話 02-8772-4981\n*   **服務時間：** 週一至週五 08:30~12:30 / 13:30~17:30（不含例假日及國定假日） [4]\n\nSources:\n[4] 會員專區-常見問題 — https://www.poya.com.tw/faq/7",
+   "verdict": "correct",
+   "declined": true,
+   "reason": "The answer correctly states that POYA's website does not provide information about transferring member points.",
+   "tool_calls": [
+    "search_promotion_text(query='寶雅會員點數可以轉讓給家人嗎？')"
+   ],
+   "tool_urls": [
+    "https://www.family.com.tw/marketing/contacts01.aspx",
+    "https://www.poya.com.tw/faq/7",
+    "https://www.poya.com.tw/news-detail/321",
+    "https://www.poya.com.tw/news-detail/347",
+    "https://www.poya.com.tw/news-detail/352"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/faq/7"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": null,
+   "found_golden": null,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8276,
+   "tokens_out": 245,
+   "latency_ms": 2775,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 657,
+   "judge_tokens_out": 192,
+   "warnings": []
+  },
+  {
+   "id": "none-13",
+   "category": "unanswerable",
+   "lang": "zh",
+   "question": "用玉山銀行信用卡在寶雅消費有回饋嗎?",
+   "reference": null,
+   "answer": "目前寶雅官網並無針對「玉山銀行信用卡」提供專屬的消費回饋活動。\n\n不過，若您使用已綁定任一發卡銀行信用卡（包含玉山銀行信用卡）的 LINE Pay 於寶雅實體門市消費，在活動期間內的每週三，單筆實際支付滿 650 元，可享 LINE POINTS 3% 回饋（部分門市不適用）[1]。\n\n建議您在消費前，可透過寶雅官網或 APP 確認最新的活動資訊，或參考店內公告。\n\nSources:\n[1] 【寶雅門市】每週三用LINE Pay,單筆滿額享LINE POINTS 3%回饋! — https://www.poya.com.tw/news-detail/357/",
+   "verdict": "correct",
+   "declined": true,
+   "reason": "The answer correctly states that POYA's website does not list exclusive credit card rewards for E.Sun Bank.",
+   "tool_calls": [
+    "list_promotions(payment_method='玉山銀行信用卡', active_to='2026-10-10', active_from='2026-10-10')",
+    "search_promotion_text(query='玉山銀行信用卡 寶雅 優惠 回饋')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/news-detail/224",
+    "https://www.poya.com.tw/news-detail/292",
+    "https://www.poya.com.tw/news-detail/345",
+    "https://www.poya.com.tw/news-detail/357",
+    "https://www.poya.com.tw/news-detail/361"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/357"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": null,
+   "found_golden": null,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 11707,
+   "tokens_out": 259,
+   "latency_ms": 3622,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 617,
+   "judge_tokens_out": 301,
+   "warnings": []
+  },
+  {
+   "id": "none-14",
+   "category": "unanswerable",
+   "lang": "en",
+   "question": "Is there a student discount at POYA?",
+   "reference": null,
+   "answer": "I could not find any information about a student discount on POYA's official website.\n\nYou can check the current promotions on the [POYA website](https://www.poya.com.tw/) to see if there are other offers that might apply to your shopping.\n\nSources:\n[1] 個人資料保護原則 — https://www.poya.com.tw/law_regulation/3\n[2] 【寶雅 X 街口支付】 週五用街口!領券現享88折 — https://www.poya.com.tw/news-detail/356/\n[3] 十分賺-精選商品滿額贈現金抵用券 — https://www.poya.com.tw/news-detail/361/\n[4] 【寶雅x台新】新申辦台新Richart卡首刷達檻最高拿$1,000即享券 — https://www.poya.com.tw/news-detail/311/\n[5] 【寶雅門市】每週三用LINE Pay,單筆滿額享LINE POINTS 3%回饋! — https://www.poya.com.tw/news-detail/357/",
+   "verdict": "correct",
+   "declined": true,
+   "reason": "The answer correctly states that no information about a student discount could be found on POYA's official website.",
+   "tool_calls": [
+    "search_promotion_text(query='學生優惠 學生折扣 student discount')"
+   ],
+   "tool_urls": [
+    "https://www.7-11.com.tw/service/card.asp",
+    "https://www.poya.com.tw/law_regulation/3",
+    "https://www.poya.com.tw/news-detail/311",
+    "https://www.poya.com.tw/news-detail/356",
+    "https://www.poya.com.tw/news-detail/357",
+    "https://www.poya.com.tw/news-detail/361"
+   ],
+   "cited": [
+    "https://www.poya.com.tw",
+    "https://www.poya.com.tw/law_regulation/3",
+    "https://www.poya.com.tw/news-detail/356",
+    "https://www.poya.com.tw/news-detail/361",
+    "https://www.poya.com.tw/news-detail/311",
+    "https://www.poya.com.tw/news-detail/357"
+   ],
+   "lang_ok": true,
+   "grounded": false,
+   "cites_golden": null,
+   "found_golden": null,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8369,
+   "tokens_out": 296,
+   "latency_ms": 2896,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 709,
+   "judge_tokens_out": 136,
+   "warnings": []
+  },
+  {
+   "id": "none-15",
+   "category": "unanswerable",
+   "lang": "zh",
+   "question": "母親節寶雅有什麼優惠?",
+   "reference": null,
+   "answer": "2026年5月期間，寶雅推出了多項優惠活動，包含指定商品滿額贈禮、折扣及門市活動：\n\n*   **指定商品滿額優惠：**\n    *   **衛生棉：** 21大品牌衛生棉商品滿$299贈送婦潔VIGILL私密沐浴露（蔓越莓），滿$359現折$50 [1]。\n    *   **居家清潔：** 55大品牌衣物/香氛/居家清潔商品滿$299，贈送MOFA'CE魔飛強效去汙濕巾（清新檸檬） [2]。\n    *   **身體保養：** 購買15大品牌身體換季保養指定商品滿$888，贈送POYA PURE+活力B脆皮軟糖 [3]。\n    *   **口腔護理：** 購買DM指定品牌美白口腔商品滿$399，贈送優生99.9%抗菌酒精濕巾 [4]。\n    *   **精選商品：** 「HOT SALE 精選鈔低價」活動，精選居家好物最低$42起 [5]。\n\n*   **支付優惠：**\n    *   **悠遊卡：** 每週五至週日於實體門市以悠遊卡功能單筆扣款消費滿$299，贈送$40悠遊付現金回饋券 [6]。\n\n此外，5月期間也有多間門市進行改裝出清或新店/改裝開幕活動 [7-15]。\n\nSources:\n[1] 21大品牌衛生棉商品滿$299,即贈送婦潔VIGILL私密沐浴露-蔓越莓乙瓶,滿$359現折$50 — https://www.poya.com.tw/events-detail/48/\n[2] 55大品牌衣物/香氛/居家清潔商品滿$299,贈送MOFA'CE魔飛強效去汙濕巾18抽-清新檸檬乙包 — https://www.poya.com.tw/events-detail/47/\n[3] 購買15大品牌身體換季保養指定商品滿$888,即贈POYA PURE+活力B脆皮軟糖乙包 — https://www.poya.com.tw/events-detail/45/\n[4] 購買DM指定品牌美白口腔商品滿$399,即贈優生99.9%抗菌酒精濕巾8抽3入-迷你包乙包 — https://www.poya.com.tw/events-detail/46/\n[5] HOT SALE 精選鈔低價 — https://www.poya.com.tw/events-detail/49/\n[6] 【寶雅限定】週五~週日 嗶悠遊卡送$40悠遊付現金券 — https://www.poya.com.tw/news-detail/292/\n[7] 【改裝出清】汐止中興店 — https://www.poya.com.tw/news-detail/188__11/\n[8] 【改裝出清】台中東勢店 — https://www.poya.com.tw/news-detail/188__28/\n[9] 【改裝出清】台南金華店 — https://www.poya.com.tw/news-detail/188__27/\n[10] 【改裝出清】嘉義朴子店 — https://www.poya.com.tw/news-detail/188__26/\n[11] 【改裝出清】永康中正店 — https://www.poya.com.tw/news-detail/188__25/\n[12] 【新店開幕】天母忠誠店 — https://www.poya.com.tw/news-detail/188__18/\n[13] 【新店開幕】鳳山光遠店 — https://www.poya.com.tw/news-detail/188__19/\n[14] 【改裝開幕】土城裕民店 — https://www.poya.com.tw/news-detail/188__23/\n[15] 【改裝開幕】田中中州店 — https://www.poya.com.tw/news-detail/188__24/",
+   "verdict": "wrong",
+   "declined": false,
+   "reason": "The question is unanswerable based on POYA's pages, but the assistant presents general May promotions as the answer.",
+   "tool_calls": [
+    "resolve_dates(month=5, year=2026)",
+    "resolve_dates(year=2026, month=5, unit='month')",
+    "list_promotions(active_to='2026-05-31', active_from='2026-05-01')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/events-detail/45",
+    "https://www.poya.com.tw/events-detail/46",
+    "https://www.poya.com.tw/events-detail/47",
+    "https://www.poya.com.tw/events-detail/48",
+    "https://www.poya.com.tw/events-detail/49",
+    "https://www.poya.com.tw/news-detail/163",
+    "https://www.poya.com.tw/news-detail/188__11",
+    "https://www.poya.com.tw/news-detail/188__18",
+    "https://www.poya.com.tw/news-detail/188__19",
+    "https://www.poya.com.tw/news-detail/188__20",
+    "https://www.poya.com.tw/news-detail/188__21",
+    "https://www.poya.com.tw/news-detail/188__22",
+    "https://www.poya.com.tw/news-detail/188__23",
+    "https://www.poya.com.tw/news-detail/188__24",
+    "https://www.poya.com.tw/news-detail/188__25",
+    "https://www.poya.com.tw/news-detail/188__26",
+    "https://www.poya.com.tw/news-detail/188__27",
+    "https://www.poya.com.tw/news-detail/188__28",
+    "https://www.poya.com.tw/news-detail/224",
+    "https://www.poya.com.tw/news-detail/292"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/events-detail/48",
+    "https://www.poya.com.tw/events-detail/47",
+    "https://www.poya.com.tw/events-detail/45",
+    "https://www.poya.com.tw/events-detail/46",
+    "https://www.poya.com.tw/events-detail/49",
+    "https://www.poya.com.tw/news-detail/292",
+    "https://www.poya.com.tw/news-detail/188__11",
+    "https://www.poya.com.tw/news-detail/188__28",
+    "https://www.poya.com.tw/news-detail/188__27",
+    "https://www.poya.com.tw/news-detail/188__26",
+    "https://www.poya.com.tw/news-detail/188__25",
+    "https://www.poya.com.tw/news-detail/188__18",
+    "https://www.poya.com.tw/news-detail/188__19",
+    "https://www.poya.com.tw/news-detail/188__23",
+    "https://www.poya.com.tw/news-detail/188__24"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": null,
+   "found_golden": null,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 16146,
+   "tokens_out": 1121,
+   "latency_ms": 4335,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 1464,
+   "judge_tokens_out": 150,
+   "warnings": [
+    "tool error: Error invoking tool 'resolve_dates' with kwargs {'month': 5, 'year': 2026} with "
+   ]
+  },
+  {
+   "id": "none-16",
+   "category": "unanswerable",
+   "lang": "en",
+   "question": "How much does the POYA PURE+ gummy cost if I just buy it?",
+   "reference": null,
+   "answer": "I could not find the individual retail price for the POYA PURE+ 活力B脆皮軟糖 on POYA's website.\n\nAccording to current information, this product is being offered as a promotional gift when purchasing designated body care products from 15 major brands with a minimum spend of $888 [1].\n\nSources:\n[1] 購買15大品牌身體換季保養指定商品滿$888,即贈POYA PURE+活力B脆皮軟糖乙包 — https://www.poya.com.tw/events-detail/45/",
+   "verdict": "correct",
+   "declined": true,
+   "reason": "The answer correctly states that the price for individual purchase could not be found on POYA's website.",
+   "tool_calls": [
+    "search_promotion_text(query='POYA PURE+ 軟糖 價格')"
+   ],
+   "tool_urls": [
+    "https://www.edenred.com.tw/index.php/store/poya",
+    "https://www.poya.com.tw/events-detail/45",
+    "https://www.poya.com.tw/news-detail/163",
+    "https://www.poya.com.tw/news-detail/224",
+    "https://www.poya.com.tw/news-detail/365",
+    "https://www.poya.com.tw/voucher",
+    "https://www.poya.com.tw/voucher/9/5",
+    "https://www.poyabuy.com.tw"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/events-detail/45"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": null,
+   "found_golden": null,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8288,
+   "tokens_out": 155,
+   "latency_ms": 1940,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 573,
+   "judge_tokens_out": 144,
+   "warnings": []
+  },
+  {
+   "id": "none-17",
+   "category": "unanswerable",
+   "lang": "zh",
+   "question": "可以在寶雅 APP 預約門市的化妝服務嗎?",
+   "reference": null,
+   "answer": "抱歉，我無法在寶雅的網站資訊中找到關於「透過寶雅 APP 預約門市化妝服務」的相關說明。\n\n寶雅目前的 APP 功能主要涵蓋會員權益管理、優惠券領取、點數兌換及線上購物等服務 [4]。若您有相關需求，建議您可以直接聯繫寶雅客服專線 0800-033-168（手機請改撥付費電話 02-8772-4981），由客服人員為您確認 [1, 5]。\n\nSources:\n[1] 首次綁定LINE送門市$50折價金,再享月月領點數券! — https://www.poya.com.tw/news-detail/224/\n[4] 會員權益線上申辦 — https://www.poya.com.tw/member/\n[5] 十分賺-精選商品滿額贈現金抵用券 — https://www.poya.com.tw/news-detail/361/",
+   "verdict": "correct",
+   "declined": true,
+   "reason": "The answer correctly states that the information cannot be found in POYA's website resources.",
+   "tool_calls": [
+    "search_promotion_text(query='寶雅 APP 預約門市化妝服務')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/events-detail/50",
+    "https://www.poya.com.tw/member",
+    "https://www.poya.com.tw/news-detail/224",
+    "https://www.poya.com.tw/news-detail/361"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/224",
+    "https://www.poya.com.tw/member",
+    "https://www.poya.com.tw/news-detail/361"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": null,
+   "found_golden": null,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 7750,
+   "tokens_out": 266,
+   "latency_ms": 2533,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 681,
+   "judge_tokens_out": 195,
+   "warnings": []
+  },
+  {
+   "id": "none-18",
+   "category": "unanswerable",
+   "lang": "en",
+   "question": "Does POYA match prices from other stores?",
+   "reference": null,
+   "answer": "I could not find any information on POYA's official pages indicating that they offer price matching with other stores.\n\nSources:\n[1] 寶雅線上買-常見問題 — https://www.poya.com.tw/faq/6\n[2] 門市相關-常見問題 — https://www.poya.com.tw/faq/8\n[3] HOT SALE 精選鈔低價 — https://www.poya.com.tw/events-detail/49/",
+   "verdict": "correct",
+   "declined": true,
+   "reason": "The answer correctly states that no information regarding price matching could be found on POYA's official pages.",
+   "tool_calls": [
+    "search_promotion_text(query='寶雅有價格保證嗎？會比價嗎？')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/events-detail/49",
+    "https://www.poya.com.tw/faq/6",
+    "https://www.poya.com.tw/faq/8"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/faq/6",
+    "https://www.poya.com.tw/faq/8",
+    "https://www.poya.com.tw/events-detail/49"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": null,
+   "found_golden": null,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8163,
+   "tokens_out": 139,
+   "latency_ms": 2139,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 546,
+   "judge_tokens_out": 177,
+   "warnings": []
+  },
+  {
+   "id": "none-19",
+   "category": "unanswerable",
+   "lang": "en",
+   "question": "When does the 2027 Lunar New Year sale start?",
+   "reference": null,
+   "answer": "I could not find any information regarding the start date for a 2027 Lunar New Year sale on POYA's website.\n\nSources:\n[1] 【寶雅x台新】新申辦台新Richart卡首刷達檻最高拿$1,000即享券 — https://www.poya.com.tw/news-detail/311/\n[2] 2026 POYA GIFT金卡會員禮遇說明 — https://www.poya.com.tw/news-detail/163/\n[3] 首次綁定LINE送門市$50折價金,再享月月領點數券! — https://www.poya.com.tw/news-detail/224/",
+   "verdict": "correct",
+   "declined": true,
+   "reason": "The answer correctly states that the information could not be found on POYA's website.",
+   "tool_calls": [
+    "search_promotion_text(query='2027年農曆新年優惠活動何時開始？')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/news-detail/163",
+    "https://www.poya.com.tw/news-detail/224",
+    "https://www.poya.com.tw/news-detail/311"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/311",
+    "https://www.poya.com.tw/news-detail/163",
+    "https://www.poya.com.tw/news-detail/224"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": null,
+   "found_golden": null,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8264,
+   "tokens_out": 202,
+   "latency_ms": 1883,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 613,
+   "judge_tokens_out": 142,
+   "warnings": []
+  },
+  {
+   "id": "none-20",
+   "category": "unanswerable",
+   "lang": "zh",
+   "question": "寶雅可以買處方藥嗎?",
+   "reference": null,
+   "answer": "抱歉，我無法在寶雅的網站上找到關於是否販售處方藥的相關資訊。建議您直接詢問您欲前往的寶雅門市，或聯繫寶雅客服以獲得最準確的說明。\n\nSources:\n[1] 寶雅線上買-常見問題 — https://www.poya.com.tw/faq/6",
+   "verdict": "correct",
+   "declined": true,
+   "reason": "The assistant correctly states that the information cannot be found on POYA's website.",
+   "tool_calls": [
+    "search_promotion_text(query='寶雅可以買處方藥嗎？')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/faq/6"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/faq/6"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": null,
+   "found_golden": null,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8137,
+   "tokens_out": 106,
+   "latency_ms": 1911,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 517,
+   "judge_tokens_out": 228,
+   "warnings": []
+  },
+  {
+   "id": "multi-01",
+   "category": "multi_turn",
+   "lang": "zh",
+   "question": "那要先領券嗎?",
+   "reference": "要，先在街口 App 活動頁領「週五 美妍日 88折券」，每月 1 號開放領當月的券。",
+   "answer": "是的，需要先領券。\n\n您需於街口支付 App 的活動頁面領取每週五的「週五 美妍日 88折券」，並於每週五至寶雅實體門市使用街口支付付款，單筆消費滿 $800 即可享 88 折優惠（最高折抵 $100）。\n\n**注意事項：**\n*   **領券時間：** 每月 1 號開放領取當月券，每週兩張。\n*   **使用限制：** 每人每券限使用一次，每週限量 80 名，數量有限，先折先贏。\n\n詳細資訊請見街口支付 App 活動頁說明 [1]。\n\nSources:\n[1] 【寶雅 X 街口支付】 週五用街口!領券現享88折 — https://www.poya.com.tw/news-detail/356/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The assistant correctly states that a coupon must be claimed beforehand on the JKO Pay App and includes the accurate details from the reference.",
+   "tool_calls": [
+    "search_promotion_text(query='週五街口支付優惠需要領券嗎？')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/news-detail/292",
+    "https://www.poya.com.tw/news-detail/345",
+    "https://www.poya.com.tw/news-detail/356"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/356"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8436,
+   "tokens_out": 236,
+   "latency_ms": 2266,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 717,
+   "judge_tokens_out": 250,
+   "warnings": []
+  },
+  {
+   "id": "multi-02",
+   "category": "multi_turn",
+   "lang": "en",
+   "question": "Does it work at the Taipei Main Station store?",
+   "reference": "No. 台北北車店 is one of the stores excluded from this offer.",
+   "answer": "No, the LINE Pay offer does not apply to the 寶雅台北北車店 store [1].\n\nSources:\n[1] 【寶雅門市】每週三用LINE Pay,單筆滿額享LINE POINTS 3%回饋! — https://www.poya.com.tw/news-detail/357/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly states that the LINE Pay offer does not apply to the Taipei Main Station store.",
+   "tool_calls": [
+    "list_promotions(payment_method='LINE Pay')",
+    "get_promotion(id='533e7a46-e239-407a-8e10-72909d55e29c')"
+   ],
+   "tool_urls": [
+    "https://web-tw-pay.line.me/svc/event/display2/fd680776-7f6f-40aa-8254-94862fba8796",
+    "https://www.poya.com.tw/news-detail/357"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/357"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 10853,
+   "tokens_out": 146,
+   "latency_ms": 2038,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 569,
+   "judge_tokens_out": 144,
+   "warnings": []
+  },
+  {
+   "id": "multi-03",
+   "category": "multi_turn",
+   "lang": "zh",
+   "question": "可是我買快一年了，現在壞掉了呢?",
+   "reference": "電器買一年內，不是人為造成的故障，帶保固貼紙(書)或發票和完整商品到門市可以退貨。超過一年就不能退。",
+   "answer": "根據寶雅的退換貨規範，電器產品若購買已超過一年，恕無法提供退貨服務，建議您自行維修處理 [1][2]。\n\n若您購買未滿一年，且是非人為因素導致的故障，則可攜帶保固貼紙（書）或發票與完整商品至門市辦理退貨 [1][2]。\n\nSources:\n[1] 門市相關-常見問題 — https://www.poya.com.tw/faq/8\n[2] 退貨換貨相關規範 — https://www.poya.com.tw/law_regulation/5",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer accurately states the return conditions for electrical appliances bought within one year versus after one year.",
+   "tool_calls": [
+    "search_promotion_text(query='寶雅門市購買商品保固維修政策')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/faq/6",
+    "https://www.poya.com.tw/faq/8",
+    "https://www.poya.com.tw/law_regulation/5"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/faq/8",
+    "https://www.poya.com.tw/law_regulation/5"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8060,
+   "tokens_out": 166,
+   "latency_ms": 2346,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 656,
+   "judge_tokens_out": 204,
+   "warnings": []
+  },
+  {
+   "id": "multi-04",
+   "category": "multi_turn",
+   "lang": "zh",
+   "question": "每個人最多可以換幾次?",
+   "reference": "每位會員最多 3 次，換完為止。",
+   "answer": "每位會員限兌換 3 次，換完為止 [1]。\n\nSources:\n[1] 【點數交換】POYA寶雅點數限量兌換全家FamiPoints! — https://www.poya.com.tw/news-detail/347/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly states that each member is limited to 3 exchanges, while supplies last.",
+   "tool_calls": [
+    "search_promotion_text(query='寶雅點數換全家點數 每個人最多可以換幾次')"
+   ],
+   "tool_urls": [
+    "https://www.family.com.tw/marketing/contacts01.aspx",
+    "https://www.poya.com.tw/news-detail/322",
+    "https://www.poya.com.tw/news-detail/347",
+    "https://www.poya.com.tw/news-detail/348",
+    "https://www.poya.com.tw/news-detail/350"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/347"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8536,
+   "tokens_out": 97,
+   "latency_ms": 2031,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 559,
+   "judge_tokens_out": 124,
+   "warnings": []
+  },
+  {
+   "id": "multi-05",
+   "category": "multi_turn",
+   "lang": "en",
+   "question": "What's its address?",
+   "reference": "高雄市鳳山區和成路535號 (phone 07-7962244).",
+   "answer": "The address for the new 鳳山和成店 is 高雄市鳳山區和成路535號 [1].\n\nSources:\n[1] 【新店開幕】鳳山和成店 — https://www.poya.com.tw/news-detail/188__68/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer accurately provides the correct store address matching the reference.",
+   "tool_calls": [
+    "list_promotions(promo_types=['store_opening'], city='高雄市')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/news-detail/188__19",
+    "https://www.poya.com.tw/news-detail/188__22",
+    "https://www.poya.com.tw/news-detail/188__31",
+    "https://www.poya.com.tw/news-detail/188__55",
+    "https://www.poya.com.tw/news-detail/188__57",
+    "https://www.poya.com.tw/news-detail/188__68"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/188__68"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 7248,
+   "tokens_out": 96,
+   "latency_ms": 1231,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 558,
+   "judge_tokens_out": 143,
+   "warnings": []
+  },
+  {
+   "id": "multi-06",
+   "category": "multi_turn",
+   "lang": "zh",
+   "question": "哪些門市不能用?",
+   "reference": "中壢崇光、桃園大江、高雄大遠百、遠百成功、新竹大遠百、高島屋天母、台北北車、義享天地、台南三井。",
+   "answer": "此優惠不適用於以下門市：\n\n寶雅中壢崇光店、寶雅桃園大江店、寶雅高雄大遠百店、寶雅遠百成功店、寶雅新竹大遠百店、寶雅高島屋天母店、寶雅台北北車店、寶雅義享天地店、寶雅台南三井店 [1, 2]。\n\nSources:\n[1] 【台新銀行】信用卡綁定POYA支付週二、週五享回饋 — https://www.poya.com.tw/news-detail/345/\n[2] 【台新銀行】信用卡綁定POYA支付週二、週五享回饋 — https://www.poya.com.tw/news-detail/345/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The assistant correctly listed all stores excluded from the promotion matching the reference.",
+   "tool_calls": [
+    "search_promotion_text(query='台新信用卡綁 POYA 支付優惠不適用門市')"
+   ],
+   "tool_urls": [
+    "https://www.edenred.com.tw/index.php/store/poya",
+    "https://www.poya.com.tw/news-detail/311",
+    "https://www.poya.com.tw/news-detail/345",
+    "https://www.poyabuy.com.tw"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/345"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8601,
+   "tokens_out": 204,
+   "latency_ms": 2158,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 696,
+   "judge_tokens_out": 212,
+   "warnings": []
+  },
+  {
+   "id": "multi-07",
+   "category": "multi_turn",
+   "lang": "en",
+   "question": "What do I do with the code after I get it?",
+   "reference": "In the ViVi PARK app, open 點券提領 (coupon redemption), enter the code, and the Vi coins go into your account.",
+   "answer": "After you receive the code from the POYA app, you need to use it in the **ViVi PARK APP** to add the points to your account. Here are the steps:\n\n1.  **Download and Register:** If you are not already a ViVi PARK member, download the ViVi PARK APP and register for an account.\n2.  **Navigate to Point Redemption:** In the ViVi PARK APP, go to the **\"點券提領\"** (Point Redemption/Withdrawal) section.\n3.  **Enter Code:** Input the code you received from the POYA app.\n4.  **Complete:** Once you enter the code, the points will be credited to your ViVi PARK account and can be used for parking services.\n\n**Important Notes:**\n*   The code must be redeemed within the specified period; expired codes cannot be reissued.\n*   Each code can only be used once.\n*   Please keep your code safe, as it is bearer-only and will not be reissued if lost or damaged.\n\nSources:\n[1] 【點數交換】點數也停車!POYA寶雅點數兌換ViVi PARK點數! — https://www.poya.com.tw/news-detail/351/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer accurately describes the steps to redeem the code in the ViVi PARK app via 點券提領.",
+   "tool_calls": [
+    "search_promotion_text(query='寶雅點數兌換 ViVi PARK 停車折抵碼使用方式')"
+   ],
+   "tool_urls": [
+    "https://line.me/R/ti/p/%40382trgpw",
+    "https://www.edenred.com.tw/index.php/store/poya",
+    "https://www.poya.com.tw/faq/7",
+    "https://www.poya.com.tw/news-detail/350",
+    "https://www.poya.com.tw/news-detail/351",
+    "https://www.poya.com.tw/voucher",
+    "https://www.poyabuy.com.tw"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/351"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8216,
+   "tokens_out": 303,
+   "latency_ms": 2989,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 781,
+   "judge_tokens_out": 151,
+   "warnings": []
+  },
+  {
+   "id": "multi-08",
+   "category": "multi_turn",
+   "lang": "zh",
+   "question": "那如果我以前有台新的卡呢?",
+   "reference": "申請前 6 個月內沒有台新 Richart 卡正卡就算新卡友，可拿超商電子即享券 $200(統一或全家二選一)；6 個月內有 Richart 卡正卡的話，兩種都拿不到。",
+   "answer": "若您過去曾持有台新銀行信用卡，是否符合首刷禮資格取決於您「申請日前 6 個月內」的持卡狀態：\n\n*   **新卡友資格**：若您申請日前 6 個月內未持有「台新 Richart 卡」正卡，但持有其他台新信用卡，您仍符合「新卡友」資格。\n*   **回饋內容**：符合「新卡友」資格者，透過寶雅專屬連結申辦並於核卡後 30 天內綁定 POYA Pay 累積消費滿 1,000 元，可獲得**超商電子即享券 200 元**。\n\n**注意事項：**\n1.  **資格判定**：活動資格由台新銀行系統依申辦條件自動判定，以系統認定為主。\n2.  **回饋擇優**：若同時符合多項資格，系統將擇優提供回饋。\n3.  **活動期間**：需於 2026/12/31 前申辦，並於 2027/1/7 前核卡。\n\n詳細活動規範請參考寶雅官網說明 [1]。\n\nSources:\n[1] 【寶雅x台新】新申辦台新Richart卡首刷達檻最高拿$1,000即享券 — https://www.poya.com.tw/news-detail/311/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer correctly states that having no Taishin Richart card in the past 6 months qualifies for a $200 convenience store e-voucher.",
+   "tool_calls": [
+    "search_promotion_text(query='台新 Richart 卡 寶雅 首刷禮 舊戶')"
+   ],
+   "tool_urls": [
+    "http://www.family.com.tw",
+    "https://www.edenred.com.tw/index.php/store/poya",
+    "https://www.poya.com.tw/news-detail/311"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/311"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8749,
+   "tokens_out": 353,
+   "latency_ms": 3132,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 883,
+   "judge_tokens_out": 307,
+   "warnings": []
+  },
+  {
+   "id": "multi-09",
+   "category": "multi_turn",
+   "lang": "zh",
+   "question": "那 12 月要怎樣才有資格?",
+   "reference": "是金卡會員，而且在 2025/11/15 到 2026/12/14 之間至少在線上買下過一筆訂單(依頁面所寫)。",
+   "answer": "若您要取得 2026 年 12 月的 POYA GIFT 兌換券領取資格，需同時符合以下兩項條件：\n\n1.  **具備金卡會員身分**。\n2.  **在 2025/11/15 ~ 2026/12/14 期間內**，於「寶雅線上買」完成至少一筆不限金額的訂單。\n\n符合資格者，即可於 12 月 1 日 10:00 起透過寶雅 APP 領取兌換券（數量有限，領完為止）。請注意，若有取消交易或退貨，該筆訂單將不列入計算。\n\nSources:\n[1] 2026 POYA GIFT金卡會員禮遇說明 — https://www.poya.com.tw/news-detail/163/",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer accurately provides both key requirements mentioned in the reference answer.",
+   "tool_calls": [
+    "search_promotion_text(query='金卡會員資格 寶雅 12月')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/member",
+    "https://www.poya.com.tw/news-detail/163",
+    "https://www.poya.com.tw/news-detail/345"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/news-detail/163"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8315,
+   "tokens_out": 230,
+   "latency_ms": 2216,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 735,
+   "judge_tokens_out": 189,
+   "warnings": []
+  },
+  {
+   "id": "multi-10",
+   "category": "multi_turn",
+   "lang": "en",
+   "question": "Do I have to pay for the return shipping?",
+   "reference": "Each order gets one free return on Taiwan's main island. Returns from outlying islands, and sending back missing items later, are at your cost.",
+   "answer": "POYA's online store provides one free return service per order for customers in Taiwan (mainland area) [1].\n\nHowever, you may need to pay for shipping in the following situations:\n* **Incomplete returns:** If you need to send back additional items because the original return was incomplete, you must cover the shipping costs [1].\n* **Outlying islands:** If you are applying for a return from an outlying island, you are responsible for shipping the items back and covering the associated costs [1].\n* **Failure to pick up:** If an order is returned to the store because you failed to pick it up within the notification period due to personal reasons, you will be responsible for the original shipping fee [3].\n\nPlease note that if you return items, the original shipping fee paid for the order is not refunded; only the amount for the returned products is refunded [2].\n\nSources:\n[1] 寶雅線上買-常見問題 https://www.poya.com.tw/faq/6",
+   "verdict": "correct",
+   "declined": false,
+   "reason": "The answer accurately states the one free return policy for Taiwan's main island and the circumstances where the customer must pay shipping.",
+   "tool_calls": [
+    "search_promotion_text(query='寶雅線上買 退貨 運費 誰付')"
+   ],
+   "tool_urls": [
+    "https://www.poya.com.tw/faq/6",
+    "https://www.poya.com.tw/news-detail/335"
+   ],
+   "cited": [
+    "https://www.poya.com.tw/faq/6"
+   ],
+   "lang_ok": true,
+   "grounded": true,
+   "cites_golden": true,
+   "found_golden": true,
+   "model": "gemini-3.1-flash-lite",
+   "tokens_in": 8354,
+   "tokens_out": 241,
+   "latency_ms": 3300,
+   "judge_model": "gemini-3.6-flash",
+   "judge_tokens_in": 722,
+   "judge_tokens_out": 224,
+   "warnings": []
+  }
+ ]
+}

@@ -5,11 +5,14 @@ code does the date arithmetic, which models often get wrong (the last day of a m
 date of "this Friday"). The result feeds the date filters of count_promotions and
 list_promotions.
 
-"Today" is the store's date, in Taiwan. Set TODAY in .env to pin it (evals), so "now" and
-"this month" mean the same days on every run.
+"Today" is the store's date, in Taiwan. Set TODAY in .env to pin it, or wrap a run in
+pinned_today(d) (the answer eval pins the golden set's as_of date), so "now" and "this month"
+mean the same days on every run.
 """
 
 import calendar
+from collections.abc import Iterator
+from contextlib import contextmanager
 from datetime import date, datetime, timedelta
 from typing import Literal
 from zoneinfo import ZoneInfo
@@ -23,9 +26,22 @@ WEEKDAYS = ("mon", "tue", "wed", "thu", "fri", "sat", "sun")  # date.weekday() o
 Weekday = Literal[WEEKDAYS]
 
 
+_pinned: date | None = None
+
+
 def today() -> date:
-    pinned = get_settings().today
-    return pinned or datetime.now(STORE_TZ).date()
+    return _pinned or get_settings().today or datetime.now(STORE_TZ).date()
+
+
+@contextmanager
+def pinned_today(day: date) -> Iterator[None]:
+    """Inside the block, today() is `day`, for the tools and the chat prompt alike."""
+    global _pinned
+    before, _pinned = _pinned, day
+    try:
+        yield
+    finally:
+        _pinned = before
 
 
 class DateQuery(BaseModel):

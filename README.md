@@ -2,7 +2,7 @@
 
 A chat assistant that answers questions about a retailer's promotions, offers and products, in Chinese and English, from the retailer's public web pages. An LLM agent routes each question to SQL tools (count and list promotions by date, store or payment method) or to hybrid search (pgvector + full-text, rank fusion, reranking) for rules and fine print. Every answer cites its sources, and every design choice is measured on a golden question set.
 
-*Work in progress.* Done: **M1, ingestion as a workflow** ([handoff](docs/handoffs/M1_ingestion.md)) and **M2, search and eval** ([handoff](docs/handoffs/M2_search_eval.md)). Next: M3, the agent.
+*Work in progress.* Done: **M1, ingestion as a workflow** ([handoff](docs/handoffs/M1_ingestion.md)) and **M2, search and eval** ([handoff](docs/handoffs/M2_search_eval.md)). In progress: **M3, the agent** (the chat assistant and its answer eval work; see [Chat](#chat) and [Answer eval](#answer-eval)).
 
 ## Layout
 
@@ -19,15 +19,18 @@ src/promo_rag/
     config.py          AgentConfig + a registry that finds each workflow's agents.py
     prompts.py         Markdown prompts with {{variable}} slots; version = hash of the text
     models.py          model roles (chat / helper / judge) from .env; retries set here only
-    tools/ middleware/ shared tools and middleware, referenced by name
+    tools/             the assistant's tools: promotions.py (SQL), dates.py, search_text.py
+    middleware/        shared middleware (model fallback, call limits), referenced by name
     tracing.py         Langfuse (off without keys)
   search/              word splitting (jieba), embeddings + cache, and search itself
     retrieve.py        search(query, mode=rerank (default) | vector | keyword | hybrid)
     rerank.py          Cohere Rerank client
     cli.py             `uv run search "…"`
-  evals/               the golden question set's loader (the questions are in evals/golden.yaml)
+  evals/               the golden set's loader, the search eval and the answer eval
+                       (the questions are in evals/golden.yaml)
   workflows/
     ingestion/         runbook.yaml, actions/, agents.py, prompts/, sources/, handler.py (CLI)
+    chat/              the assistant and its judge (agents.py, prompts/), ask(), cli.py
   db/  storage/        tables (schemas platform and rag) and the blob store
 ```
 
@@ -173,3 +176,47 @@ uv run ingest embed --version <test id>
 Flags that take several values make one variant per combination (mode × corpus version × setting). For each variant it reports Hit@5 and Hit@20 (a chunk that answers the question is in the top 5 / 20), MRR@10 (1 / the rank of the first one), nDCG@5 (how close the top 5 is to the best possible order) and search latency.
 
 Every variant is compared with the first one question by question, with a 95% range for the difference: draw the answerable questions at random, with repeats, 2,000 times, and keep the middle 95% of the results. A range that includes 0 means the two can't be told apart on this many questions; with 82 answerable questions, one question moves Hit@5 by 0.012. The unanswerable questions are searched too, to find the top-score cutoff (vector and rerank only) that best flags "nothing relevant". Results are saved to `evals/results/` as Markdown tables and JSON (every question's results and each variant's settings).
+
+## Chat
+
+```bash
+uv run chat                                  # a conversation; /new starts over, /quit ends
+uv run chat "週五用街口支付有什麼優惠?"         # one question
+uv run chat --tools --today 2026-10-10       # show tool calls; pretend it's the golden set's date
+```
+
+An LLM agent (`CHAT_MODEL`) answers from POYA's pages only, through five tools. It picks the tools; it never writes SQL. Every fact is cited with the page's URL, and when the tools don't answer the question it says so instead of guessing.
+
+| Tool | For | How |
+|---|---|---|
+| `count_promotions`, `list_promotions` | how many, which ones | typed filters on the `promotions` table: kind, dates, store, city, payment method, channel |
+| `get_promotion` | one promotion's details | every fact, and the full text of its pages |
+| `resolve_dates` | "this month", "Fridays in October" | the model fills the parts (unit, offset, month, weekdays); code does the date arithmetic, from today in Taiwan |
+| `search_promotion_text` | rules, conditions, fine print, FAQ | the M2 search (vector → rerank); a note flags a top score below 0.61 |
+
+- **Follow-ups** are rewritten into full questions before searching: the model writes the search query, and the tool asks for one that stands on its own.
+- **History** keeps the questions and answers, not tool calls and results. The answers carry the facts and their sources, and the prompt stays small.
+- **Limits:** after 8 tool calls in one turn the model must answer with what it has; 10 model calls end the turn.
+- **Today** is the date in Taiwan. `TODAY=YYYY-MM-DD` in `.env`, or `--today`, pins it.
+
+## Answer eval
+
+```bash
+uv run eval-answers                          # all 102 golden questions, about 12 minutes, ≈ US$0.40
+uv run eval-answers --only count-04 list-06  # some questions
+CHAT_MODEL=gemini-3.5-flash-lite uv run eval-answers    # another chat model, to compare
+```
+
+The assistant answers every golden question, with the golden history before multi-turn ones and today pinned to the golden set's `as_of` date. A judge model (`JUDGE_MODEL`) compares each answer with the reference answer: correct, partial or wrong (unanswerable questions are correct when declined). Code checks the rest: the reply is in the question's language, it cites pages, every cited URL came from a tool in that turn, and the cited pages are ones the golden set names. Results go to `evals/results/answers_<time>.md` and `.json`. After a change to the judge, `--rejudge <results>.json` grades the saved answers again without asking the assistant, so a change in the numbers comes from the judge alone.
+
+The judge is told the golden date: without it, it took a correct "2026" for an error. The judge model ignores temperature, so grading the same answers twice can differ by about one question; treat a difference that small as noise.
+
+First run (2026-10-12, `gemini-3.1-flash-lite`, judge `gemini-3.6-flash`): **score 0.94**.
+
+| | n | correct | partial | wrong |
+|---|---|---|---|---|
+| answerable | 82 | 73 | 8 | 1 |
+| unanswerable (declined) | 20 | 19 | | 1 |
+
+By category, lists are the weakest (0.82, 4 partial). Search returns the top 5 passages, so it misses items when a list runs across a long page (list-02, list-04, and count-01's 11 point-exchange partners). list-06 left out a store that opens a week after "today". Citations: 98% of answerable answers cite a page, 99% of cited URLs came from the tools, and 100% of replies are in the question's language. p50 2.5 s, 1.2 tool calls per question.
+

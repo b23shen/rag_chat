@@ -42,7 +42,10 @@ class PromotionFilters(BaseModel):
         default=None,
         description="Kinds of promotion. Store events: store_opening (a new store), "
         "store_reopening (after renovation), clearance_sale (before renovation). Offers: "
-        "discount, cashback, points, coupon, gift, card_offer, lottery, other.",
+        "discount, cashback, points, coupon, gift, card_offer, lottery, other. Each offer has "
+        "one kind, from its main benefit: most offers that need a credit card or a payment "
+        "app are points, cashback or discount, not card_offer. To find offers for a card or "
+        "payment method, leave this out and list the offers in the period.",
     )
     active_from: date | None = Field(
         default=None,

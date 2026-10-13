@@ -34,6 +34,8 @@ serve = "promo_rag.platform.api:serve"
 worker = "promo_rag.platform.worker:main"
 search = "promo_rag.search.cli:main"
 eval-search = "promo_rag.evals.cli:main"
+eval-answers = "promo_rag.evals.answer_cli:main"
+chat = "promo_rag.workflows.chat.cli:main"
 
 [build-system]
 requires = ["uv_build>=0.13.0,<0.14.0"]
