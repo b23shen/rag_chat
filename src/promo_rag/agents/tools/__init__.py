@@ -2,8 +2,6 @@
 
 Each tool is a plain function, wrapped once here, so the chat agent and the MCP server (M5)
 share the same code. Each wrapper returns JSON; the database tools open their own session.
-M3 adds count_promotions, list_promotions, get_promotion, resolve_dates (here) and
-search_promotion_text.
 """
 
 import json
@@ -22,6 +20,7 @@ from promo_rag.agents.tools.promotions import (
     get_promotion,
     list_promotions,
 )
+from promo_rag.agents.tools.search_text import SearchArgs, search_promotion_text
 from promo_rag.db.session import new_session
 
 
@@ -31,6 +30,7 @@ def _db_tool(
     def run(**kwargs) -> str:
         with new_session() as session:
             result = fn(session, args_schema(**kwargs))
+            session.commit()  # search adds new question embeddings to the cache
         return json.dumps(result, ensure_ascii=False)
 
     return StructuredTool.from_function(
@@ -70,6 +70,16 @@ TOOLS: dict[str, BaseTool] = {
             "Get one promotion by its id (from list_promotions): every fact, and the full "
             "text of each page it comes from, with the page URL to cite. Use it for the "
             "details of one promotion: its conditions, dates, exclusions or address.",
+        ),
+        _db_tool(
+            search_promotion_text,
+            SearchArgs,
+            "search_promotion_text",
+            "Search the text of every page (campaigns, store notices, FAQ and policy pages) "
+            "for passages that answer a question, best first, each with its page URL. Use it "
+            "for rules, conditions and fine print, and for anything the promotion tools "
+            "don't cover. It returns only the top few passages, so don't count or list "
+            "with it. A 'note' says when the passages may not answer the question.",
         ),
         StructuredTool.from_function(
             func=_resolve_dates,
