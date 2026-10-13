@@ -20,17 +20,18 @@ def golden() -> GoldenSet:
 
 
 def test_categories_and_languages(golden):
-    assert len(golden.questions) == 50
+    assert len(golden.questions) == 102
     assert Counter(q.category for q in golden.questions) == {
-        "rule": 16,
-        "date": 8,
-        "list": 8,
-        "count": 6,
-        "unanswerable": 6,
-        "multi_turn": 6,
+        "rule": 26,
+        "exact": 15,
+        "date": 12,
+        "list": 11,
+        "count": 8,
+        "unanswerable": 20,
+        "multi_turn": 10,
     }
     n_english = sum(q.lang == "en" for q in golden.questions)
-    assert 15 <= n_english <= 20  # about a third
+    assert 30 <= n_english <= 45  # a third or more
 
 
 def test_every_page_is_in_the_snapshot(golden):

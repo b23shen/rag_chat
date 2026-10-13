@@ -14,7 +14,7 @@ as_of: 2026-10-10   # snapshot date: "now" and "this month" mean this date / Oct
 
 questions:
 
-  # ------------------------------------------------------------------ rule (16)
+  # ------------------------------------------------------------------ rule (26)
 
   - id: rule-01
     category: rule
@@ -151,7 +151,217 @@ questions:
       /member/: {grade: 2, quote: "年度消費累積$10,000元"}
     answer: 一年內累積消費滿 $10,000，次月 15 號升等金卡。
 
-  # ------------------------------------------------------------------ date (8)
+  - id: rule-17
+    category: rule
+    lang: zh
+    question: 線上買付款沒成功，我用掉的折價券會還給我嗎?
+    relevant:
+      /faq/6: {grade: 2, quote: "2小時會返還於您"}
+    answer: 會。取消訂單或付款失敗後，該筆用掉的折價券和點數 2 小時內返還。
+
+  - id: rule-18
+    category: rule
+    lang: en
+    question: I chose store pickup for an online order but never picked it up. Do I get back the points I used?
+    relevant:
+      /faq/6: {grade: 2, quote: "紅利點數將無法返還"}
+    answer: No. The order is refunded after it goes back to the warehouse, but coupons and points used on it are not returned.
+
+  - id: rule-19
+    category: rule
+    lang: zh
+    question: 網購退貨以後，錢大概多久會退回來?
+    relevant:
+      /faq/6: {grade: 2, quote: "七至十工作天內退款"}
+    answer: 商店確認退貨完成後，7 到 10 個工作天內退到指定帳戶。
+
+  - id: rule-20
+    category: rule
+    lang: zh
+    question: 在寶雅線上買下單，寄到家裡要幾天?
+    relevant:
+      /faq/6: {grade: 2, quote: "完成付款後約2-5工作日到貨"}
+    answer: 宅配在完成付款後約 2 到 5 個工作天到貨，偏遠地區或節慶檔期再多 1 到 3 天。
+
+  - id: rule-21
+    category: rule
+    lang: en
+    question: Can I stack two coupons on one online order?
+    relevant:
+      /faq/6: {grade: 2, quote: "只能使用一張折價券"}
+    answer: No. Each online checkout can use only one coupon.
+
+  - id: rule-22
+    category: rule
+    lang: zh
+    question: 如果在店裡被騷擾，最晚多久以內可以申訴?
+    relevant:
+      /law_regulation/: {grade: 2, quote: "於知悉事件發生後二年內提出申訴"}
+    answer: 一般在知道事件後 2 年內(事件發生起不超過 5 年)；權勢性騷擾是 3 年內(不超過 7 年)；未成年時發生的，成年後 3 年內。
+    notes: The answer is deep inside a long legal page.
+
+  - id: rule-23
+    category: rule
+    lang: en
+    question: Can I ask POYA to delete my personal data?
+    relevant:
+      /law_regulation/3: {grade: 2, quote: "刪除您的個人資料"}
+    answer: Yes. Ask through the customer service mailbox, the hotline 0800-033-168, or at any store.
+
+  - id: rule-24
+    category: rule
+    lang: en
+    question: How long can I use the LINE WEBTOON coins I get with POYA points?
+    relevant:
+      /news-detail/354/: {grade: 2, quote: "自歸戶日起算14天內有效"}
+    answer: 14 days from the day the code is redeemed; then they expire.
+
+  - id: rule-25
+    category: rule
+    lang: zh
+    question: 褲褲兔集點的同一款贈品，我最多可以換幾個?
+    relevant:
+      /news-detail/335/: {grade: 2, quote: "最高兌換數量以 10 個為限"}
+    answer: 每位會員每款贈品最多 10 個。
+
+  - id: rule-26
+    category: rule
+    lang: zh
+    question: 存在 POYA Pay 裡的錢有銀行擔保嗎?
+    relevant:
+      /warranty/: {grade: 2, quote: "凱基商業銀行股份有限公司提供足額履約保證"}
+      /law_regulation/4: {grade: 2, quote: "凱基銀行提供之足額履約保證"}
+    answer: 有，由凱基銀行提供足額履約保證(保證期間 2025/12/12 到 2026/12/12)。
+
+  # ------------------------------------------------------------------ exact (15)
+  # Exact names, numbers and codes: where keyword search should beat vector search.
+
+  - id: exact-01
+    category: exact
+    lang: zh
+    question: 買什麼可以拿到 MOFA'CE 去汙濕巾?
+    relevant:
+      /events-detail/47/: {grade: 2, quote: "MOFA'CE"}
+    answer: DM 上 55 大品牌衣物、香氛、居家清潔商品滿 $299，送 MOFA'CE 魔飛強效去汙濕巾一包(限量 16,000 包)。
+    notes: On the site, this page's brand list is the sanitary pad brands (pages 47 and 48 swapped lists).
+
+  - id: exact-02
+    category: exact
+    lang: zh
+    question: 婦潔 VIGILL 沐浴露要怎麼拿?
+    relevant:
+      /events-detail/48/: {grade: 2, quote: "婦潔VIGILL私密沐浴露"}
+    answer: 買 21 大品牌衛生棉滿 $299 送一瓶(限量 10,000 瓶)，滿 $359 再折 $50。
+
+  - id: exact-03
+    category: exact
+    lang: zh
+    question: WECHAMP 衣架現在特價多少?
+    relevant:
+      /events-detail/49/: {grade: 2, quote: "WECHAMP"}
+    answer: WECHAMP 雙桿 H 型可移動加厚衣架 $499。
+
+  - id: exact-04
+    category: exact
+    lang: en
+    question: How much is the 永悅 shower head filter on sale?
+    relevant:
+      /events-detail/49/: {grade: 2, quote: "永悅"}
+    answer: NT$42.
+
+  - id: exact-05
+    category: exact
+    lang: zh
+    question: 07-7962244 是哪一家店的電話?
+    relevant:
+      /news-detail/188__68/: {grade: 2, quote: "07-7962244"}
+    answer: 鳳山和成店(高雄市鳳山區和成路535號)。
+
+  - id: exact-06
+    category: exact
+    lang: en
+    question: Which POYA store is at 南京東路五段118號?
+    relevant:
+      /store/: {grade: 2, quote: "南京東路五段118號"}
+      /news-detail/188__65/: {grade: 2, quote: "南京東路五段118號"}
+    answer: 南京三民店 (opened September 12, 2026).
+
+  - id: exact-07
+    category: exact
+    lang: zh
+    question: 台新信用卡的預借現金手續費怎麼算?
+    relevant:
+      /news-detail/311/: {grade: 2, quote: "預借現金金額x3.5%+NT$150"}
+      /news-detail/345/: {grade: 2, quote: "預借現金金額X3.5%+NT150元"}
+    answer: 預借現金金額 × 3.5% + NT$150。
+
+  - id: exact-08
+    category: exact
+    lang: zh
+    question: 提貨券號碼 150114121002 是寶雅發的嗎?
+    relevant:
+      /gift_card/: {grade: 2, quote: "150114121002"}
+    answer: 是，寶雅提貨券號碼範圍是 150114121002 到 150114141001。
+
+  - id: exact-09
+    category: exact
+    lang: zh
+    question: 衛部救字第1141364026號是哪個基金會?
+    relevant:
+      /news-detail/342/: {grade: 2, quote: "1141364026"}
+      /news-detail/365/: {grade: 2, quote: "1141364026"}
+    answer: 伊甸基金會。
+
+  - id: exact-10
+    category: exact
+    lang: en
+    question: What number do I call for Asia Miles questions about the POYA points exchange?
+    relevant:
+      /news-detail/340/: {grade: 2, quote: "7727 6370"}
+    answer: Cathay's customer service, +886 2 7727 6370.
+
+  - id: exact-11
+    category: exact
+    lang: zh
+    question: ViVi PARK 的 Vi 幣一點等於多少錢?
+    relevant:
+      /news-detail/351/: {grade: 2, quote: "1點為新台幣1元整"}
+    answer: 1 點 = 新台幣 1 元。
+
+  - id: exact-12
+    category: exact
+    lang: en
+    question: What do I get for 9000 POYA points on Ocard?
+    relevant:
+      /news-detail/348/: {grade: 2, quote: "兌換25 Ocoin"}
+    answer: 25 Ocoin, up to 5 times per member.
+    notes: 9000 points also buy 30 Vi coins (ViVi PARK), a different page.
+
+  - id: exact-13
+    category: exact
+    lang: zh
+    question: Euthymol 牙膏有活動嗎?
+    relevant:
+      /events-detail/46/: {grade: 2, quote: "Euthymol"}
+    answer: 有，DM 指定品牌美白口腔商品滿 $399，送優生抗菌酒精濕巾一包(限量 3,000 包)。
+
+  - id: exact-14
+    category: exact
+    lang: zh
+    question: 台中大墩店有十分賺的活動嗎?
+    relevant:
+      /events-detail/44/: {grade: 2, quote: "台中大墩店"}
+    answer: 有，限店版十分賺(護髮、身體乳液、開架彩妝、口腔商品滿額送 10% 回饋金)，2026/10/07 到 11/03。
+
+  - id: exact-15
+    category: exact
+    lang: en
+    question: What is the address of 台東中華二店?
+    relevant:
+      /news-detail/188__48/: {grade: 2, quote: "中華路二段415號"}
+    answer: 台東縣台東市中華路二段415號.
+
+  # ------------------------------------------------------------------ date (12)
 
   - id: date-01
     category: date
@@ -221,7 +431,41 @@ questions:
       /news-detail/311/: {grade: 2, quote: "2027/1/7"}
     answer: 2026/8/1 到 12/31 透過寶雅專屬連結申辦，2027/1/7 前核卡。
 
-  # ------------------------------------------------------------------ list (8)
+  - id: date-09
+    category: date
+    lang: zh
+    question: 國泰世華十月儲值送的小樹點什麼時候會給?
+    relevant:
+      /news-detail/346/: {grade: 2, quote: "預計2027/1/1前回饋"}
+    answer: 預計 2027/1/1 前回饋。
+
+  - id: date-10
+    category: date
+    lang: en
+    question: When will the winners of the cancer foundation points donation draw be announced?
+    relevant:
+      /news-detail/341/: {grade: 2, quote: "2027/01/08"}
+      /news-detail/342/: {grade: 1, quote: "2027/01/08"}
+    answer: By January 8, 2027, on the POYA website.
+    notes: The 伊甸 donation page (342) gives the same date for its own draw.
+
+  - id: date-11
+    category: date
+    lang: zh
+    question: 嗶悠遊卡送的 40 元回饋券要在什麼時候前用完?
+    relevant:
+      /news-detail/292/: {grade: 2, quote: "2027/1/31前使用"}
+    answer: 2027/1/31 前，在寶雅實體門市用悠遊付付款時使用。
+
+  - id: date-12
+    category: date
+    lang: en
+    question: Until when can I spend the Rakuten points I get from POYA points?
+    relevant:
+      /news-detail/349/: {grade: 2, quote: "2027/01/31"}
+    answer: January 31, 2027.
+
+  # ------------------------------------------------------------------ list (11)
 
   - id: list-01
     category: list
@@ -310,7 +554,35 @@ questions:
     answer: 身體保養滿 $888 送軟糖；美白口腔滿 $399 送酒精濕巾；衣物/居家清潔滿 $299 送去汙濕巾；衛生棉滿 $299 送私密沐浴露。
     notes: On the site, pages 47 and 48 have each other's brand lists.
 
-  # ------------------------------------------------------------------ count (6)
+  - id: list-09
+    category: list
+    lang: zh
+    question: 寶雅網路商店可以用哪些方式付錢?
+    relevant:
+      /faq/6: {grade: 2, quote: "AFTEE先享後付"}
+    answer: POYA 支付、信用卡、超商付款取貨、LINE Pay、街口支付、Apple Pay、Google Pay、AFTEE 先享後付、悠遊付、即享券。
+
+  - id: list-10
+    category: list
+    lang: en
+    question: What gifts can I get in the 褲褲兔 stamp campaign?
+    relevant:
+      /news-detail/335/: {grade: 2, quote: "萌應援多功能披肩"}
+    answer: A phone stand, a two-sided pouch, two drink bags, a multi-use shawl and two handheld fans.
+
+  - id: list-11
+    category: list
+    lang: zh
+    question: 台中今年有哪些店新開或重新開幕?
+    relevant:
+      /news-detail/188__5/: {grade: 2, quote: "台中市大里區"}
+      /news-detail/188__47/: {grade: 2, quote: "台中市東勢區"}
+      /news-detail/188__62/: {grade: 2, quote: "台中市南屯區"}
+      /news-detail/188__69/: {grade: 2, quote: "台中市北屯區"}
+    answer: 大里國光店(4/18 改裝開幕)、台中東勢店(7/18 改裝開幕)、台中五權西店(9/5 新開)、台中興安店(10/24 新開)。
+    notes: Only the addresses say 台中.
+
+  # ------------------------------------------------------------------ count (8)
 
   - id: count-01
     category: count
@@ -391,7 +663,39 @@ questions:
     answer: 2 個：台灣癌症基金會和伊甸基金會，到 2026/12/31。
     notes: 364 and 365 are winner notices for the earlier round, which ended 2026/09/30.
 
-  # ------------------------------------------------------------------ unanswerable (6)
+  - id: count-07
+    category: count
+    lang: zh
+    question: 今年四月有幾家全新的店開幕?
+    relevant:
+      /news-detail/188/: {grade: 2, quote: "04/11(六)"}
+      /news-detail/188__1/: {grade: 2, quote: "04/11(六)"}
+    answer: 2 家：西門成都店和板橋合宜店，都在 4/11。(另有 7 家改裝後重新開幕。)
+
+  - id: count-08
+    category: count
+    lang: en
+    question: How many stores held a clearance sale before renovation in 2026?
+    relevant:
+      /news-detail/188__9/: {grade: 2, quote: "出清"}
+      /news-detail/188__10/: {grade: 2, quote: "出清"}
+      /news-detail/188__11/: {grade: 2, quote: "出清"}
+      /news-detail/188__12/: {grade: 2, quote: "出清"}
+      /news-detail/188__13/: {grade: 2, quote: "出清"}
+      /news-detail/188__15/: {grade: 2, quote: "出清"}
+      /news-detail/188__16/: {grade: 2, quote: "出清"}
+      /news-detail/188__17/: {grade: 2, quote: "出清"}
+      /news-detail/188__25/: {grade: 2, quote: "出清"}
+      /news-detail/188__26/: {grade: 2, quote: "出清"}
+      /news-detail/188__27/: {grade: 2, quote: "出清"}
+      /news-detail/188__28/: {grade: 2, quote: "出清"}
+      /news-detail/188__39/: {grade: 2, quote: "出清"}
+      /news-detail/188__40/: {grade: 2, quote: "出清"}
+      /news-detail/188__41/: {grade: 2, quote: "出清"}
+      /news-detail/188__61/: {grade: 2, quote: "出清"}
+    answer: 16, from March (高雄五甲 and others) to August (環球青埔, before its counter changes).
+
+  # ------------------------------------------------------------------ unanswerable (20)
 
   - id: none-01
     category: unanswerable
@@ -436,7 +740,110 @@ questions:
     relevant: {}
     answer: null
 
-  # ------------------------------------------------------------------ multi_turn (6)
+  - id: none-07
+    category: unanswerable
+    lang: zh
+    question: 寶雅有賣 Dyson 吹風機嗎?
+    relevant: {}
+    answer: null
+
+  - id: none-08
+    category: unanswerable
+    lang: en
+    question: Does POYA have a store in Hong Kong?
+    relevant: {}
+    answer: null
+
+  - id: none-09
+    category: unanswerable
+    lang: zh
+    question: 雙11 寶雅線上買有什麼活動?
+    relevant: {}
+    answer: null
+    notes: Near miss; online-store campaigns exist, but none for 11/11.
+
+  - id: none-10
+    category: unanswerable
+    lang: zh
+    question: 全聯的點數可以換成寶雅點數嗎?
+    relevant: {}
+    answer: null
+    notes: Near miss; there are exchanges with 全家 and 台新, not 全聯.
+
+  - id: none-11
+    category: unanswerable
+    lang: en
+    question: Can I exchange POYA points for Starbucks stars?
+    relevant: {}
+    answer: null
+    notes: Near miss; 11 other partners exist.
+
+  - id: none-12
+    category: unanswerable
+    lang: zh
+    question: 寶雅的會員點數可以轉給家人用嗎?
+    relevant: {}
+    answer: null
+
+  - id: none-13
+    category: unanswerable
+    lang: zh
+    question: 用玉山銀行信用卡在寶雅消費有回饋嗎?
+    relevant: {}
+    answer: null
+    notes: Near miss; 台新, 國泰世華 and American Express have offers, 玉山 doesn't.
+
+  - id: none-14
+    category: unanswerable
+    lang: en
+    question: Is there a student discount at POYA?
+    relevant: {}
+    answer: null
+
+  - id: none-15
+    category: unanswerable
+    lang: zh
+    question: 母親節寶雅有什麼優惠?
+    relevant: {}
+    answer: null
+
+  - id: none-16
+    category: unanswerable
+    lang: en
+    question: How much does the POYA PURE+ gummy cost if I just buy it?
+    relevant: {}
+    answer: null
+    notes: Near miss; the gummy appears only as a free gift, with no price.
+
+  - id: none-17
+    category: unanswerable
+    lang: zh
+    question: 可以在寶雅 APP 預約門市的化妝服務嗎?
+    relevant: {}
+    answer: null
+
+  - id: none-18
+    category: unanswerable
+    lang: en
+    question: Does POYA match prices from other stores?
+    relevant: {}
+    answer: null
+
+  - id: none-19
+    category: unanswerable
+    lang: en
+    question: When does the 2027 Lunar New Year sale start?
+    relevant: {}
+    answer: null
+
+  - id: none-20
+    category: unanswerable
+    lang: zh
+    question: 寶雅可以買處方藥嗎?
+    relevant: {}
+    answer: null
+
+  # ------------------------------------------------------------------ multi_turn (10)
 
   - id: multi-01
     category: multi_turn
@@ -504,3 +911,48 @@ questions:
     relevant:
       /news-detail/345/: {grade: 2, quote: "寶雅中壢崇光店"}
     answer: 中壢崇光、桃園大江、高雄大遠百、遠百成功、新竹大遠百、高島屋天母、台北北車、義享天地、台南三井。
+
+  - id: multi-07
+    category: multi_turn
+    lang: en
+    history:
+      - {role: user, content: "Can I use POYA points for parking?"}
+      - {role: assistant, content: "Yes. 9000 POYA points get you 30 Vi coins for ViVi PARK, through the POYA app's points exchange."}
+    question: What do I do with the code after I get it?
+    relevant:
+      /news-detail/351/: {grade: 2, quote: "點券提領"}
+    answer: In the ViVi PARK app, open 點券提領 (coupon redemption), enter the code, and the Vi coins go into your account.
+
+  - id: multi-08
+    category: multi_turn
+    lang: zh
+    history:
+      - {role: user, content: "辦台新 Richart 卡有什麼寶雅的首刷禮?"}
+      - {role: assistant, content: "活動期間透過寶雅專屬連結申辦，核卡後 30 天內綁 POYA Pay 消費滿 1,000 元，新戶可拿寶雅即享券 $1,000。"}
+    question: 那如果我以前有台新的卡呢?
+    relevant:
+      /news-detail/311/: {grade: 2, quote: "可享超商電子即享券 200 元"}
+    answer: 申請前 6 個月內沒有台新 Richart 卡正卡就算新卡友，可拿超商電子即享券 $200(統一或全家二選一)；6 個月內有 Richart 卡正卡的話，兩種都拿不到。
+
+  - id: multi-09
+    category: multi_turn
+    lang: zh
+    history:
+      - {role: user, content: "金卡會員每個月有什麼券可以領?"}
+      - {role: assistant, content: "符合資格的金卡會員，每月 1 日 10:00 可以在 APP 領 POYA GIFT 兌換券，每卡每月一次。"}
+    question: 那 12 月要怎樣才有資格?
+    relevant:
+      /news-detail/163/: {grade: 2, quote: "2025/11/15 ~ 2026/12/14"}
+    answer: 是金卡會員，而且在 2025/11/15 到 2026/12/14 之間至少在線上買下過一筆訂單(依頁面所寫)。
+    notes: The page's December range looks like a typo for 2026/11/14; the answer follows the page.
+
+  - id: multi-10
+    category: multi_turn
+    lang: en
+    history:
+      - {role: user, content: "How do I return something I bought on POYA's online store?"}
+      - {role: assistant, content: "Apply in My Account > Orders > Apply for return within the cooling-off period, and keep the item unopened with all its packaging."}
+    question: Do I have to pay for the return shipping?
+    relevant:
+      /faq/6: {grade: 2, quote: "每張訂單僅提供乙次免費退貨服務"}
+    answer: Each order gets one free return on Taiwan's main island. Returns from outlying islands, and sending back missing items later, are at your cost.

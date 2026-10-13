@@ -16,9 +16,11 @@ from pydantic import BaseModel, Field, field_validator, model_validator
 GOLDEN_PATH = Path(__file__).resolve().parents[3] / "evals" / "golden.yaml"
 SITE = "https://www.poya.com.tw"
 
-Category = Literal["rule", "date", "list", "count", "unanswerable", "multi_turn"]
+# exact: names, numbers and codes that must match as written (where keyword search helps)
+Category = Literal["rule", "exact", "date", "list", "count", "unanswerable", "multi_turn"]
 ID_PREFIX = {
     "rule": "rule-",
+    "exact": "exact-",
     "date": "date-",
     "list": "list-",
     "count": "count-",

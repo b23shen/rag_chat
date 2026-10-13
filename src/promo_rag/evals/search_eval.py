@@ -287,6 +287,8 @@ def no_answer_cutoffs(results: list[QuestionResult], variants: list[Variant]) ->
                 **best_cutoff(answerable, unanswerable),
                 "answerable_min": min(answerable),
                 "unanswerable_max": max(unanswerable),
+                # a cutoff just below every answerable question's top score loses none
+                "safe_caught": sum(s < min(answerable) for s in unanswerable),
             }
     return out
 
@@ -350,15 +352,16 @@ def report(results: list[QuestionResult], variants: list[Variant], base_settings
             "",
             (
                 "| Variant | Best cutoff | Answerable kept | Unanswerable caught | "
-                "Lowest answerable top score | Highest unanswerable top score |"
+                "Lowest answerable top score | Highest unanswerable top score | "
+                "Caught while keeping every answerable one |"
             ),
-            "|---|---|---|---|---|---|",
+            "|---|---|---|---|---|---|---|",
         ]
         for label, c in cutoffs.items():
             lines.append(
                 f"| {label} | {c['cutoff']:.3f} | {c['kept']}/{c['n_answerable']} | "
                 f"{c['caught']}/{c['n_unanswerable']} | {c['answerable_min']:.3f} | "
-                f"{c['unanswerable_max']:.3f} |"
+                f"{c['unanswerable_max']:.3f} | {c['safe_caught']}/{c['n_unanswerable']} |"
             )
 
     best = max(labels, key=lambda lb: (summary[lb]["ndcg@5"], summary[lb]["hit@5"]))

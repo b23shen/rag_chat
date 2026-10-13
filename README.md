@@ -121,9 +121,9 @@ If the reranker fails (no key, a trial key's limit of 10 calls a minute, an outa
 | `keyword` | Postgres full-text search on the split text; any question word may match. Words found in more than 20% of chunks (的, 活動, 2026 …) are ignored, because Postgres ranking doesn't weigh rare words higher | `ts_rank`; compare only within one search |
 | `hybrid` | Vector's and keyword's top 20, merged by reciprocal rank fusion: each chunk scores `weight / (60 + rank)` per list it appears in | at most 2/61 ≈ 0.0328 (first in both) |
 
-**Why not hybrid?** On the golden set, keyword search made results worse: hybrid's MRR was 0.70–0.85 against vector's 0.93, whatever the segmenter (jieba or bigram), word filter (10%–off) or vector weight (1–5). Keyword helped 1 question and hurt 6 to 13. So keyword and hybrid stay as modes for experiments (e.g. a learned sparse model such as BGE-M3), not for answers. The set has few exact-match questions (phone numbers, serial numbers), where keyword search usually helps.
+**Why not hybrid?** On the golden set (82 answerable questions), keyword search made results worse: hybrid's MRR was 0.74–0.84 against vector's 0.91, whatever the segmenter (jieba or bigram), word filter (10%–off) or vector weight (1–5). Keyword does help where it should, on the 15 exact-match questions (phone numbers, codes, brand names): hybrid 0.97 vs vector 0.91. But rerank reaches 1.00 on those without it. So keyword and hybrid stay as modes for experiments (e.g. a learned sparse model such as BGE-M3), not for answers.
 
-**Why rerank, when it ranks no better than vector here?** Its scores mean the same thing across questions, so a low top score can flag "nothing relevant": a cutoff of 0.68 caught 3 of the 6 unanswerable questions without losing an answerable one. Vector's scores caught 1 of 6.
+**Why rerank?** It ranks a little better than vector (MRR 0.94 vs 0.91; the 95% range, −0.03 to +0.09, still includes 0) and is the best on exact-match questions. Its scores also mean the same thing across questions, so a low top score can flag "nothing relevant": a cutoff of 0.61 catches 7 of the 20 unanswerable questions without losing an answerable one, where vector's scores catch 1. Near misses ("全聯 points", "Starbucks stars", "玉山 card") score as high as real answers (0.89–0.94), so the answering LLM must catch those.
 
 ```bash
 uv run search "週五用街口支付有什麼優惠?"                 # rerank
@@ -137,7 +137,7 @@ The question is split into words and embedded with the settings its corpus versi
 
 ## Search eval
 
-[`evals/golden.yaml`](evals/golden.yaml) holds 50 questions (rules, dates, lists, counts, unanswerable, multi-turn; about a third in English). Each one names the pages that answer it and a short quote from each page. A search result chunk counts as relevant if it comes from one of those pages and contains the quote, so the labels work on every corpus version, whatever its chunk ids or boundaries.
+[`evals/golden.yaml`](evals/golden.yaml) holds 102 questions: rules, exact names and numbers, dates, lists, counts, multi-turn follow-ups, and 20 unanswerable ones (many of them near misses); 40 are in English. Each one names the pages that answer it and a short quote from each page. A search result chunk counts as relevant if it comes from one of those pages and contains the quote, so the labels work on every corpus version, whatever its chunk ids or boundaries.
 
 ```bash
 uv run eval-search                          # all modes, the active corpus version (rerank takes ~5 min on a trial key)
@@ -147,4 +147,4 @@ uv run eval-search --version 5da896fe 3090b223 --max-word-share 0.1 0.2 1.0   # 
 
 Flags that take several values make one variant per combination (mode × corpus version × setting). For each variant it reports Hit@5 and Hit@20 (a chunk that answers the question is in the top 5 / 20), MRR@10 (1 / the rank of the first one), nDCG@5 (how close the top 5 is to the best possible order) and search latency.
 
-Every variant is compared with the first one question by question, with a 95% range for the difference: draw the 44 questions at random, with repeats, 2,000 times, and keep the middle 95% of the results. A range that includes 0 means the two can't be told apart on this many questions; with 44 questions, one question moves Hit@5 by 0.023. The unanswerable questions are searched too, to find the top-score cutoff (vector and rerank only) that best flags "nothing relevant". Results are saved to `evals/results/` as Markdown tables and JSON (every question's results and each variant's settings).
+Every variant is compared with the first one question by question, with a 95% range for the difference: draw the answerable questions at random, with repeats, 2,000 times, and keep the middle 95% of the results. A range that includes 0 means the two can't be told apart on this many questions; with 82 answerable questions, one question moves Hit@5 by 0.012. The unanswerable questions are searched too, to find the top-score cutoff (vector and rerank only) that best flags "nothing relevant". Results are saved to `evals/results/` as Markdown tables and JSON (every question's results and each variant's settings).
