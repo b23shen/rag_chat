@@ -24,7 +24,7 @@ from promo_rag.workflows.ingestion.actions.import_snapshot import (
     write_manifest,
 )
 from promo_rag.workflows.ingestion.actions.parse import parse_documents
-from promo_rag.workflows.ingestion.index_config import IndexConfig
+from promo_rag.workflows.ingestion.index_config import QUERY_FORMATS, IndexConfig
 
 
 def cmd_import_snapshot(args: argparse.Namespace) -> int:
@@ -100,6 +100,7 @@ def cmd_chunk(args: argparse.Namespace) -> int:
             "overlap_tokens": args.overlap_tokens,
             "segmenter": args.segmenter,
             "header": False if args.no_header else None,
+            "embed_query_format": QUERY_FORMATS[args.query_format] if args.query_format else None,
         }.items()
         if v is not None
     }
@@ -198,6 +199,11 @@ def main() -> int:
     )
     p.add_argument("--segmenter", choices=["none", "jieba", "bigram"], help="default jieba")
     p.add_argument("--no-header", action="store_true", help="no 'title | dates | stores' line")
+    p.add_argument(
+        "--query-format",
+        choices=list(QUERY_FORMATS),
+        help="how questions are embedded (default search; chunk embeddings don't change)",
+    )
     p.add_argument("--rebuild", action="store_true", help="rebuild even if this version exists")
     p.set_defaults(func=cmd_chunk)
 

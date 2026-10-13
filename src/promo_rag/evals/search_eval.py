@@ -18,6 +18,7 @@ nor a trial key's pacing is counted; the reranker's own API call is.
 """
 
 import itertools
+import json
 import statistics
 import time
 from collections import defaultdict
@@ -47,6 +48,7 @@ from promo_rag.search.retrieve import (
     cached_query_embedder,
     search,
 )
+from promo_rag.workflows.ingestion.index_config import QUERY_FORMATS
 
 MODES: tuple[Mode, ...] = ("vector", "keyword", "hybrid", "rerank")
 DEPTH = 20  # results kept per search: enough for Hit@20
@@ -101,6 +103,7 @@ def make_variants(
     short = {"max_word_share": "share", "vector_weight": "vw", "rrf_k": "k", "rerank_from": "from"}
     keyword_knobs = ["max_word_share"]
     hybrid_knobs = ["max_word_share", "vector_weight", "rrf_k"]
+    tags = _version_tags(versions)
     variants = []
     for version, mode in itertools.product(versions, modes):
         if mode == "rerank":
@@ -118,7 +121,7 @@ def make_variants(
                 chosen = {**pinned, **dict(zip(free, combo, strict=True))}
                 parts = [mode]
                 if len(versions) > 1:
-                    parts.append(f"{version.config['segmenter']}:{str(version.id)[:8]}")
+                    parts.append(tags[version.id])
                 parts += [
                     f"{short[k]}={v:g}" if isinstance(v, float) else f"{short[k]}={v}"
                     for k, v in chosen.items()
@@ -127,6 +130,31 @@ def make_variants(
                 settings = SearchSettings(**chosen)
                 variants.append(Variant(" ".join(parts), mode, version, settings))
     return variants
+
+
+def _version_tags(versions: list[Version]) -> dict:
+    """A short name per version from the settings that differ between them, plus its id:
+    "bigram:3090b223", "query=qa:6cfd76b5"."""
+    differ = [
+        key
+        for key in versions[0].config
+        if len({json.dumps(v.config.get(key), sort_keys=True) for v in versions}) > 1
+    ]
+    format_names = {fmt: name for name, fmt in QUERY_FORMATS.items()}
+    tags = {}
+    for v in versions:
+        parts = []
+        for key in differ:
+            value = v.config.get(key)
+            if key == "segmenter":
+                parts.append(str(value))
+            elif key == "embed_query_format":
+                parts.append(f"query={format_names.get(value, value)}")
+            else:
+                parts.append(f"{key}={value}")
+        short_id = str(v.id)[:8]
+        tags[v.id] = f"{','.join(parts)}:{short_id}" if parts else short_id
+    return tags
 
 
 def search_query(q: Question) -> str:

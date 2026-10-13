@@ -21,6 +21,15 @@ def _embed_dims() -> int:
     return get_settings().embed_dims
 
 
+# gemini-embedding-2's task prefixes for questions (ai.google.dev/gemini-api/docs/embeddings).
+# "none" sends the bare question, as a control for how much the prefix matters.
+QUERY_FORMATS = {
+    "search": "task: search result | query: {query}",
+    "qa": "task: question answering | query: {query}",
+    "none": "{query}",
+}
+
+
 class IndexConfig(BaseModel):
     # Bump when the chunking code changes in a way that changes its output.
     chunker: str = "sentence-pack-v2"  # v2: posting date and section in headers
@@ -37,7 +46,7 @@ class IndexConfig(BaseModel):
     # gemini-embedding-2 takes the task as a text prefix. The query format is an eval
     # experiment ("task: search result" vs "task: question answering").
     embed_doc_format: str = "title: {title} | text: {text}"
-    embed_query_format: str = "task: search result | query: {query}"
+    embed_query_format: str = QUERY_FORMATS["search"]
 
     def fingerprint(self) -> str:
         blob = json.dumps(self.model_dump(), sort_keys=True)

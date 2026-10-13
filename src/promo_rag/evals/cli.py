@@ -3,7 +3,7 @@
 uv run eval-search                                   # every mode, the active corpus version
 uv run eval-search --modes vector hybrid             # some modes (rerank is the slow one)
 uv run eval-search --only rule-01 multi-02           # some questions
-uv run eval-search --version 5da896fe 02fc002a       # compare corpus versions (jieba, bigram)
+uv run eval-search --version <active id> <test id>   # compare corpus versions (see README)
 uv run eval-search --modes vector hybrid --vector-weight 1 2 3    # compare settings
 uv run eval-search --modes vector rerank --rerank-from vector hybrid
 

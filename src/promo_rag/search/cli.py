@@ -2,7 +2,7 @@
 
 uv run search "週五用街口支付有什麼優惠?"                 # rerank (needs COHERE_API_KEY in .env)
 uv run search "Can I bring my dog?" --mode vector -k 3
-uv run search "退貨" --mode keyword --version 3090b223    # another corpus version, by id prefix
+uv run search "退貨" --mode keyword --version <id>        # another corpus version, by id prefix
 """
 
 import argparse

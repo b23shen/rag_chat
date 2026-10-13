@@ -128,7 +128,7 @@ If the reranker fails (no key, a trial key's limit of 10 calls a minute, an outa
 ```bash
 uv run search "週五用街口支付有什麼優惠?"                 # rerank
 uv run search "Can I bring my dog?" --mode vector -k 3
-uv run search "退貨" --mode keyword --version 3090b223    # another corpus version, by id prefix
+uv run search "退貨" --mode keyword --version <id>        # another corpus version, by id prefix
 ```
 
 Each line of output is one chunk (a page can appear more than once): rank, score, page, title, and the start of the chunk's text. Rerank also shows each chunk's rank before reranking, and hybrid its rank in the vector and keyword lists.
@@ -142,7 +142,14 @@ The question is split into words and embedded with the settings its corpus versi
 ```bash
 uv run eval-search                          # all modes, the active corpus version (rerank takes ~5 min on a trial key)
 uv run eval-search --modes vector hybrid    # some modes (the first is the baseline)
-uv run eval-search --version 5da896fe 3090b223 --max-word-share 0.1 0.2 1.0   # compare variants
+uv run eval-search --version <active id> <test id> --max-word-share 0.1 0.2 1.0   # compare variants
+```
+
+To compare an index setting (segmenter, chunk size, question format), build a test version and embed it right away: building the next one removes any draft that has no embeddings yet. Unchanged chunk text comes from the embedding cache, so this costs no API calls. The test version is never activated, so search doesn't read it.
+
+```bash
+uv run ingest chunk --segmenter bigram          # or --query-format qa, --chunk-tokens 384, …; prints the id
+uv run ingest embed --version <test id>
 ```
 
 Flags that take several values make one variant per combination (mode × corpus version × setting). For each variant it reports Hit@5 and Hit@20 (a chunk that answers the question is in the top 5 / 20), MRR@10 (1 / the rank of the first one), nDCG@5 (how close the top 5 is to the best possible order) and search latency.
