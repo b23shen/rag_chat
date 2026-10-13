@@ -128,6 +128,8 @@ class Promotion(Base):
     start_date: Mapped[date | None]
     end_date: Mapped[date | None]  # NULL = open-ended
     stores: Mapped[list[str]] = mapped_column(ARRAY(String), server_default="{}")
+    # Full city or county names (高雄市, 新竹縣); store notices only, from the address.
+    cities: Mapped[list[str]] = mapped_column(ARRAY(String), server_default="{}")
     channels: Mapped[list[str]] = mapped_column(ARRAY(String), server_default="{}")
     payment_methods: Mapped[list[str]] = mapped_column(ARRAY(String), server_default="{}")
     products: Mapped[list[str]] = mapped_column(ARRAY(String), server_default="{}")

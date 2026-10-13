@@ -9,6 +9,7 @@ from promo_rag.workflows.ingestion.facts import (
     StoreNoticeFacts,
     appears_in,
     check_facts,
+    city_from_address,
     date_in_text,
     dedup_key,
     number_in,
@@ -38,6 +39,7 @@ def _sample(schema):
         period_text="📅08/22(六) 10:00",
         start_date=date(2026, 8, 22),
         end_date=None,
+        address="高雄市鼓山區大順一路605-1號",
     )
 
 
@@ -52,6 +54,25 @@ def test_every_extractor_fills_real_promotion_columns_including_dates(doc_type):
 
 def test_only_doc_types_with_facts_have_extractors():
     assert set(EXTRACTORS) == {"promotion", "store_notice"}
+
+
+@pytest.mark.parametrize(
+    ("address", "city"),
+    [
+        ("高雄市鳳山區五甲二路100號", "高雄市"),
+        ("臺北市士林區至善路二段", "台北市"),
+        ("新竹縣竹北市光明六路", "新竹縣"),
+        ("鳳山區五甲二路100號", None),  # no city: leave it empty rather than guess
+        (None, None),
+    ],
+)
+def test_city_from_address(address, city):
+    assert city_from_address(address) == city
+
+
+def test_store_notice_city_comes_from_its_address():
+    row = EXTRACTORS["store_notice"].to_promotion(_sample(StoreNoticeFacts), "title")
+    assert row["cities"] == ["高雄市"]
 
 
 # ---------------------------------------------------------------- store notice rules

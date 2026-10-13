@@ -98,6 +98,24 @@ Every step is safe to re-run. Parse skips pages that aren't HTTP 200, have no te
 
 A snapshot folder holds `sources.csv` and `raw/<slug>.html`. Raw pages are never committed; [`data/sources.csv`](data/sources.csv) lists each page's URL and sha256 instead.
 
+## Facts for the SQL tools
+
+The M3 SQL tools count and list promotions from the `promotions` table. The extract step fills that table, so its facts decide which questions SQL can answer.
+
+**Each page type has its own path.** The site's category decides the page type ([`sources/poya.py`](src/promo_rag/workflows/ingestion/sources/poya.py)). Each type with facts has its own extractor ([`facts.EXTRACTORS`](src/promo_rag/workflows/ingestion/facts.py)): campaign pages go to the LLM with `PromotionFacts`, and store notices to rules (or the LLM, if the rules don't match). Every other type, including a category we haven't seen (`other`), is search-only: search finds its pages, but SQL can't count or list them. Add an extractor for a type only when the eval shows SQL questions about it failing.
+
+**Tried and dropped: one general schema by default.** Hard-coded types looked fragile, so we tried a mix: one general LLM schema for every type without its own extractor, campaign pages included. It added a "does this page have a promotion" flag and two common columns, `weekdays` (每週五) and `payment_kinds` (credit card, mobile payment, …).
+
+- All 101 pages passed the checks, but the campaign pages' answers got worse. A field changed on 18 of the 36 pages. Each page gave the same answer 3 times out of 3 with each schema, so the schema caused it, not chance.
+- The old answers were better on most of them. 11 pages lost `app` from `channels` (page 331, for one, has "POYA寶雅APP操作說明"). The 台新 offer lost `POYA支付`, though the page requires it. LINE POINTS and 小樹點 rewards became `cashback` instead of `points`.
+- The new columns weren't needed either. Only 4 offers are limited to some weekdays and 7 to some payment methods, and their titles say 週五 or 信用卡, so search finds them.
+
+So the per-type schemas stay.
+
+**Kept: `cities`.** "New stores in Kaohsiung in 2026" needs all six stores, and search returns only the top 5. Store notices fill `cities` from the store's address, by rules (no LLM): all 65 have one. Campaign pages leave it empty.
+
+**Lesson:** adding fields to a schema can change the LLM's answers on fields you didn't touch. Before keeping a schema change, compare the extractions page by page, and run each page more than once.
+
 ## Search
 
 Search reads the active corpus version's chunks and returns the top chunks for a question. The default mode, `rerank`, is a funnel: a cheap search finds candidates, then a slower, more accurate model puts them in order.

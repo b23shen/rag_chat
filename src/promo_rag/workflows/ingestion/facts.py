@@ -91,6 +91,22 @@ class StoreNoticeFacts(BaseModel):
     phone: str | None = None
 
 
+# ---------------------------------------------------------------- cities
+
+# Taiwan's 22 cities and counties, written with 台 (the site mixes 台 and 臺).
+CITIES = (
+    "台北市", "新北市", "基隆市", "桃園市", "新竹市", "新竹縣", "苗栗縣", "台中市",
+    "彰化縣", "南投縣", "雲林縣", "嘉義市", "嘉義縣", "台南市", "高雄市", "屏東縣",
+    "宜蘭縣", "花蓮縣", "台東縣", "澎湖縣", "金門縣", "連江縣",
+)  # fmt: skip
+
+
+def city_from_address(address: str | None) -> str | None:
+    """'高雄市鳳山區五甲二路…' → 高雄市. None if it doesn't start with a city or county."""
+    head = unicodedata.normalize("NFKC", address or "").strip().replace("臺", "台")[:3]
+    return head if head in CITIES else None
+
+
 # ---------------------------------------------------------------- dates
 
 
@@ -250,12 +266,14 @@ def promotion_from_campaign(facts: PromotionFacts, title: str) -> dict:
 
 def promotion_from_store_notice(facts: StoreNoticeFacts, title: str) -> dict:
     details = [facts.period_text, facts.address, facts.phone]
+    city = city_from_address(facts.address)
     return {
         "title": title,
         "promo_type": facts.notice_type,
         "start_date": facts.start_date,
         "end_date": facts.end_date,
         "stores": [facts.store_name],
+        "cities": [city] if city else [],
         "channels": ["store"],
         "payment_methods": [],
         "products": [],
@@ -277,4 +295,5 @@ EXTRACTORS: dict[str, Extractor] = {
     "promotion": Extractor(PromotionFacts, promotion_from_campaign),
     "store_notice": Extractor(StoreNoticeFacts, promotion_from_store_notice, parse_store_notice),
 }
-RULES_VERSION = "rules-v1"
+# v2: store notices also fill promotions.cities, from the address.
+RULES_VERSION = "rules-v2"
